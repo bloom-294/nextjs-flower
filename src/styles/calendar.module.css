@@ -1,0 +1,18 @@
+.calendar {
+  border: solid 1px rgb(183, 181, 181);
+  
+}
+
+.calendar th   {
+  padding: 1px;
+  font-weight: normal;
+  padding: 5px;
+  background-color: rgb(240, 239, 239);
+}
+
+.calendar td {
+  padding: 1px;
+  font-weight: normal;
+  padding: 5px;
+  
+}

@@ -1,0 +1,33 @@
+.line {
+  width: 700px;
+  margin: 10px auto;
+}
+
+.gridWidth {
+  width: 700px;
+}
+.Width {
+  width: 550px;
+  height: 300px;
+}
+
+/* .swiper-button-next:after, .swiper-button-prev:after {
+  font-family: swiper-icons;
+  font-size: 10px;
+  text-transform: none!important;
+  letter-spacing: 0;
+  font-variant: initial;
+  line-height: 1;
+  color: gray;
+} */
+
+.slider__wrapper {
+  position: relative;
+}
+div #button_prev .swiper-button-prev ::after {
+ position: fixed;
+ background: #000;
+color: red;
+}
+        
+/* #button_next */

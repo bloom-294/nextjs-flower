@@ -1,0 +1,22 @@
+.recognizeButton {
+  background-color: #75ad9d;
+  font-size: 12px;
+  padding: 6px 14px;
+}
+
+.CartInButton {
+  background-color: #75ad9d;
+  font-size: 12px;
+  padding: 12px 40px;
+}
+
+.CartInButton :hover{
+  opacity: 0.5;
+}
+
+.recognizeItemName {
+  font-size: 11px;
+  width: 66px;
+  /* height: 20px; */
+  /* overflow: ; */
+}

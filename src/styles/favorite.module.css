@@ -1,0 +1,80 @@
+
+
+.like{
+  cursor: pointer;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  /* transition: background .6s; */
+}
+
+.like [type="checkbox"]{
+  display: none;
+}
+
+.glitter {
+  font-size: 25px;
+  color: #dcdbdb;
+  user-select: none;
+  position: relative;
+  /* transform:translateY(-30px); */
+  opacity: 0;
+  top: -1px;
+}
+
+.favorite {
+  font-size: 25px;
+  color: #dcdbdb;
+  user-select: none;
+  position: relative;
+  top: -30px;
+}
+
+.like [type="checkbox"]:checked ~ .glitter {
+  animation-name: bright;
+  animation-duration: .6s;
+  animation-fill-mode: forwards;
+}
+
+.like [type="checkbox"]:checked ~ .favorite {
+  animation-name: favorite;
+  animation-duration: .6s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes favorite {
+  0%{
+      transform: scale(0);
+      /* opacity: 0.5; */
+  }
+  50%{
+      transform: scale(1.2);
+      /* opacity: 0.5; */
+      color: rgb(202, 30, 30);
+  }
+  100%{
+      transform: scale(1);
+      color: rgb(202, 30, 30);
+  }
+}
+
+@keyframes bright {
+  0%{
+      transform: scale(0) ;
+      opacity: 1;
+      color: rgb(202, 30, 30) 
+      
+      
+    }
+    50%{
+      transform: scale(2.2)  ;
+      /* opacity: 0.5; */
+      color: rgb(202, 30, 30) rotate(30deg);
+      
+    }
+    100%{
+      transform: scale(1) rotate(60deg);
+      opacity: 0;
+      
+  }
+}

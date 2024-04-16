@@ -1,0 +1,58 @@
+.icon:hover + .list {
+  display:flex;
+  flex-flow: column;
+  /* width: 150px; */
+
+}
+
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.list {
+  display: none;
+}
+
+.list:hover {
+  display:flex;
+  flex-flow: column;
+  /* width: 150px; */
+}
+
+.link:hover {
+  color: #75ad9d;
+} 
+
+.close, .menu {
+  font-size: 40px;
+}
+
+.close :hover {
+  color: #75ad9d;
+}
+
+
+/* 以下　未使用 */
+.humburgerList {
+  transform: translateY(29px) translateX(-60px);
+  display: none;
+}
+
+.menu:hover + .humburgerList {
+  /* color: red; */
+  display:flex;
+  flex-flow: column;
+  cursor: pointer;
+}
+
+.humburgerList :hover {
+  display:flex;
+  flex-flow: column;
+  cursor: pointer;
+  /* transform: translateY(30px) translateX(-60px); */
+}
+
+.menu:hover {
+  cursor: pointer;
+}
