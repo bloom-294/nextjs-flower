@@ -1,7 +1,6 @@
-import style from "../../src/styles/calendar.module.css"
+import style from "../../src/styles/calendar.module.css";
 
 export const Calendar = () => {
-
   return (
     <>
       <div className="mt-5">
@@ -20,7 +19,7 @@ export const Calendar = () => {
         </div>
         <table className={`m-auto  ${style.calendar}`}>
           <thead>
-            <tr >
+            <tr>
               <th className="text-red-700 ">日</th>
               <th className="">月</th>
               <th className="">火</th>
@@ -31,7 +30,7 @@ export const Calendar = () => {
             </tr>
           </thead>
           <tbody>
-            <tr >
+            <tr>
               <td className=" text-red-700">&nbsp;1</td>
               <td className="">&nbsp;2</td>
               <td className="">&nbsp;3</td>
@@ -75,5 +74,5 @@ export const Calendar = () => {
         </table>
       </div>
     </>
-  )
-}
+  );
+};

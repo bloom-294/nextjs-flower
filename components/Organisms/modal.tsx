@@ -1,54 +1,51 @@
-import Modal from "react-modal"
-import { useEffect, useState } from "react"
-
+import Modal from "react-modal";
+import { useEffect, useState } from "react";
 
 const customStyles = {
   overlay: {
     // position: "fixed",
     top: 0,
     left: 0,
-    backgroundColor: "rgba(0,0,0,0.3)"
+    backgroundColor: "rgba(0,0,0,0.3)",
   },
 
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    width: '500px',
-    height: '300px',
-    transform: 'translate(-50%, -50%)'
-  }
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    width: "500px",
+    height: "300px",
+    transform: "translate(-50%, -50%)",
+  },
 };
 
 // アプリのルートを識別するクエリセレクタを指定する。
-Modal.setAppElement('#__next')
+Modal.setAppElement("#__next");
 
-const ModalWindow = (props: {state: boolean}) => {
-  const [modalOpen, SetModalOpen] = useState(false)
+const ModalWindow = (props: { state: boolean }) => {
+  const [modalOpen, SetModalOpen] = useState(false);
 
   // モーダルを開く処理
   const openModal = () => {
-    SetModalOpen(true)
-  }
+    SetModalOpen(true);
+  };
 
   const afterOpenModal = () => {
     // モーダルが開いた後の処理
-  }
+  };
 
   // モーダルを閉じる処理
   const closeModal = () => {
-    SetModalOpen(false)
-  }
+    SetModalOpen(false);
+  };
 
   useEffect(() => {
-
     if (props.state === true) {
-      SetModalOpen(true)
+      SetModalOpen(true);
     }
-
-  }, [])
+  }, []);
   return (
     <>
       {/* <button onClick={openModal}>Open Modal</button> */}
@@ -62,12 +59,17 @@ const ModalWindow = (props: {state: boolean}) => {
         // スタイリングを定義
         style={customStyles}
       >
-
         <h2 className="">ログインしました。</h2>
-        <button type="button" onClick={closeModal} className="bg-gray-200 border ">close</button>
+        <button
+          type="button"
+          onClick={closeModal}
+          className="bg-gray-200 border "
+        >
+          close
+        </button>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default ModalWindow
+export default ModalWindow;

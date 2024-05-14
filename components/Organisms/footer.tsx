@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import style from "../../src/styles/footer.module.css"
-
+import style from "../../src/styles/footer.module.css";
 
 export const Footer = () => {
-  const Twitter = "/logo/Twitter.png"
-  const Instagram = "/logo/Instagram.png"
-  const Facebook = "/logo/facebook.png"
+  const Twitter = "/logo/Twitter.png";
+  const Instagram = "/logo/Instagram.png";
+  const Facebook = "/logo/facebook.png";
 
   return (
     <>
@@ -15,37 +14,22 @@ export const Footer = () => {
         <ul>
           <li className="float-left mx-5 ">
             <Link href="https://twitter.com/">
-              <a >
-                <Image
-                  src={Twitter}
-                  alt="twitter"
-                  width={50}
-                  height={50}
-                />
+              <a>
+                <Image src={Twitter} alt="twitter" width={50} height={50} />
               </a>
             </Link>
           </li>
           <li className="float-left mx-5">
             <Link href="https://www.instagram.com/">
-              <a >
-                <Image
-                  src={Instagram}
-                  alt="instagram"
-                  width={50}
-                  height={50}
-                />
+              <a>
+                <Image src={Instagram} alt="instagram" width={50} height={50} />
               </a>
             </Link>
           </li>
           <li className="float-left mx-5">
             <Link href="https://ja-jp.facebook.com/">
-              <a >
-                <Image
-                  src={Facebook}
-                  alt="facebook"
-                  width={50}
-                  height={50}
-                />
+              <a>
+                <Image src={Facebook} alt="facebook" width={50} height={50} />
               </a>
             </Link>
           </li>
@@ -63,6 +47,6 @@ export const Footer = () => {
       {/* </nav> */}
     </>
   );
-}
+};
 
 export default Footer;

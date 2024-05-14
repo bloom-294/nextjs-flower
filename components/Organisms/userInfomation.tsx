@@ -1,24 +1,18 @@
-import useSWR, { useSWRConfig } from 'swr';
-import React, { useState, useEffect } from 'react';
+import useSWR, { useSWRConfig } from "swr";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { UserInfo } from 'types/type';
-
-
+import { UserInfo } from "types/type";
 
 export const UserInfomation = (props: UserInfo) => {
-
-  if (!props.name) return (
-    <></>
-
-  );
-
+  if (!props.name) return <></>;
 
   if (props.orderUserInfoChange === false) {
-
     return (
       <div className="mb-1 rounded-md">
         <div className="grid gap-1 grid-cols-7  h-24 ">
-          <p className=' items-center flex justify-center col-span-2'>お届け先</p>
+          <p className=" items-center flex justify-center col-span-2">
+            お届け先
+          </p>
           <div className="col-span-4 items-center flex ">
             <ul>
               <li>{props.name}　様</li>
@@ -30,13 +24,14 @@ export const UserInfomation = (props: UserInfo) => {
           </div>
         </div>
       </div>
-
-    )
-  }else{
+    );
+  } else {
     return (
       <div className="mb-1 rounded-md">
         <div className="grid gap-1 grid-cols-7  h-24 ">
-          <p className=' items-center flex justify-center col-span-2'>お届け先</p>
+          <p className=" items-center flex justify-center col-span-2">
+            お届け先
+          </p>
           <div className="col-span-4 items-center flex ">
             <ul>
               <li>{props.ordererName}　様</li>
@@ -48,7 +43,6 @@ export const UserInfomation = (props: UserInfo) => {
           </div>
         </div>
       </div>
-
-    )
+    );
   }
-}
+};

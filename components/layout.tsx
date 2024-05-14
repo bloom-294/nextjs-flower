@@ -5,18 +5,15 @@ import Head from "next/head";
 // import { Html, Head, Main, NextScript } from "next/document"
 
 export const Layout = ({ children }: any) => {
-
   return (
     <>
       <div className="conatiner">
-      <Header />
+        <Header />
         <main>{children}</main>
       </div>
       <Footer />
-
-
     </>
   );
-}
+};
 
 export default Layout;
