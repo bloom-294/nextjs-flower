@@ -67,7 +67,7 @@ console.log(4,typeof(list))
         {
           icon: 'success',
           text: '追加しました！',
-          confirmButtonText: '　　OK　　',
+          confirmButtonText: '&nbsp;&nbsp;OK&nbsp;&nbsp;',
           confirmButtonColor : "#75ad9d"
         }
       )
@@ -94,7 +94,7 @@ console.log(4,typeof(list))
             <div className={`  `}>
               <div className={`z-1`}>
                 <Image
-                  src={data.item.imagePath}
+                  src={data.item?.imagePath}
                   alt=""
                   width={500}
                   height={500}
@@ -104,10 +104,10 @@ console.log(4,typeof(list))
           </div>
 
           <div className="m-12 ">
-            <p className="mb-4 text-xl text-gray-600">{data.item.name}</p>
+            <p className="mb-4 text-xl text-gray-600">{data.item?.name}</p>
             <h5 className="mb-8 text-2xl 
             font-bold
-            text-[#75ad9d]">{Number(data.item.price).toLocaleString()}<span className="text-sm text-gray-500">円（税込）</span></h5>
+            text-[#75ad9d]">{Number(data.item?.price).toLocaleString()}<span className="text-sm text-gray-500">円（税込）</span></h5>
             <p className="mb-4 text-sm">この商品の高さの目安は<span className="text-green-900 text-bold text-lg">～５０ｃｍ</span>になります。</p>
 
             <hr className="mb-6" />
@@ -134,7 +134,7 @@ console.log(4,typeof(list))
             <div>
               <h5 className="mt-2 text-md text-bold">商品説明</h5>
               <p className="text-sm">
-                {data.item.info}
+                {data.item?.info}
               </p>
             </div>
 
@@ -142,7 +142,7 @@ console.log(4,typeof(list))
 
         </div>
 
-        < RecognizeList title="おすすめ" category={data.item.category} itemId={data.item.id}/>
+        < RecognizeList title="おすすめ" category={data.item?.category} itemId={data.item?.id}/>
       </div>
     </>
   );
