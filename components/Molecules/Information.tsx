@@ -1,10 +1,12 @@
-import React from 'react'
+import React from "react";
 
 export const Information = () => {
   return (
     <>
-      <section  className="wrapper">
-        <h2 className="flex flex-wrap items-center  justify-center  mt-24 sm:text-2xl">お知らせ</h2>
+      <section className="wrapper">
+        <h2 className="flex flex-wrap items-center  justify-center  mt-24 sm:text-2xl">
+          お知らせ
+        </h2>
         <ul className="sm:py-8 py-4 px-12  rounded-xl">
           <hr />
           <li>2022.XX.XX</li>
@@ -25,5 +27,5 @@ export const Information = () => {
         </ul>
       </section>
     </>
-  )
-}
+  );
+};

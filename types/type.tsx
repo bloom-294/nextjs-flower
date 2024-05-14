@@ -1,5 +1,3 @@
-
-
 export type User = {
   address: string;
   firstName: string;
@@ -9,7 +7,7 @@ export type User = {
   password: string;
   tel: string;
   zip: string;
-}
+};
 
 export type UserInfo = {
   name: string;
@@ -21,7 +19,7 @@ export type UserInfo = {
   ordererAddress: string;
   ordererTel: string;
   orderUserInfoChange: boolean;
-}
+};
 
 export type FavoriteItem = {
   name: string;
@@ -32,31 +30,30 @@ export type FavoriteItem = {
   recommend: number;
   popular: number;
   id: number;
-}
+};
 
 export type Error = {
   errorFlag: string;
   value: string;
   text: string;
-}
+};
 
 export type NameError = {
   errorFlag: string;
   value1: string;
   value2: string;
   text: string;
-}
-
+};
 
 export type AddressTypes = {
   ordererAddress?: string;
   addressValue: string;
   SetAddressValue: React.FC | Function;
   SetAddressErrorState: React.FC | Function;
-  SetOrdererAddress?: React.FC | Function ;
+  SetOrdererAddress?: React.FC | Function;
   addressErrorState: string;
   errorFlag: string;
-}
+};
 
 export type ConfirmPasswordTypes = {
   SetConfirmPasswordValue: React.FC | Function;
@@ -65,7 +62,7 @@ export type ConfirmPasswordTypes = {
   passwordValue: string;
   errorFlag: string;
   confirmPasswordValue: string;
-}
+};
 
 export type MailTypes = {
   SetMailValue: React.FC | Function;
@@ -77,7 +74,7 @@ export type MailTypes = {
   errorFlag: string;
   register?: string;
   mailErrorState: string;
-}
+};
 
 export type NameTypes = {
   SetLastNameValue: React.FC | Function;
@@ -94,18 +91,18 @@ export type NameTypes = {
   firstNameErrorState: string;
   lastNameValue: string;
   firstNameValue: string;
-}
+};
 
 export type PasswordTypes = {
   SetPasswordValue: React.FC | Function;
   SetPasswordErrorState: React.FC | Function;
   confirmPasswordValue: string;
-  SetConfirmPasswordErrorState: React.FC | Function ;
+  SetConfirmPasswordErrorState: React.FC | Function;
   passwordErrorState: string;
   passwordValue: string;
   errorFlag: string;
   displayFlag: boolean;
-}
+};
 
 export type TelTypes = {
   SetTelValue: React.FC | Function;
@@ -115,7 +112,7 @@ export type TelTypes = {
   telValue: string;
   telErrorState: string;
   errorFlag: string;
-}
+};
 
 export type ZipTypes = {
   zipValue: string;
@@ -125,29 +122,26 @@ export type ZipTypes = {
   errorFlag: string;
   ordererZip?: string;
   SetOrdererZip?: React.FC | Function;
-
-}
+};
 
 export type PaymethodTypes = {
   SetOrdererPayMethod: React.FC | Function;
-}
+};
 
 export type DateTypes = {
   ordererDateState?: { current: string[] } | any;
   SetDateErrorState?: React.FC | Function;
   SetOrdererDate?: React.FC | Function;
   ordererDate?: string;
-}
+};
 
-export type ConfirmFromTypes =
-  NameTypes &
+export type ConfirmFromTypes = NameTypes &
   TelTypes &
   AddressTypes &
   ZipTypes &
   PaymethodTypes &
   DateTypes &
-  MailTypes &
-  {
+  MailTypes & {
     SetOrdererName: React.FC | Function;
     SetordererStateChange: React.FC | Function;
     SetOrderUserInfoChange: React.FC | Function;
@@ -155,7 +149,7 @@ export type ConfirmFromTypes =
     ordererName: string;
     ordererPayMethod: string;
     dateErrorState: string;
-  }
+  };
 
 export type ItemCardsSideTypes = {
   price: number;
@@ -169,8 +163,7 @@ export type ItemCardsSideTypes = {
   totalPrice: number;
   setTotalPrice: React.FC | Function;
   gestId: string;
-
-}
+};
 
 export type ItemCardsSideCount = {
   name: string;
@@ -181,29 +174,28 @@ export type ItemCardsSideCount = {
   gestId: string;
   id: number;
   totalPrice: number;
-  setItemsPriceChange: any
+  setItemsPriceChange: any;
   setQuantityAdd: any;
   setTotalPrice: React.FC | Function;
   quantity: number;
-
-}
+};
 
 export type ItemCardsWrapTypes = {
   id?: number;
   imagePath: string;
   name?: string;
   price?: number;
-  favorite?: string,
+  favorite?: string;
   data?: {
-    favoriteItem?: FavoriteItem,
-    gestId?: string,
-    id?: number
-  }
-}
+    favoriteItem?: FavoriteItem;
+    gestId?: string;
+    id?: number;
+  };
+};
 
 export type ItemCardsWrapRecognizeTypes = {
   id?: number;
   imagePath: string;
   name?: string;
   price?: number;
-}
+};

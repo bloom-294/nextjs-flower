@@ -1,51 +1,51 @@
-import { useEffect } from '@storybook/addons'
-import React, { FC } from 'react'
-import { useState, useRef } from 'react'
+import { useEffect } from "@storybook/addons";
+import React, { FC } from "react";
+import { useState, useRef } from "react";
 import { DateTypes } from "types/type";
 
-
-const Error = (props: { state: string | undefined; text: string; ordererDateState: any }) => {
-
-  console.log(2, typeof (props.ordererDateState))
+const Error = (props: {
+  state: string | undefined;
+  text: string;
+  ordererDateState: any;
+}) => {
+  console.log(2, typeof props.ordererDateState);
   if (props.state === "日時指定あり") {
-
     if (props.ordererDateState[2] === undefined) {
       return (
         <>
-          <label className="Error text-red-500  ml-3 text-sm">{props.text}</label>
+          <label className="Error text-red-500  ml-3 text-sm">
+            {props.text}
+          </label>
         </>
-      )
+      );
     } else if (props.ordererDateState[1] === "impossible") {
       return (
         <>
-          <label className="Error text-red-500  ml-3 text-sm">６日後以降を選択してください。</label>
+          <label className="Error text-red-500  ml-3 text-sm">
+            ６日後以降を選択してください。
+          </label>
         </>
       );
     } else {
-      return (
-        <></>
-      )
+      return <></>;
     }
   } else {
-    return <></>
+    return <></>;
   }
-}
-
-
+};
 
 export const DateInput = (props: {
   // ordererDateState: { current: string[] } ,
-  ordererDateState: any ,
-  SetDateErrorState: Function | FC<{}> | undefined,
-  SetOrdererDate: Function | FC<{}> | undefined,
-  ordererDate: string | undefined,
-  errorFlag: string
+  ordererDateState: any;
+  SetDateErrorState: Function | FC<{}> | undefined;
+  SetOrdererDate: Function | FC<{}> | undefined;
+  ordererDate: string | undefined;
+  errorFlag: string;
 }) => {
-
-  const [state, SetState] = useState(props?.ordererDateState?.current[1])
+  const [state, SetState] = useState(props?.ordererDateState?.current[1]);
 
   const Input = () => {
-    console.log(1, typeof (props.SetDateErrorState))
+    console.log(1, typeof props.SetDateErrorState);
 
     // 2073617790
     if (state === "日時指定あり") {
@@ -59,11 +59,11 @@ export const DateInput = (props: {
               className={`form-control px-3 py-1 rounded-md border`}
               pattern="\d{4},\d{1},\d{1}"
               onChange={(e) => {
-                props.ordererDateState.current[2] = String(e.target.value)
+                props.ordererDateState.current[2] = String(e.target.value);
                 // props.SetOrdererDate(e.target.value)
                 if (e.target.value === undefined) {
                   // props.SetDateErrorState("empty")
-                  props.ordererDateState.current[1] = "empty"
+                  props.ordererDateState.current[1] = "empty";
                 } else {
                   const currentDate = new Date();
                   const Specified = new Date();
@@ -75,51 +75,56 @@ export const DateInput = (props: {
                   currentDate.setHours(0, 0, 0);
 
                   // 選択された日付を指定
-                  let split = props.ordererDateState.current[2].split('-');
+                  let split = props.ordererDateState.current[2].split("-");
                   Specified.setFullYear(Number(split[0]));
                   Specified.setMonth(Number(split[1]));
                   Specified.setDate(Number(split[2]));
                   Specified.setHours(0, 0, 0);
-                  console.log("c", Number(Specified), Number(currentDate), (Number(Specified) - Number(currentDate)))
+                  console.log(
+                    "c",
+                    Number(Specified),
+                    Number(currentDate),
+                    Number(Specified) - Number(currentDate)
+                  );
                   // ６日後以降を選択しているか
-                  if (
-                    Number(Specified) - Number(currentDate) <=
-                    518400017
-                  ) {
-                    props.ordererDateState.current[1] = "impossible"
-                    console.log("no")
+                  if (Number(Specified) - Number(currentDate) <= 518400017) {
+                    props.ordererDateState.current[1] = "impossible";
+                    console.log("no");
                   } else {
-                    props.ordererDateState.current[1] = "ok"
+                    props.ordererDateState.current[1] = "ok";
                     // props.SetDateErrorState("ok")
                   }
                 }
               }}
-
             />
           </div>
         </>
-      )
+      );
     } else {
-      return <></>
+      return <></>;
     }
-  }
+  };
 
   return (
     <>
       <div className="my-5 ml-5">
         <div className="mb-2">
           <label htmlFor="address">配達日 </label>
-          <span className="bg-red-600 rounded-md p-1 text-sm text-white " style={{ fontSize: "12px" }}>必須</span>
+          <span
+            className="bg-red-600 rounded-md p-1 text-sm text-white "
+            style={{ fontSize: "12px" }}
+          >
+            必須
+          </span>
           <Error
             text="配達日（６日後以降）を選択してください"
             // SetDateErrorState={props.SetDateErrorState}
             ordererDateState={props.ordererDateState}
             state={state}
-          // errorFlag={props.errorFlag}
+            // errorFlag={props.errorFlag}
           />
         </div>
         <div>
-
           <label className="radio-inline">
             <input
               className="pay mx-3"
@@ -129,8 +134,8 @@ export const DateInput = (props: {
               value="日時指定なし"
               onClick={() => {
                 // props.SetOrdererDateState("日時指定なし")
-                SetState("日時指定なし")
-                props.ordererDateState.current[0] = "日時指定なし"
+                SetState("日時指定なし");
+                props.ordererDateState.current[0] = "日時指定なし";
                 // console.log(props.ordererDateState.current)
               }}
             />
@@ -145,8 +150,8 @@ export const DateInput = (props: {
               value="日時指定あり"
               onClick={() => {
                 // props.SetOrdererDateState("日時指定あり")
-                SetState("日時指定あり")
-                props.ordererDateState.current[0] = "日時指定あり"
+                SetState("日時指定あり");
+                props.ordererDateState.current[0] = "日時指定あり";
                 // console.log(props.ordererDateState.current)
               }}
             />
@@ -162,8 +167,8 @@ export const DateInput = (props: {
               value="即日配送"
               onClick={() => {
                 // props.SetOrdererDateState("即日配送")
-                SetState("即日配送")
-                props.ordererDateState.current[0] = "即日配送"
+                SetState("即日配送");
+                props.ordererDateState.current[0] = "即日配送";
                 // console.log(props.ordererDateState.current)
               }}
             />
@@ -173,13 +178,12 @@ export const DateInput = (props: {
 
           {/* 指定ありが選択されたら表示 */}
           <Input
-            // SetDateErrorState={props.SetDateErrorState} 
-            // SetOrdererDate={props.SetOrdererDate}
-            //  ordererDateState={props.ordererDateState} 
-             />
-
+          // SetDateErrorState={props.SetDateErrorState}
+          // SetOrdererDate={props.SetOrdererDate}
+          //  ordererDateState={props.ordererDateState}
+          />
         </div>
       </div>
     </>
-  )
-}
+  );
+};
