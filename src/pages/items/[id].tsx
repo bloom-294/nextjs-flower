@@ -9,25 +9,16 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import style from "../../styles/itemListWrap.module.css";
 import RecognizeList from "components/Organisms/recognizeList";
 import Swal from "sweetalert2";
+import { ItemListTypes } from "types/type";
+import { Loader } from "components/Atoms/loader";
 
 // const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
-export const Details = (data: {
-  item: {
-    name: string;
-    price: number;
-    info: string;
-    imagepath: string;
-    id: number;
-    quantity: number;
-    category: string;
-  };
-}) => {
+export const Details = (data: { item: ItemListTypes }) => {
   const router = useRouter();
   const [gestIdValue, SetGestIdValue] = useState("");
   const list: Array<string[]> = [];
 
-  console.log(1, data);
   useEffect(() => {
     const splitCookie = document.cookie.split(";");
 
@@ -43,6 +34,10 @@ export const Details = (data: {
       }
     });
   }, []);
+
+  if (!data.item) {
+    return <Loader />;
+  }
 
   const addItemsRegister = () => {
     // カートに商品情報・ゲストID追加
@@ -101,6 +96,7 @@ export const Details = (data: {
                   width={500}
                   height={500}
                   className="object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -167,7 +163,7 @@ export const Details = (data: {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`http://localhost:3000/api/itemList`);
+  const res = await fetch(`https://nextjs-flower-api.vercel.app/api/itemList`);
   const json = await res.json();
   const list: any = [];
 
@@ -182,12 +178,14 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: any) => {
-  const res = await fetch(`http://localhost:3000/api/itemList?id=${params.id}`);
+  const res = await fetch(
+    `https://nextjs-flower-api.vercel.app/api/itemList?id=${Number(params.id)}`
+  );
   const json = await res.json();
-  const test = params.id;
+  const itemLists = await json.itemList[0];
 
   return {
-    props: { item: json.item, id: params },
+    props: { item: itemLists, id: params },
     revalidate: 1,
   };
 };

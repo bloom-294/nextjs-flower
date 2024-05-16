@@ -51,7 +51,7 @@ export const Home = () => {
   const loginStatusRegister = async (props: any) => {
     // ログインしているか判定
     if (loginStatus === false) {
-      console.log(`put前 ${gestIdValue}`);
+      // console.log(`put前 ${gestIdValue}`);
 
       const data = {
         name: props[0].name,
@@ -166,14 +166,14 @@ export const Home = () => {
 
                   const hash = async () => {
                     const digestHex = await sha256(password);
-                    console.log(digestHex);
+                    // console.log(digestHex);
                     password = digestHex;
                   };
 
                   await hash();
 
                   if (mailErrorState === "ok" && passwordErrorState === "ok") {
-                    console.log(password);
+                    // console.log(password);
                     await fetch(
                       `http://localhost:8000/users?mail=${mailValue}&&password=${password}`
                     )

@@ -32,6 +32,17 @@ export type FavoriteItem = {
   id: number;
 };
 
+export type ItemListTypes = {
+  name: string;
+  price: number;
+  info: string;
+  imagepath: string;
+  category: string;
+  recommend: number;
+  popular: number;
+  id: number;
+};
+
 export type Error = {
   errorFlag: string;
   value: string;
@@ -165,7 +176,7 @@ export type ItemCardsSideTypes = {
   gestId: string;
 };
 
-export type ItemCardsSideCount = {
+export type ItemCardsSideCountTypes = {
   name: string;
   price: number;
   itemsPriceChange: number;

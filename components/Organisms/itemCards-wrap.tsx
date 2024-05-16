@@ -45,6 +45,7 @@ export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
             alt=""
             width={200}
             height={200}
+            priority
           />
         </a>
       </Link>

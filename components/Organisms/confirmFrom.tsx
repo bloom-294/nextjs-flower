@@ -92,7 +92,7 @@ export const ConfirmFrom = (props: ConfirmFromTypes) => {
                     props.ordererDateState.current[1] == "ok") ||
                   props.ordererDateState.current[1] == "init"
                 ) {
-                  console.log(props.ordererTel);
+                  // console.log(props.ordererTel);
                   props.SetOrdererName(
                     `${props.ordererLastName} ${props.ordererFirstName}`
                   );

@@ -30,7 +30,7 @@ export const Favorite = (props: {
     });
   });
 
-  console.log(favorite);
+  // console.log(favorite);
   if (props.favorite === "favorite") {
     return (
       <label className={`${style.like} text-[17px] text-gray-500 `}>×</label>
@@ -78,7 +78,7 @@ export const Favorite = (props: {
                 });
             }
 
-            console.log(props.data);
+            // console.log(props.data);
           }}
         />
         <span className={` material-icons ${style.glitter} `}>flare</span>
