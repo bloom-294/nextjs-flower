@@ -30,7 +30,7 @@ export const Home = ({ data }: any) => {
       </>
     );
 
-    // console.log(data.itemList[1])
+  // console.log(data.itemList[1])
 
   return (
     <>

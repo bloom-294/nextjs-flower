@@ -12,10 +12,7 @@ const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 export const TopRecognizeList = (props: { title?: string }) => {
   const router = useRouter();
-  const { data, error, mutate } = useSWR(
-    `/api/itemList`,
-    fetcher
-  );
+  const { data, error, mutate } = useSWR(`/api/itemList`, fetcher);
 
   if (error) return <div></div>;
 

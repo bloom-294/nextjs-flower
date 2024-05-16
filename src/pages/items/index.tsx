@@ -32,10 +32,7 @@ export const Home = () => {
     categoryWord = "全ての商品";
   }
 
-  const { data, error, mutate } = useSWR(
-    `/api/itemList`,
-    fetcher
-  );
+  const { data, error, mutate } = useSWR(`/api/itemList`, fetcher);
 
   if (error)
     return (

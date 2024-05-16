@@ -14,9 +14,7 @@ import { Loader } from "components/Atoms/loader";
 
 // const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
-export const Details = (data: {
-  item: ItemListTypes;
-}) => {
+export const Details = (data: { item: ItemListTypes }) => {
   const router = useRouter();
   const [gestIdValue, SetGestIdValue] = useState("");
   const list: Array<string[]> = [];
@@ -37,10 +35,8 @@ export const Details = (data: {
     });
   }, []);
 
-  if(!data.item) {
-    return(
-      <Loader />
-    );
+  if (!data.item) {
+    return <Loader />;
   }
 
   const addItemsRegister = () => {
@@ -182,7 +178,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: any) => {
-  const res = await fetch(`https://nextjs-flower-api.vercel.app/api/itemList?id=${Number(params.id)}`);
+  const res = await fetch(
+    `https://nextjs-flower-api.vercel.app/api/itemList?id=${Number(params.id)}`
+  );
   const json = await res.json();
   const itemLists = await json.itemList[0];
 

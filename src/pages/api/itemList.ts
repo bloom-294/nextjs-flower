@@ -223,8 +223,7 @@ export type ItemListApiResponse = {
 
 import { sql } from "@vercel/postgres";
 
-
-let itemList:any;
+let itemList: any;
 
 export default async (
   req: NextApiRequest,
@@ -234,10 +233,10 @@ export default async (
   const id = req.query.id as string;
   const item = fetchItemList(Number(id));
   const itemListSql = await sql`SELECT * FROM items;`;
-  itemList = await itemListSql.rows
+  itemList = await itemListSql.rows;
 
   if (item === "ALL") {
-    res.status(200).json( { itemList } );
+    res.status(200).json({ itemList });
   } else if (item) {
     res.status(200).json({ item });
   } else {
@@ -247,7 +246,7 @@ export default async (
 
 const fetchItemList = (id: number) => {
   if (id) {
-    return itemList.find((item:any) => item.id === id);
+    return itemList.find((item: any) => item.id === id);
   } else {
     return "ALL";
   }

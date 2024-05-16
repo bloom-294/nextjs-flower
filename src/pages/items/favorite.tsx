@@ -1,6 +1,7 @@
 import { ItemCardsWrap } from "components/Organisms/itemCards-wrap";
 import React from "react";
 import { useRef, useEffect } from "react";
+import { Loader } from "components/Atoms/loader";
 
 export const Favorite = ({ data }: any) => {
   const gestIdValue = useRef("");
@@ -36,7 +37,10 @@ export const Favorite = ({ data }: any) => {
     }
   };
 
-  console.log(data);
+  if (!data) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="container flex flex-wrap justify-center items-center mx-auto py-5 px-5   ">
@@ -71,11 +75,11 @@ export const Favorite = ({ data }: any) => {
                 ) => {
                   return (
                     <ItemCardsWrap
-                      name={itemData.favoriteItem.name}
-                      price={itemData.favoriteItem.price}
-                      imagePath={itemData.favoriteItem.imagePath}
+                      name={itemData.favoriteItem?.name}
+                      price={itemData.favoriteItem?.price}
+                      imagePath={itemData.favoriteItem?.imagePath}
                       key={index}
-                      id={itemData.favoriteItem.id}
+                      id={itemData.favoriteItem?.id}
                       favorite="favorite"
                     />
                   );
