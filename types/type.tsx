@@ -199,3 +199,10 @@ export type ItemCardsWrapRecognizeTypes = {
   name?: string;
   price?: number;
 };
+
+export type ItemCardsWrapRecognizeSqlTypes = {
+  id?: number;
+  imagepath: string;
+  name?: string;
+  price?: number;
+};

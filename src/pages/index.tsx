@@ -30,6 +30,8 @@ export const Home = ({ data }: any) => {
       </>
     );
 
+    console.log(data.itemList[1])
+
   return (
     <>
       <div className="container flex flex-wrap justify-center items-center mx-auto   ">

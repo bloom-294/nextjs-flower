@@ -39,7 +39,7 @@ export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
         <a>
           <Image
             className="
-            rounded-t-lg 
+            rounded-t-lg object-cover
             "
             src={props.imagePath}
             alt=""
@@ -101,7 +101,7 @@ export const ItemCardsWrapRecognize = (props: ItemCardsWrapRecognizeTypes) => {
             alt=""
             width={150}
             height={150}
-            className="rounded-t-md"
+            className="rounded-t-md object-cover"
           />
         </a>
       </Link>

@@ -17,7 +17,7 @@ export const Details = (data: {
     name: string;
     price: number;
     info: string;
-    imagePath: string;
+    imagepath: string;
     id: number;
     quantity: number;
     category: string;
@@ -52,7 +52,7 @@ export const Details = (data: {
       price: data.item.price,
       orderPrice: data.item.price,
       quantity: 1,
-      imagePath: data.item.imagePath,
+      imagePath: data.item.imagepath,
       gestId: gestIdValue,
     };
 
@@ -96,10 +96,11 @@ export const Details = (data: {
             <div className={`  `}>
               <div className={`z-1`}>
                 <Image
-                  src={data.item?.imagePath}
+                  src={data.item?.imagepath}
                   alt=""
                   width={500}
                   height={500}
+                  className="object-cover"
                 />
               </div>
             </div>

@@ -6,7 +6,7 @@ import style from "../../src/styles/itemList.module.css";
 import Image from "next/image";
 import Head from "next/head";
 import React, { useRef, useState } from "react";
-import { ItemCardsWrapRecognizeTypes } from "types/type";
+import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -39,12 +39,12 @@ export const NewItemsList = (props: { title?: string }) => {
         <h5 className="sm:mb-5">{props.title}</h5>
         <div className="grid grid-cols-2 sm:grid-cols-4  md:grid-cols-5 gap-y-3">
           {newItemList.map(
-            (items: ItemCardsWrapRecognizeTypes, index: number) => {
+            (items: ItemCardsWrapRecognizeSqlTypes, index: number) => {
               return (
                 <ItemCardsWrapRecognize
                   name={items.name}
                   price={items.price}
-                  imagePath={items.imagePath}
+                  imagePath={items.imagepath}
                   id={items.id}
                   key={items.id}
                 />

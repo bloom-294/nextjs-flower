@@ -11,7 +11,7 @@ import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
 import { Transform } from "@material-ui/icons";
 import ModalWindow from "../../../components/Organisms/modal";
 import Countup from "react-countup";
-import { ItemCardsWrapRecognizeTypes } from "types/type";
+import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -141,12 +141,12 @@ export const Home = () => {
       return (
         <>
           {data.itemList.map(
-            (itemData: ItemCardsWrapRecognizeTypes, index: number) => {
+            (itemData: ItemCardsWrapRecognizeSqlTypes, index: number) => {
               return (
                 <ItemCardsWrap
                   name={itemData.name}
                   price={itemData.price}
-                  imagePath={itemData.imagePath}
+                  imagePath={itemData.imagepath}
                   key={index}
                   id={itemData.id}
                 />
@@ -292,12 +292,12 @@ export const Home = () => {
       "
             >
               {itemList.map(
-                (itemData: ItemCardsWrapRecognizeTypes, index: number) => {
+                (itemData: ItemCardsWrapRecognizeSqlTypes, index: number) => {
                   return (
                     <ItemCardsWrap
                       name={itemData.name}
                       price={itemData.price}
-                      imagePath={itemData.imagePath}
+                      imagePath={itemData.imagepath}
                       key={index}
                       id={itemData.id}
                       data={itemData}
