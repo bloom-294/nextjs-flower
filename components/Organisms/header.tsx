@@ -46,33 +46,55 @@ const HeaderListText = (props: { name: string; path: string }) => {
   );
 };
 
+const headerIconStyles =
+  "float-left mx-8 py-2.5  flex flex-col justify-center items-center mx-auto text-gray-500 text-sm z-100";
+
 const HeaderListGoogleIconList = (props: {
   name: string;
   path: string;
-  list: any;
+  list?: any;
   title: string;
 }) => {
-  return (
-    <>
-      <li
-        className={`float-left mx-8 py-2.5  flex flex-col justify-center items-center mx-auto text-gray-500 text-sm z-100`}
-      >
-        <span className={`material-icons text-gray-400 ${style.icon} `}>
-          {props.name}
-        </span>
-        {props.list}
-        <label htmlFor="material-icons">
-          <p className="cursor-pointer"> {props.title}</p>
-        </label>
-      </li>
-    </>
-  );
+  if (props.title === "商品一覧") {
+    return (
+      <>
+        <Link href="/items">
+          <li className={`group ${headerIconStyles} w-max cursor-pointer`}>
+            <span
+              className={`material-icons text-gray-400 group-hover:text-[#75ad9d] `}
+            >
+              {props.name}
+            </span>
+            <label htmlFor="material-icons">
+              <a className={`float-left group-hover:text-[#75ad9d]`}>
+                商品一覧
+              </a>
+            </label>
+          </li>
+        </Link>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <li className={`${headerIconStyles}`}>
+          <span className={`material-icons text-gray-400 ${style.icon} `}>
+            {props.name}
+          </span>
+          {props.list}
+          <label htmlFor="material-icons">
+            <p className="cursor-pointer"> {props.title}</p>
+          </label>
+        </li>
+      </>
+    );
+  }
 };
 
 const UserNavigationGroupUser = (props: any) => {
   return (
     <ul
-      className={`bg-white absolute   translate-y-4 flex flex-col rounded-xl  shadow-md  ${style.list} z-100`}
+      className={`bg-white absolute translate-y-4 flex flex-col rounded-xl  shadow-md  ${style.list} z-100`}
     >
       <HeaderListText name="新規登録" path={`/users/`} />
       <LoginState
@@ -99,13 +121,11 @@ const UserNavigationGroupOther = () => {
     <ul
       className={`bg-white absolute translate-y-4 flex flex-col rounded-xl  shadow-md  ${style.list} z-100 `}
     >
-      <HeaderListText name="トップ" path={`/`} />
+      {/* <HeaderListText name="トップ" path={`/`} /> */}
       <HeaderListText name="商品一覧" path={`/items`} />
     </ul>
   );
 };
-
-// opacity-0.3 absolute z-20  -translate-x-12
 
 export const Header = () => {
   const [hamburgerMenuDisplayState, SetHamburgerMenuDisplayState] =
@@ -214,7 +234,7 @@ export const Header = () => {
             name="favorite"
             path={`/users/login`}
             list={<UserNavigationGroupOther />}
-            title="商品"
+            title="商品一覧"
           />
         </ul>
 
@@ -252,7 +272,7 @@ const LoginState = (props: any) => {
             Swal.fire({
               icon: "success",
               text: "ログアウトしました！",
-              confirmButtonText: "　　OK　　",
+              confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
               confirmButtonColor: "#75ad9d",
             });
             props.SetLoginState(false);
