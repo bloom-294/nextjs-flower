@@ -33,7 +33,7 @@ export const Home = () => {
   }
 
   const { data, error, mutate } = useSWR(
-    `http://localhost:3000/api/itemList`,
+    `/api/itemList`,
     fetcher
   );
 

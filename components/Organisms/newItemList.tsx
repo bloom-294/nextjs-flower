@@ -13,7 +13,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export const NewItemsList = (props: { title?: string }) => {
   const router = useRouter();
   const { data, error, mutate } = useSWR(
-    `http://localhost:3000/api/itemList`,
+    `/api/itemList`,
     fetcher
   );
 

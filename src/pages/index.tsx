@@ -30,7 +30,7 @@ export const Home = ({ data }: any) => {
       </>
     );
 
-    console.log(data.itemList[1])
+    // console.log(data.itemList[1])
 
   return (
     <>
@@ -63,7 +63,7 @@ export const Home = ({ data }: any) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`http://localhost:3000/api/itemList`);
+  const res = await fetch(`https://nextjs-flower-api.vercel.app/api/itemList`);
   const json = await res.json();
 
   return {

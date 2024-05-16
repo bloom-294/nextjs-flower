@@ -17,7 +17,7 @@ export const RecognizeList = (props: {
 }) => {
   const router = useRouter();
   const { data, error, mutate } = useSWR(
-    `http://localhost:3000/api/itemList`,
+    `/api/itemList`,
     fetcher
   );
 

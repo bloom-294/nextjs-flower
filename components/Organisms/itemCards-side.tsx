@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { ChangeHistory } from "@material-ui/icons";
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
-import { ItemCardsSideTypes, ItemCardsSideCount } from "types/type";
+import { ItemCardsSideTypes, ItemCardsSideCountTypes } from "types/type";
 
 const ItemCardsSideImage = (props: { imagePath: string }) => {
   return (
@@ -52,7 +52,7 @@ const ItemCardsSideQuentity = (props: { quentity: number | string }) => {
   );
 };
 
-const ItemCardsSideCount = (props: ItemCardsSideCount) => {
+const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
   // const router = useRouter();
   const change = () => {
     const addCartItems = {
@@ -134,7 +134,7 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
       method: "DELETE",
     })
       .then((response) => {
-        console.log(props.id);
+        // console.log(props.id);
         props.mutate();
       })
       .catch((error) => {

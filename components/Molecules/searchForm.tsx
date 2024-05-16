@@ -19,15 +19,15 @@ export const SearchForm = (props: {
         }}
         onKeyDown={(ev) => {
           if (ev.code === "Enter") {
-            console.log(ev.code);
+            // console.log(ev.code);
             props.setSearchState(true);
           }
           if (ev.code === "Backspace") {
-            console.log(ev.code);
+            // console.log(ev.code);
             props.setSearchState(false);
           }
 
-          console.log(ev.code);
+          // console.log(ev.code);
         }}
       />
       <span className="material-icons absolute   -translate-y-0.5 translate-x-40 text-gray-400 z-10">

@@ -50,11 +50,11 @@ export const Home = () => {
             type="button"
             onClick={() => {
               if (!loginStatus) {
-                console.log(loginStatus);
+                // console.log(loginStatus);
                 router.push("/users/login");
                 document.cookie = "carts=confirm; path=/;";
               } else {
-                console.log(loginStatus);
+                // console.log(loginStatus);
                 router.push("/carts/confirm");
               }
             }}
