@@ -55,7 +55,7 @@ export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
             <p
               className="mb-2  text-sm font-nomal tracking-tight 
             w-32 h-10
-            text-gray-800 dark:text-white overflow-hidden"
+            dark:text-white text-ellipsis overflow-hidden"
             >
               {props.name}
             </p>
