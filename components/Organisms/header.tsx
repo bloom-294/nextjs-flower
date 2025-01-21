@@ -111,7 +111,8 @@ const UserNavigationGroupCart = () => {
       className={`bg-white absolute translate-y-4 flex flex-col rounded-xl  shadow-md  ${style.list} z-100`}
     >
       <HeaderListText name="カート" path={`/carts`} />
-      <HeaderListText name="お気に入り" path={`/items/favorite`} />
+      {/* favorite */}
+      {/* <HeaderListText name="商品一覧" path={`/items`} /> */}
     </ul>
   );
 };

@@ -8,7 +8,7 @@
 
 ## <span style="color: #75ad9d;">環境構築</span>　
 - `yarn install && npm install` 実行
-- json-server :  `npm run mock-api`
+- json-server :  `yarn mock-api`
 - local : `yarn dev`
 
 <br/>

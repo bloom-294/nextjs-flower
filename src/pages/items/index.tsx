@@ -12,6 +12,8 @@ import { Transform } from "@material-ui/icons";
 import ModalWindow from "../../../components/Organisms/modal";
 import Countup from "react-countup";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
+import Swal from "sweetalert2";
+import { escape } from "querystring";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -19,6 +21,7 @@ export const Home = () => {
   const [searchWord, setSearchWord] = useState("");
   // 検索フォームでEnterが押されたかどうか
   const [searchState, setSearchState] = useState(false);
+  const [itemListState, setItemListState] = useState(false);
   const [sort, setSort]: any = useState("");
 
   const router = useRouter();
@@ -101,8 +104,37 @@ export const Home = () => {
   }
 
   // console.log(categoryitemList)
+  // エラー表示
+  const ErrorMessage = (flag?:boolean) => {
+    if (itemList.length === 0) {
+        Swal.fire({
+          icon: "error",
+          text: "該当する商品がありません",
+          confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+          confirmButtonColor: "#75ad9d",
+        });
+        router.push("/items");
+        return;
+    } else {
+      return;
+    }
+  };
 
-  const itemList: any = [];
+
+  let itemList: any = [];
+  // フォームで検索
+  // Enterが押された時
+  // if (searchState === true) {
+  // categoryitemList.map((ItemData: { name: string }, index: number) => {
+  //   // 検索ワードと一致した場合
+  //   if (ItemData.name.match(searchWord)) {
+  //     itemList.push(ItemData);
+  //   }
+  // });
+  // } else {
+  //   itemList = categoryitemList;
+  // }
+
   // フォームで検索
   categoryitemList.map((ItemData: { name: string }, index: number) => {
     // Enterが押された時
@@ -110,31 +142,23 @@ export const Home = () => {
       // 検索ワードと一致した場合
       if (ItemData.name.match(searchWord)) {
         itemList.push(ItemData);
+      } else {
+        return;
       }
     } else {
       itemList.push(ItemData);
     }
   });
 
-  // エラー表示
-  const ErrorMessage = () => {
-    if (itemList.length === 0) {
-      return (
-        <>
-          <p className=" translate-y-8 translate-x-24 ">
-            該当する商品がありません。
-          </p>
-        </>
-      );
-    } else {
-      return <></>;
-    }
-  };
+  const itemListLength:boolean = (itemList.length === 0);
 
   // 該当商品がない場合、全ての商品を表示
   const SearchItemsNone = (props: any) => {
     // console.log(itemList.length)
     if (itemList.length === 0) {
+      if(searchState === false) {
+        ErrorMessage();
+      } 
       return (
         <>
           {data.itemList.map(
@@ -150,34 +174,30 @@ export const Home = () => {
               );
             }
           )}
-          {(() => {
-            // if (itemList.length === 0) {
-            // data.map((itemData: any, index: number) => {
-            //   return (
-            //     <ItemCardsWrap name={itemData.name} price={itemData.price} imagePath={itemData.imagePath} key={index} id={itemData.id} />
-            //   )
-            // })
-            // }
-            // if (categoryitemList.length !== 0) {
-            //   categoryitemList.map((itemData: any, index: number) => {
-            //     return (
-            //       <ItemCardsWrap name={itemData.name} price={itemData.price} imagePath={itemData.imagePath} key={index} id={itemData.id} />
-            //     )
-            //   })
-            // } else {
-            //   data.map((itemData: any, index: number) => {
-            //     return (
-            //       <ItemCardsWrap name={itemData.name} price={itemData.price} imagePath={itemData.imagePath} key={index} id={itemData.id} />
-            //     )
-            //   })
-            // }
-          })()}
         </>
       );
     } else {
       return <></>;
     }
   };
+
+  // if(searchState === true) {
+  //   ErrorMessage();
+  //   return;
+  //   if(itemList.length === 0) {
+  //      Swal.fire({
+  //       icon: "error",
+  //       text: "該当する商品がありません",
+  //       confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+  //       confirmButtonColor: "#75ad9d",
+  //     });
+  //     router.push("/items")
+  //     return;
+  //   }
+  // }else {
+  //   console.log("hi")
+  // }
+  console.log(searchState);
 
   mutate();
   return (
@@ -195,8 +215,8 @@ export const Home = () => {
               justify-center items-end mx-auto h-12 pb-1"
               >
                 該当商品
-                <span className="mx-4 translate-y-2 text-[#75ad9d] text-[30px]">
-                  <Countup end={itemList.length} duration={0.3} />
+                <span className="mx-4 translate-y-2">
+                  <Countup end={itemList.length} duration={0.3} className="text-[#75ad9d] text-[30px]" />
                 </span>
                 件
               </h3>
@@ -211,13 +231,15 @@ export const Home = () => {
                 setSearchState={setSearchState}
                 categoryWord={categoryWord}
                 mutate={mutate}
+                itemListLength={itemListLength}
+                onChange={() => {}}
               />
             </div>
             <div className=" flex flex-wrap justify-center items-center mr-36   ">
-              <ErrorMessage />
+              {/* <ErrorMessage /> */}
             </div>
 
-            <div className="flex flex-wrap justify-center items-center mt-12">
+            <div className="flex flex-wrap justify-center items-center mt-8">
               <ul className="flex float-right">
                 <li className="mr-4 ">
                   <button

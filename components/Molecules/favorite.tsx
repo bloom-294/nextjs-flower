@@ -47,38 +47,38 @@ export const Favorite = (props: {
               ref.current = false;
             }
 
-            if (ref.current === true) {
-              const favoriteData = {
-                favoriteItem: props.data,
-                gestId: gestIdValue,
-              };
+            // if (ref.current === true) {
+            //   const favoriteData = {
+            //     favoriteItem: props.data,
+            //     gestId: gestIdValue,
+            //   };
 
-              fetch(`http://localhost:8000/favorite`, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(favoriteData),
-              })
-                .then((response) => {
-                  return response.json();
-                })
-                .then((data) => {
-                  // Swal.fire(
-                  //   {
-                  //     icon: 'success',
-                  //     text: 'お気に入りに追加しました',
-                  //     confirmButtonText: '　　OK　　',
-                  //     confirmButtonColor : "#75ad9d"
-                  //   }
-                  // )
-                })
-                .catch((error) => {
-                  console.error("通信に失敗しました", error);
-                });
-            }
+            //   fetch(`http://localhost:8000/favorite`, {
+            //     method: "POST",
+            //     headers: {
+            //       "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(favoriteData),
+            //   })
+            //     .then((response) => {
+            //       return response.json();
+            //     })
+            //     .then((data) => {
+            //       // Swal.fire(
+            //       //   {
+            //       //     icon: 'success',
+            //       //     text: 'お気に入りに追加しました',
+            //       //     confirmButtonText: '　　OK　　',
+            //       //     confirmButtonColor : "#75ad9d"
+            //       //   }
+            //       // )
+            //     })
+            //     .catch((error) => {
+            //       console.error("通信に失敗しました", error);
+            //     });
+            // }
 
-            // console.log(props.data);
+            // // console.log(props.data);
           }}
         />
         <span className={` material-icons ${style.glitter} `}>flare</span>
