@@ -1,4 +1,7 @@
 {
-  "singleQuote": true,
-  "printWidth": 70
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "import/no-anonymous-default-export": 0,
+    "react-hooks/exhaustive-deps": 0
+  }
 }

@@ -68,7 +68,7 @@ export const ShoppingList = (props: { pageName: string }) => {
         mutate();
       }
     }
-  }, [initTotalPrice]);
+  }, [totalPrice, mutate, initTotalPrice]);
 
   if (!data)
     return (

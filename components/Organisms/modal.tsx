@@ -45,7 +45,7 @@ const ModalWindow = (props: { state: boolean }) => {
     if (props.state === true) {
       SetModalOpen(true);
     }
-  }, []);
+  }, [props.state]);
   return (
     <>
       {/* <button onClick={openModal}>Open Modal</button> */}

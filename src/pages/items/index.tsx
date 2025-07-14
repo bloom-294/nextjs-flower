@@ -232,7 +232,7 @@ export const Home = () => {
                 categoryWord={categoryWord}
                 mutate={mutate}
                 itemListLength={itemListLength}
-                onChange={() => {}}
+                // onChange={() => {}}
               />
             </div>
             <div className=" flex flex-wrap justify-center items-center mr-36   ">

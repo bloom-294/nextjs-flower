@@ -1,9 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
-// import Link from "next/link";
-// import style from "../src/styles/humburger.module.css";
-// import React from "react";
-import { SearchForm } from "../Molecules/searchForm";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import style from "../../src/styles/header.module.css";
@@ -14,23 +9,9 @@ const Logo = (props: { path: string }) => {
   return (
     <Link href="/">
       <a>
-        <Image src={props.path} width={100} height={70} className="" />
+        <Image src={props.path} width={100} height={70} alt="logo"/>
       </a>
     </Link>
-  );
-};
-
-const HeaderListGoogleIcon = (props: { name: string; path: string }) => {
-  return (
-    <>
-      <li className="float-left mx-8 py-2.5">
-        <Link href={props.path}>
-          <a>
-            <span className="material-symbols-outlined">{props.name}</span>
-          </a>
-        </Link>
-      </li>
-    </>
   );
 };
 
@@ -55,10 +36,10 @@ const HeaderListGoogleIconList = (props: {
   list?: any;
   title: string;
 }) => {
-  if (props.title === "商品一覧") {
+  if (props.title === "商品一覧" || props.title === "カート") {
     return (
       <>
-        <Link href="/items">
+        <Link href={props.path}>
           <li className={`group ${headerIconStyles} w-max cursor-pointer`}>
             <span
               className={`material-icons text-gray-400 group-hover:text-[#75ad9d] `}
@@ -67,7 +48,7 @@ const HeaderListGoogleIconList = (props: {
             </span>
             <label htmlFor="material-icons">
               <a className={`float-left group-hover:text-[#75ad9d]`}>
-                商品一覧
+                {props.title}
               </a>
             </label>
           </li>
@@ -194,7 +175,7 @@ export const Header = () => {
             <HeaderListText name="トップ" path={`/`} />
             <HeaderListText name="商品一覧" path={`/items`} />
             <HeaderListText name="カート" path={`/carts`} />
-            <HeaderListText name="お気に入り" path={`/items/favorite`} />
+            {/* <HeaderListText name="お気に入り" path={`/items/favorite`} /> */}
             <HeaderListText name="新規登録" path={`/users/`} />
 
             <LoginState loginState={loginState} SetLoginState={SetLoginState} />
@@ -227,13 +208,13 @@ export const Header = () => {
           />
           <HeaderListGoogleIconList
             name="shopping_cart"
-            path={`/users/login`}
+            path={`/carts`}
             list={<UserNavigationGroupCart />}
             title="カート"
           />
           <HeaderListGoogleIconList
             name="favorite"
-            path={`/users/login`}
+            path={`/items`}
             list={<UserNavigationGroupOther />}
             title="商品一覧"
           />
