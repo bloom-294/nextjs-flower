@@ -175,7 +175,7 @@ export const Header = () => {
             <HeaderListText name="トップ" path={`/`} />
             <HeaderListText name="商品一覧" path={`/items`} />
             <HeaderListText name="カート" path={`/carts`} />
-            <HeaderListText name="お気に入り" path={`/items/favorite`} />
+            {/* <HeaderListText name="お気に入り" path={`/items/favorite`} /> */}
             <HeaderListText name="新規登録" path={`/users/`} />
 
             <LoginState loginState={loginState} SetLoginState={SetLoginState} />
