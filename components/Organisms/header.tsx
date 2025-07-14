@@ -9,7 +9,7 @@ const Logo = (props: { path: string }) => {
   return (
     <Link href="/">
       <a>
-        <Image src={props.path} width={100} height={70} className="" />
+        <Image src={props.path} width={100} height={70} alt="logo"/>
       </a>
     </Link>
   );
