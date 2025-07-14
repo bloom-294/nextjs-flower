@@ -5,6 +5,7 @@ export const SearchForm = (props: {
   setSearchWord: Function;
   setSearchState: Function;
   mutate?: Function;
+  itemListLength: boolean;
 }) => {
   return (
     <>
