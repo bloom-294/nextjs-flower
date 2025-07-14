@@ -1,9 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
-// import Link from "next/link";
-// import style from "../src/styles/humburger.module.css";
-// import React from "react";
-import { SearchForm } from "../Molecules/searchForm";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import style from "../../src/styles/header.module.css";
@@ -17,20 +12,6 @@ const Logo = (props: { path: string }) => {
         <Image src={props.path} width={100} height={70} className="" />
       </a>
     </Link>
-  );
-};
-
-const HeaderListGoogleIcon = (props: { name: string; path: string }) => {
-  return (
-    <>
-      <li className="float-left mx-8 py-2.5">
-        <Link href={props.path}>
-          <a>
-            <span className="material-symbols-outlined">{props.name}</span>
-          </a>
-        </Link>
-      </li>
-    </>
   );
 };
 
@@ -55,7 +36,7 @@ const HeaderListGoogleIconList = (props: {
   list?: any;
   title: string;
 }) => {
-  if (props.title === "商品一覧") {
+  if (props.title === "商品一覧" || props.title === "カート") {
     return (
       <>
         <Link href="/items">
@@ -67,7 +48,7 @@ const HeaderListGoogleIconList = (props: {
             </span>
             <label htmlFor="material-icons">
               <a className={`float-left group-hover:text-[#75ad9d]`}>
-                商品一覧
+                {props.title}
               </a>
             </label>
           </li>
