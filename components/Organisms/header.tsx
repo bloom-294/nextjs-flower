@@ -39,7 +39,7 @@ const HeaderListGoogleIconList = (props: {
   if (props.title === "商品一覧" || props.title === "カート") {
     return (
       <>
-        <Link href="/items">
+        <Link href={props.path}>
           <li className={`group ${headerIconStyles} w-max cursor-pointer`}>
             <span
               className={`material-icons text-gray-400 group-hover:text-[#75ad9d] `}
@@ -208,13 +208,13 @@ export const Header = () => {
           />
           <HeaderListGoogleIconList
             name="shopping_cart"
-            path={`/users/login`}
+            path={`/carts`}
             list={<UserNavigationGroupCart />}
             title="カート"
           />
           <HeaderListGoogleIconList
             name="favorite"
-            path={`/users/login`}
+            path={`/items`}
             list={<UserNavigationGroupOther />}
             title="商品一覧"
           />
