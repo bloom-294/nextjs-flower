@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-
 export const SearchForm = (props: {
   categoryWord: string | string[];
   setSearchWord: Function;
   setSearchState: Function;
   mutate?: Function;
+  itemListLength: boolean;
+  onChange: () => void;
 }) => {
   return (
     <>
