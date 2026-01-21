@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from "react";
-import { useEffect } from "react";
 import { NameError, NameTypes } from "types/type";
 
 const Error3 = (props: NameError) => {

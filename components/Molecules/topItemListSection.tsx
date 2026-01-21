@@ -1,7 +1,6 @@
 import NewItemsList from "components/Organisms/newItemList";
 import TopRecognizeList from "components/Organisms/topRecognizeList";
 import React from "react";
-import RecognizeList from "../Organisms/recognizeList";
 
 export const RecognizeItesSection = () => {
   return (

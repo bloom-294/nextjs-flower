@@ -1,7 +1,5 @@
-import { useEffect } from "@storybook/addons";
 import React, { FC } from "react";
-import { useState, useRef } from "react";
-import { DateTypes } from "types/type";
+import { useState } from "react";
 
 const Error = (props: {
   state: string | undefined;

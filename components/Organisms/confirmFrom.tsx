@@ -1,12 +1,9 @@
 import React from "react";
-import { MailInput } from "components/Organisms/form/mailInput";
 import { TelInput } from "components/Organisms/form/telInput";
 import { ZipInput } from "components/Organisms/form/zipInput";
 import { AddressInput } from "components/Organisms/form/addressInput";
-import { PasswordInput } from "components/Organisms/form/passwordInput";
 import { NameInput } from "components/Organisms/form/nameInput";
 import PaymethodInput from "./form/paymethodInput";
-import { useState } from "react";
 import { DateInput } from "./form/dateInput";
 import { ConfirmFromTypes } from "types/type";
 

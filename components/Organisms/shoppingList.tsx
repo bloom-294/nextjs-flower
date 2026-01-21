@@ -1,21 +1,14 @@
-import useSWR, { useSWRConfig } from "swr";
-import { useRouter } from "next/router";
+import useSWR from "swr";
 import { ItemCardsSide } from "components/Organisms/itemCards-side";
-import { RecognizeList } from "../Organisms/recognizeList";
-import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
 import style from "../../src/styles/shoppingCart.module.css";
-import Image from "next/image";
-import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "components/Atoms/loader";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 export const ShoppingList = (props: { pageName: string }) => {
   const [gestIdValue, SetGestIdValue] = useState("");
-  const [loginStatus, SetLoginStatus] = useState("");
-
-  const [initFlag, SetInitFlag] = useState(false);
+  const [, SetLoginStatus] = useState("");
 
   useEffect(() => {
     const splitCookie = document.cookie.split(";");
@@ -25,7 +18,7 @@ export const ShoppingList = (props: { pageName: string }) => {
       list.push(splitCookie[i].split("="));
     }
 
-    list.map((cookieData, index) => {
+    list.map((cookieData) => {
       // ゲストID取得
       if (cookieData.includes("gestId")) {
         SetGestIdValue(cookieData[1]);
@@ -44,7 +37,7 @@ export const ShoppingList = (props: { pageName: string }) => {
   // カートの商品の金額を配列に入れる
   const priceList: any = [];
   if (data) {
-    data.map((itemData: any, index: number) => {
+    data.map((itemData: any) => {
       priceList.push(itemData.orderPrice);
     });
   }

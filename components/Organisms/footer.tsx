@@ -1,7 +1,5 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import style from "../../src/styles/footer.module.css";
 
 export const Footer = () => {
   const Twitter = "/logo/Twitter.png";

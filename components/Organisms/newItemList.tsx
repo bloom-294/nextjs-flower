@@ -1,18 +1,12 @@
-import useSWR, { useSWRConfig } from "swr";
-import { useRouter } from "next/router";
-import { ItemCardsSide } from "components/Organisms/itemCards-side";
+import useSWR from "swr";
 import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
-import style from "../../src/styles/itemList.module.css";
-import Image from "next/image";
-import Head from "next/head";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const NewItemsList = (props: { title?: string }) => {
-  const router = useRouter();
-  const { data, error, mutate } = useSWR(`/api/itemList`, fetcher);
+  const { data, error } = useSWR(`/api/itemList`, fetcher);
 
   if (error) return <div></div>;
 
@@ -36,7 +30,7 @@ export const NewItemsList = (props: { title?: string }) => {
         <h5 className="sm:mb-5">{props.title}</h5>
         <div className="grid grid-cols-2 sm:grid-cols-4  md:grid-cols-5 gap-y-3">
           {newItemList.map(
-            (items: ItemCardsWrapRecognizeSqlTypes, index: number) => {
+            (items: ItemCardsWrapRecognizeSqlTypes) => {
               return (
                 <ItemCardsWrapRecognize
                   name={items.name}

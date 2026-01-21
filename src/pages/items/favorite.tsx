@@ -14,7 +14,7 @@ export const Favorite = ({ data }: any) => {
       list.push(splitCookie[i].split("="));
     }
 
-    list.map((cookieData, index) => {
+    list.map((cookieData) => {
       // ゲストID取得
       if (cookieData.includes(" gestId") || cookieData.includes("gestId")) {
         gestIdValue.current = cookieData[1];

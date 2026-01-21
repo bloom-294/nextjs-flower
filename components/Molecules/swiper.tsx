@@ -12,7 +12,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
-import style from "../../src/styles/swiper.module.css";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade]);
 
