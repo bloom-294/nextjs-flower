@@ -1,27 +1,16 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import useSWR, { useSWRConfig } from "swr";
-import { useRouter } from "next/router";
-import { ItemCardsWrap } from "../../components/Organisms/itemCards-wrap";
-import { SearchForm } from "components/Molecules/searchForm";
+import React from "react";
 import { Loader } from "components/Atoms/loader";
-import RecognizeList from "../../components/Organisms/recognizeList";
-import { Calendar } from "components/Molecules/calendar";
 import { Information } from "components/Molecules/Information";
 import { Map } from "components/Molecules/map";
 import {
   NewItemsSection,
   RecognizeItesSection,
-  ItemsSection,
 } from "../../components/Molecules/topItemListSection";
 import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
 import { Slide } from "components/Molecules/swiper";
 import { SlideCursor } from "components/Molecules/swiperCursor";
 
 export const Home = ({ data }: any) => {
-  const router = useRouter();
 
   if (!data)
     return (
