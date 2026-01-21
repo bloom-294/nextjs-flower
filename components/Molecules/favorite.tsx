@@ -68,7 +68,7 @@ export const Favorite = (props: {
             //       //   {
             //       //     icon: 'success',
             //       //     text: 'お気に入りに追加しました',
-            //       //     confirmButtonText: '　　OK　　',
+            //       //     confirmButtonText: 'OK',
             //       //     confirmButtonColor : "#75ad9d"
             //       //   }
             //       // )

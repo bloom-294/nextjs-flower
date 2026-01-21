@@ -15,7 +15,7 @@ export const UserInfomation = (props: UserInfo) => {
           </p>
           <div className="col-span-4 items-center flex ">
             <ul>
-              <li>{props.name}　様</li>
+              <li>{props.name}&nbsp;様</li>
               <li>〒{props.zip}</li>
               <li>{props.address}</li>
               <li>{props.tel}</li>
@@ -34,7 +34,7 @@ export const UserInfomation = (props: UserInfo) => {
           </p>
           <div className="col-span-4 items-center flex ">
             <ul>
-              <li>{props.ordererName}　様</li>
+              <li>{props.ordererName}&nbsp;様</li>
               <li>〒{props.ordererZip}</li>
               <li>{props.ordererAddress}</li>
               <li>{props.ordererTel}</li>

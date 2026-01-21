@@ -24,7 +24,7 @@ export const Home = () => {
   // ゲストID
   const [gestIdValue, SetGestIdValue] = useState("");
 
-  // お届け情報変更　status
+  // お届け情報変更status
   const [ordererStateChange, SetordererStateChange] = useState(false);
 
   // 注文者情報
