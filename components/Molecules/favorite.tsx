@@ -1,7 +1,6 @@
 import style from "../../src/styles/favorite.module.css";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-import Swal from "sweetalert2";
+// import { useRouter } from "next/router";
 
 import { FavoriteItem } from "types/type";
 
@@ -9,9 +8,9 @@ export const Favorite = (props: {
   favorite?: string;
   data?: { favoriteItem?: FavoriteItem; gestId?: string; id?: number };
 }) => {
-  const [favorite, SetFavorite] = useState(false);
+  // const [favorite, SetFavorite] = useState(false);
   const [gestIdValue, SetGestIdValue] = useState("");
-  const router = useRouter();
+  // const router = useRouter();
   const ref = useRef(false);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export const Favorite = (props: {
       list.push(splitCookie[i].split("="));
     }
 
-    list.map((cookieData, index) => {
+    list.map((cookieData) => {
       // ゲストID取得
       if (cookieData.includes(" gestId") || cookieData.includes("gestId")) {
         SetGestIdValue(cookieData[1]);
@@ -40,7 +39,7 @@ export const Favorite = (props: {
       <label className={`${style.like} `}>
         <input
           type="checkbox"
-          onChange={(e) => {
+          onChange={() => {
             if (ref.current === false) {
               ref.current = true;
             } else {
