@@ -123,7 +123,7 @@ export const Home = () => {
           Swal.fire({
             icon: "success",
             text: "登録が完了いたしました",
-            confirmButtonText: "　　OK　　",
+            confirmButtonText: "OK",
             confirmButtonColor: "#75ad9d",
           });
         })

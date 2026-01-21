@@ -110,7 +110,7 @@ export const Home = () => {
         Swal.fire({
           icon: "error",
           text: "該当する商品がありません",
-          confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+          confirmButtonText: "OK",
           confirmButtonColor: "#75ad9d",
         });
         router.push("/items");
@@ -188,7 +188,7 @@ export const Home = () => {
   //      Swal.fire({
   //       icon: "error",
   //       text: "該当する商品がありません",
-  //       confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+  //       confirmButtonText: "OK",
   //       confirmButtonColor: "#75ad9d",
   //     });
   //     router.push("/items")

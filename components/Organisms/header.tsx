@@ -273,7 +273,7 @@ const LoginState = (props: any) => {
             Swal.fire({
               icon: "success",
               text: "ログアウトしました！",
-              confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+              confirmButtonText: "OK",
               confirmButtonColor: "#75ad9d",
             });
             props.SetLoginState(false);

@@ -88,7 +88,7 @@ export const Home = () => {
           Swal.fire({
             icon: "success",
             text: "ログインしました！",
-            confirmButtonText: "　　OK　　",
+            confirmButtonText: "OK",
             confirmButtonColor: "#75ad9d",
           });
         })
@@ -108,7 +108,7 @@ export const Home = () => {
       Swal.fire({
         icon: "error",
         text: "既にログインしています",
-        confirmButtonText: "　　OK　　",
+        confirmButtonText: "OK",
         confirmButtonColor: "#75ad9d",
       });
     }
@@ -184,7 +184,7 @@ export const Home = () => {
                           Swal.fire({
                             icon: "error",
                             text: "メールアドレスかパスワードが違います。",
-                            confirmButtonText: "　　OK　　",
+                            confirmButtonText: "OK",
                             confirmButtonColor: "#75ad9d",
                           });
                         } else {
@@ -200,7 +200,7 @@ export const Home = () => {
                             Swal.fire({
                               icon: "error",
                               text: "メールアドレスかパスワードが違います。",
-                              confirmButtonText: "　　OK　　",
+                              confirmButtonText: "OK",
                               confirmButtonColor: "#75ad9d",
                             });
                           }

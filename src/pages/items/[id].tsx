@@ -65,7 +65,7 @@ export const Details = (data: { item: ItemListTypes }) => {
         Swal.fire({
           icon: "success",
           text: "追加しました！",
-          confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+          confirmButtonText: "OK",
           confirmButtonColor: "#75ad9d",
         });
       })
