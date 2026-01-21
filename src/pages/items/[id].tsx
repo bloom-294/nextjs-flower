@@ -1,12 +1,6 @@
-import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import useSWR, { useSWRConfig } from "swr";
 import { useRouter } from "next/router";
-import { SearchForm } from "components/Molecules/searchForm";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import style from "../../styles/itemListWrap.module.css";
 import RecognizeList from "components/Organisms/recognizeList";
 import Swal from "sweetalert2";
 import { ItemListTypes } from "types/type";
@@ -16,23 +10,23 @@ import { Loader } from "components/Atoms/loader";
 
 export const Details = (data: { item: ItemListTypes }) => {
   const router = useRouter();
-  const [gestIdValue, SetGestIdValue] = useState("");
-  const list: Array<string[]> = [];
+  const [gestIdValue, setGestIdValue] = useState("");
 
   useEffect(() => {
+    const list: string[][] = [];
     const splitCookie = document.cookie.split(";");
 
     for (let i = 0; i < splitCookie.length; i++) {
       list.push(splitCookie[i].split("="));
     }
-    console.log(4, typeof list);
 
-    list.map((cookieData: string[], index: number) => {
+    for (const cookieData of list) {
       // ゲストID取得
       if (cookieData.includes("gestId")) {
-        SetGestIdValue(cookieData[1]);
+        setGestIdValue(cookieData[1]);
+        break;
       }
-    });
+    }
   }, []);
 
   if (!data.item) {
@@ -61,11 +55,11 @@ export const Details = (data: { item: ItemListTypes }) => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
+      .then(() => {
         Swal.fire({
           icon: "success",
           text: "追加しました！",
-          confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+          confirmButtonText: "OK",
           confirmButtonColor: "#75ad9d",
         });
       })

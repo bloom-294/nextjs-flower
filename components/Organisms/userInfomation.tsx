@@ -1,6 +1,4 @@
-import useSWR, { useSWRConfig } from "swr";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import { UserInfo } from "types/type";
 
 export const UserInfomation = (props: UserInfo) => {
@@ -15,7 +13,7 @@ export const UserInfomation = (props: UserInfo) => {
           </p>
           <div className="col-span-4 items-center flex ">
             <ul>
-              <li>{props.name}　様</li>
+              <li>{props.name}&nbsp;様</li>
               <li>〒{props.zip}</li>
               <li>{props.address}</li>
               <li>{props.tel}</li>
@@ -34,7 +32,7 @@ export const UserInfomation = (props: UserInfo) => {
           </p>
           <div className="col-span-4 items-center flex ">
             <ul>
-              <li>{props.ordererName}　様</li>
+              <li>{props.ordererName}&nbsp;様</li>
               <li>〒{props.ordererZip}</li>
               <li>{props.ordererAddress}</li>
               <li>{props.ordererTel}</li>

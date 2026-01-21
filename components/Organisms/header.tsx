@@ -1,9 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
-// import Link from "next/link";
-// import style from "../src/styles/humburger.module.css";
-// import React from "react";
-import { SearchForm } from "../Molecules/searchForm";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import style from "../../src/styles/header.module.css";
@@ -14,25 +9,25 @@ const Logo = (props: { path: string }) => {
   return (
     <Link href="/">
       <a>
-        <Image src={props.path} width={100} height={70} className="" />
+        <Image src={props.path} width={100} height={70} className="" alt="サイトのロゴ" />
       </a>
     </Link>
   );
 };
 
-const HeaderListGoogleIcon = (props: { name: string; path: string }) => {
-  return (
-    <>
-      <li className="float-left mx-8 py-2.5">
-        <Link href={props.path}>
-          <a>
-            <span className="material-symbols-outlined">{props.name}</span>
-          </a>
-        </Link>
-      </li>
-    </>
-  );
-};
+// const HeaderListGoogleIcon = (props: { name: string; path: string }) => {
+//   return (
+//     <>
+//       <li className="float-left mx-8 py-2.5">
+//         <Link href={props.path}>
+//           <a>
+//             <span className="material-symbols-outlined">{props.name}</span>
+//           </a>
+//         </Link>
+//       </li>
+//     </>
+//   );
+// };
 
 const HeaderListText = (props: { name: string; path: string }) => {
   return (
@@ -131,7 +126,6 @@ const UserNavigationGroupOther = () => {
 export const Header = () => {
   const [hamburgerMenuDisplayState, SetHamburgerMenuDisplayState] =
     useState(false);
-  const [gestIdState, SetgestIdState] = useState(false);
   const cookieList: any = [];
 
   const [loginState, SetLoginState] = useState(false);
@@ -146,7 +140,7 @@ export const Header = () => {
 
     // cookieにgestIDがセットされていな場合、付与する
     if (list.length !== 0) {
-      list.map((data, index) => {
+      list.map((data) => {
         if (data[0].includes("gestId")) {
           cookieList.push(data[0]);
         }
@@ -273,7 +267,7 @@ const LoginState = (props: any) => {
             Swal.fire({
               icon: "success",
               text: "ログアウトしました！",
-              confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+              confirmButtonText: "OK",
               confirmButtonColor: "#75ad9d",
             });
             props.SetLoginState(false);

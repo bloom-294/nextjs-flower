@@ -28,9 +28,9 @@ const ModalWindow = (props: { state: boolean }) => {
   const [modalOpen, SetModalOpen] = useState(false);
 
   // モーダルを開く処理
-  const openModal = () => {
-    SetModalOpen(true);
-  };
+  // const openModal = () => {
+  //   SetModalOpen(true);
+  // };
 
   const afterOpenModal = () => {
     // モーダルが開いた後の処理
@@ -45,7 +45,7 @@ const ModalWindow = (props: { state: boolean }) => {
     if (props.state === true) {
       SetModalOpen(true);
     }
-  }, []);
+  }, [props.state]);
   return (
     <>
       {/* <button onClick={openModal}>Open Modal</button> */}

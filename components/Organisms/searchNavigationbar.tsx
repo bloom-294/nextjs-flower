@@ -1,6 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import { Calendar } from "../Molecules/calendar";
 import { SearchCategoryList } from "./searchCategoryList";
 import { BannerList } from "./bannerList";
 

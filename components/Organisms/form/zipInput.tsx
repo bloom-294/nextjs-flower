@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from "react";
-import { useEffect } from "react";
 
 const Navigation = (props: { value: string; text: string }) => {
   if (props.value.length > 0) {

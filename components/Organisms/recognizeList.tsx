@@ -1,11 +1,6 @@
-import useSWR, { useSWRConfig } from "swr";
-import { useRouter } from "next/router";
-import { ItemCardsSide } from "components/Organisms/itemCards-side";
+import useSWR from "swr";
 import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
-import style from "../../src/styles/itemList.module.css";
-import Image from "next/image";
-import Head from "next/head";
-import React, { FC, useRef, useState } from "react";
+import React from "react";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -15,8 +10,7 @@ export const RecognizeList = (props: {
   itemId: number;
   title: string;
 }) => {
-  const router = useRouter();
-  const { data, error, mutate } = useSWR(`/api/itemList`, fetcher);
+  const { data, error } = useSWR(`/api/itemList`, fetcher);
 
   if (error) return <div></div>;
 
@@ -33,7 +27,7 @@ export const RecognizeList = (props: {
 
   if (props.category && props.category.length !== 0) {
     data.itemList.map(
-      (items: { category: string; id: number }, incdex: number) => {
+      (items: { category: string; id: number }) => {
         if (
           (props.category.includes(items.category) ||
             items.category.includes(props.category)) &&
@@ -103,7 +97,7 @@ export const RecognizeList = (props: {
         <h5 className="sm:mb-5">{props.title}</h5>
         <div className="flex  ">
           {recommendItemList.map(
-            (items: ItemCardsWrapRecognizeSqlTypes, index: number) => {
+            (items: ItemCardsWrapRecognizeSqlTypes) => {
               return (
                 <ItemCardsWrapRecognize
                   name={items.name}

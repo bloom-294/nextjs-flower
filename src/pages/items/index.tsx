@@ -1,19 +1,14 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect, Fragment } from "react";
-import useSWR, { useSWRConfig } from "swr";
+
+import React, { useState} from "react";
+import useSWR from "swr";
 import { useRouter } from "next/router";
 import { ItemCardsWrap } from "../../../components/Organisms/itemCards-wrap";
 import { SearchForm } from "components/Molecules/searchForm";
 import { Loader } from "components/Atoms/loader";
 import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
-import { Transform } from "@material-ui/icons";
-import ModalWindow from "../../../components/Organisms/modal";
 import Countup from "react-countup";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 import Swal from "sweetalert2";
-import { escape } from "querystring";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -21,7 +16,6 @@ export const Home = () => {
   const [searchWord, setSearchWord] = useState("");
   // 検索フォームでEnterが押されたかどうか
   const [searchState, setSearchState] = useState(false);
-  const [itemListState, setItemListState] = useState(false);
   const [sort, setSort]: any = useState("");
 
   const router = useRouter();
@@ -54,7 +48,7 @@ export const Home = () => {
   // console.log(categoryWord.length)
   const categoryitemList: any = [];
   // カテゴリ検索
-  data.itemList.map((ItemData: { category: any }, index: number) => {
+  data.itemList.map((ItemData: { category: any }) => {
     if (categoryWord !== "全ての商品") {
       if (ItemData.category.includes(categoryWord)) {
         categoryitemList.push(ItemData);
@@ -105,12 +99,12 @@ export const Home = () => {
 
   // console.log(categoryitemList)
   // エラー表示
-  const ErrorMessage = (flag?:boolean) => {
+  const ErrorMessage = () => {
     if (itemList.length === 0) {
         Swal.fire({
           icon: "error",
           text: "該当する商品がありません",
-          confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+          confirmButtonText: "OK",
           confirmButtonColor: "#75ad9d",
         });
         router.push("/items");
@@ -136,7 +130,7 @@ export const Home = () => {
   // }
 
   // フォームで検索
-  categoryitemList.map((ItemData: { name: string }, index: number) => {
+  categoryitemList.map((ItemData: { name: string }) => {
     // Enterが押された時
     if (searchState === true) {
       // 検索ワードと一致した場合
@@ -153,7 +147,7 @@ export const Home = () => {
   const itemListLength:boolean = (itemList.length === 0);
 
   // 該当商品がない場合、全ての商品を表示
-  const SearchItemsNone = (props: any) => {
+  const SearchItemsNone = () => {
     // console.log(itemList.length)
     if (itemList.length === 0) {
       if(searchState === false) {
@@ -188,7 +182,7 @@ export const Home = () => {
   //      Swal.fire({
   //       icon: "error",
   //       text: "該当する商品がありません",
-  //       confirmButtonText: "&nbsp;&nbsp;OK&nbsp;&nbsp;",
+  //       confirmButtonText: "OK",
   //       confirmButtonColor: "#75ad9d",
   //     });
   //     router.push("/items")

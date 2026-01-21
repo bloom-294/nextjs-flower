@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
-import style from "../../styles/input.module.css";
-import { GreenButton } from "components/Atoms/greenButton";
 import { MailInput } from "components/Organisms/form/mailInput";
 import { PasswordInput } from "components/Organisms/form/passwordInput";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import ModalWindow from "components/Organisms/modal";
 import Swal from "sweetalert2";
-import { FiberNew } from "@material-ui/icons";
 
 export const Home = () => {
   const [mailValue, SetMailValue] = useState("");
@@ -33,7 +29,7 @@ export const Home = () => {
       list.push(splitCookie[i].split("="));
     }
 
-    list.map((data, index) => {
+    list.map((data) => {
       if (data.includes("login")) {
         SetLoginStatus(true);
       }
@@ -80,19 +76,19 @@ export const Home = () => {
         .then((data) => {
           console.log(data);
         })
-        .then((cookie) => {
+        .then(() => {
           document.cookie = "status=login; path=/;";
         })
-        .then((alerts) => {
+        .then(() => {
           // alert("ログインしました。");
           Swal.fire({
             icon: "success",
             text: "ログインしました！",
-            confirmButtonText: "　　OK　　",
+            confirmButtonText: "OK",
             confirmButtonColor: "#75ad9d",
           });
         })
-        .then((route) => {
+        .then(() => {
           if (cartStatus === "confirm") {
             router.push("/carts/confirm");
             document.cookie = "carts=shopping; path=/; max-age=0;";
@@ -108,7 +104,7 @@ export const Home = () => {
       Swal.fire({
         icon: "error",
         text: "既にログインしています",
-        confirmButtonText: "　　OK　　",
+        confirmButtonText: "OK",
         confirmButtonColor: "#75ad9d",
       });
     }
@@ -184,7 +180,7 @@ export const Home = () => {
                           Swal.fire({
                             icon: "error",
                             text: "メールアドレスかパスワードが違います。",
-                            confirmButtonText: "　　OK　　",
+                            confirmButtonText: "OK",
                             confirmButtonColor: "#75ad9d",
                           });
                         } else {
@@ -200,7 +196,7 @@ export const Home = () => {
                             Swal.fire({
                               icon: "error",
                               text: "メールアドレスかパスワードが違います。",
-                              confirmButtonText: "　　OK　　",
+                              confirmButtonText: "OK",
                               confirmButtonColor: "#75ad9d",
                             });
                           }

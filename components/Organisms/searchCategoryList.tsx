@@ -1,4 +1,3 @@
-import { Category } from "@material-ui/icons";
 import React from "react";
 import { useRouter } from "next/router";
 

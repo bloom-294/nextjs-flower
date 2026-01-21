@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { useEffect } from "react";
-import { Error, MailTypes } from "types/type";
+import { ErrorMessageProps, MailTypes } from "types/type";
 
 const Navigation = (props: { value: string; text: string }) => {
   if (props.value.length > 0) {
@@ -46,7 +45,7 @@ const Navigation = (props: { value: string; text: string }) => {
   }
 };
 
-const Error = (props: Error) => {
+const ErrorMessage = (props: ErrorMessageProps) => {
   if (props.errorFlag === "true") {
     if (props.value === "empty" || props.value === "init") {
       return (
@@ -122,7 +121,7 @@ export const MailInput = (props: MailTypes) => {
             props.SetMailErrorState("registered");
           }
         })
-        .catch((error) => {
+        .catch(() => {
           console.log("error");
         });
     }
@@ -139,7 +138,7 @@ export const MailInput = (props: MailTypes) => {
           >
             必須
           </span>
-          <Error
+          <ErrorMessage
             value={props.mailErrorState}
             text="メールアドレスを入力してください"
             // SetMailErrorState={props.SetMailErrorState}

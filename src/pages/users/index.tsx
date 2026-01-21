@@ -1,6 +1,4 @@
 import React from "react";
-import style from "../../styles/input.module.css";
-import { GreenButton } from "components/Atoms/greenButton";
 import { useState } from "react";
 import { MailInput } from "components/Organisms/form/mailInput";
 import { TelInput } from "components/Organisms/form/telInput";
@@ -8,7 +6,6 @@ import { ZipInput } from "components/Organisms/form/zipInput";
 import { AddressInput } from "components/Organisms/form/addressInput";
 import { PasswordInput } from "components/Organisms/form/passwordInput";
 import { NameInput } from "components/Organisms/form/nameInput";
-import { AlternateEmail } from "@material-ui/icons";
 import { ConfirmPasswordInput } from "components/Organisms/form/confirmPassword";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
@@ -118,12 +115,12 @@ export const Home = () => {
         .then((response) => {
           return response.json();
         })
-        .then((data) => {
+        .then(() => {
           // alert("登録が完了いたしました。");
           Swal.fire({
             icon: "success",
             text: "登録が完了いたしました",
-            confirmButtonText: "　　OK　　",
+            confirmButtonText: "OK",
             confirmButtonColor: "#75ad9d",
           });
         })

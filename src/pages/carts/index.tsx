@@ -1,16 +1,10 @@
-import useSWR, { useSWRConfig } from "swr";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { ItemCardsSide } from "components/Organisms/itemCards-side";
 import { RecognizeList } from "components/Organisms/recognizeList";
 import { ShoppingList } from "components/Organisms/shoppingList";
-import style from "../../styles/shoppingCart.module.css";
-import Image from "next/image";
-import Head from "next/head";
-import { Loader } from "components/Atoms/loader";
 
 export const Home = () => {
-  const [gestIdValue, SetGestIdValue] = useState("");
+  const [, SetGestIdValue] = useState("");
   const [loginStatus, SetLoginStatus] = useState("");
 
   useEffect(() => {
@@ -21,7 +15,7 @@ export const Home = () => {
       list.push(splitCookie[i].split("="));
     }
 
-    list.map((cookieData, index) => {
+    list.map((cookieData) => {
       // ゲストID取得
       if (cookieData.includes("gestId")) {
         SetGestIdValue(cookieData[1]);

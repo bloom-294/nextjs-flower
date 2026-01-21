@@ -1,10 +1,6 @@
 import Image from "next/image";
 import style from "../../src/styles/itemCards.module.css";
 import { useState } from "react";
-import { useEffect } from "react";
-import { ChangeHistory } from "@material-ui/icons";
-import { Router, useRouter } from "next/router";
-import Link from "next/link";
 import { ItemCardsSideTypes, ItemCardsSideCountTypes } from "types/type";
 
 const ItemCardsSideImage = (props: { imagePath: string }) => {
@@ -124,7 +120,6 @@ const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
 };
 
 export const ItemCardsSide = (props: ItemCardsSideTypes) => {
-  const router = useRouter();
 
   const [quantityAdd, setQuantityAdd] = useState(1);
   const [itemsPriceChange, setItemsPriceChange] = useState(props.price);
@@ -133,7 +128,7 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
     fetch(`http://localhost:8000/carts/${props.id}`, {
       method: "DELETE",
     })
-      .then((response) => {
+      .then(() => {
         // console.log(props.id);
         props.mutate();
       })

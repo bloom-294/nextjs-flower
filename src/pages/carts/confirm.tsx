@@ -1,20 +1,14 @@
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { ItemCardsSide } from "components/Organisms/itemCards-side";
-import { RecognizeList } from "components/Organisms/recognizeList";
 import { ShoppingList } from "components/Organisms/shoppingList";
 import { Loader } from "components/Atoms/loader";
-import style from "../../styles/shoppingCart.module.css";
-import Image from "next/image";
-import Head from "next/head";
 import styles from "../../styles/itemCards.module.css";
 import { UserInfomation } from "components/Organisms/userInfomation";
 import { PayMethod } from "components/Molecules/payMethod";
 import { DateOfDelivery } from "components/Molecules/dateOfDelivery";
 import { ConfirmFrom } from "components/Organisms/confirmFrom";
 import { createContext } from "react";
-import { anyTypeAnnotation } from "@babel/types";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -24,7 +18,7 @@ export const Home = () => {
   // ゲストID
   const [gestIdValue, SetGestIdValue] = useState("");
 
-  // お届け情報変更　status
+  // お届け情報変更status
   const [ordererStateChange, SetordererStateChange] = useState(false);
 
   // 注文者情報
@@ -75,7 +69,7 @@ export const Home = () => {
       list.push(splitCookie[i].split("="));
     }
 
-    list.map((cookieData, index) => {
+    list.map((cookieData) => {
       // ゲストID取得
       if (cookieData.includes(" gestId") || cookieData.includes("gestId")) {
         SetGestIdValue(cookieData[1]);
@@ -84,7 +78,7 @@ export const Home = () => {
   });
 
   const router = useRouter();
-  const { data, error, mutate } = useSWR(
+  const { data, error } = useSWR(
     `http://localhost:8000/users?gestId=${gestIdValue}`,
     fetcher
   );
@@ -254,8 +248,8 @@ export const Home = () => {
 
               console.log("q", orderItemsList);
               let totalPrice = 0;
-              orderItemsList.map((data: any, index: number) => {
-                data.map((items: any, index: number) => {
+              orderItemsList.map((data: any) => {
+                data.map((items: any) => {
                   totalPrice = totalPrice + Number(items.orderPrice);
                 });
                 // totalPrice = Number(totalPrice) + Number(data.orderPrice)
@@ -285,7 +279,7 @@ export const Home = () => {
                 .then((response) => {
                   return response.json();
                 })
-                .then((data) => {
+                .then(() => {
                   router.replace("/carts/finish");
                 })
                 .catch((error) => {

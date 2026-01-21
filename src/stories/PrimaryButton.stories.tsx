@@ -1,5 +1,6 @@
 import PrimaryButton from "./PrimaryButton";
 
+/* eslint-disable import/no-anonymous-default-export */
 export default {
   title: "Commn/PrimaryButton",
   component: PrimaryButton,

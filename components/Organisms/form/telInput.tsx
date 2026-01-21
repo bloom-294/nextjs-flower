@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { useEffect } from "react";
-import { Error, TelTypes } from "types/type";
+import { ErrorMessageProps , TelTypes } from "types/type";
 
 const Navigation = (props: { value: string; text: string }) => {
   if (props.value.length > 0) {
@@ -46,7 +45,7 @@ const Navigation = (props: { value: string; text: string }) => {
   }
 };
 
-const Error4 = (props: Error) => {
+const Error4 = (props: ErrorMessageProps) => {
   if (props.errorFlag === "true") {
     if (props.value === "empty" || props.value === "init") {
       return (
