@@ -43,7 +43,7 @@ export type ItemListTypes = {
   id: number;
 };
 
-export type Error = {
+export type ErrorMessageProps = {
   errorFlag: string;
   value: string;
   text: string;

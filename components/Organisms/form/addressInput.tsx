@@ -1,53 +1,52 @@
-import { AnyRecord } from "dns";
+// import { AnyRecord } from "dns";
 import React, { ChangeEvent } from "react";
-import { Error } from "types/type";
-import { AddressTypes } from "types/type";
+import { AddressTypes, ErrorMessageProps } from "types/type";
 
-const Navigation = (props: { value: string; text: string }) => {
-  if (props.value.length > 0) {
-    return (
-      <>
-        <div className="py-2 text-gray-500 text-sm mb-8">
-          <p>
-            {(() => {
-              if (props.value.includes("-")) {
-                return (
-                  <>
-                    <span
-                      className="material-symbols-outlined 
-                  rounded-full mr-3 text-white translate-y-1.5
-                  "
-                      style={{ backgroundColor: "#75ad9d" }}
-                    >
-                      check_circle
-                    </span>
-                  </>
-                );
-              } else {
-                return (
-                  <>
-                    <span
-                      className="material-symbols-outlined 
-                  rounded-full mr-3 text-white translate-y-1.5 bg-gray-300
-                  "
-                    >
-                      check_circle
-                    </span>
-                  </>
-                );
-              }
-            })()}
-            {props.text}
-          </p>
-        </div>
-      </>
-    );
-  } else {
-    return <></>;
-  }
-};
+// const Navigation = (props: { value: string; text: string }) => {
+//   if (props.value.length > 0) {
+//     return (
+//       <>
+//         <div className="py-2 text-gray-500 text-sm mb-8">
+//           <p>
+//             {(() => {
+//               if (props.value.includes("-")) {
+//                 return (
+//                   <>
+//                     <span
+//                       className="material-symbols-outlined 
+//                   rounded-full mr-3 text-white translate-y-1.5
+//                   "
+//                       style={{ backgroundColor: "#75ad9d" }}
+//                     >
+//                       check_circle
+//                     </span>
+//                   </>
+//                 );
+//               } else {
+//                 return (
+//                   <>
+//                     <span
+//                       className="material-symbols-outlined 
+//                   rounded-full mr-3 text-white translate-y-1.5 bg-gray-300
+//                   "
+//                     >
+//                       check_circle
+//                     </span>
+//                   </>
+//                 );
+//               }
+//             })()}
+//             {props.text}
+//           </p>
+//         </div>
+//       </>
+//     );
+//   } else {
+//     return <></>;
+//   }
+// };
 
-const Error = (props: Error) => {
+const ErrorMessage = (props: ErrorMessageProps) => {
   if (props.errorFlag === "true") {
     if (props.value === "empty" || props.value === "init") {
       return (
@@ -113,7 +112,7 @@ export const AddressInput = (props: AddressTypes) => {
           >
             必須
           </span>
-          <Error
+          <ErrorMessage
             text="住所を入力してください"
             value={props.addressErrorState}
             errorFlag={props.errorFlag}

@@ -60,7 +60,7 @@ export const DateOfDelivery = (props: {
       </>
     );
   } else if (props.ordererDateState.current[0] === "日時指定あり") {
-    const Specified = new Date();
+    // const Specified = new Date();
     let split = props.ordererDateState.current[2].split("-");
 
     // 〇年〇月〇日に変換（指定日）

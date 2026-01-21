@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useEffect } from "react";
-import { Error, PasswordTypes } from "types/type";
+import React, { ChangeEvent } from "react";
+import { ErrorMessageProps, PasswordTypes } from "types/type";
 
 const Navigation = (props: { value: string; text: string }) => {
   if (props.value.length > 0) {
@@ -45,7 +45,7 @@ const Navigation = (props: { value: string; text: string }) => {
   }
 };
 
-const Error = (props: Error) => {
+const ErrorMessage = (props: ErrorMessageProps) => {
   if (props.errorFlag === "true") {
     if (props.value === "empty" || props.value === "init") {
       return (
@@ -119,7 +119,7 @@ export const PasswordInput = (props: PasswordTypes) => {
           >
             必須
           </span>
-          <Error
+          <ErrorMessage
             text="パスワードを入力してください"
             value={props.passwordErrorState}
             // confirmPasswordValue={props.confirmPasswordValue}

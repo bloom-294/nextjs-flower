@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
-import { Error } from "types/type";
+import { ErrorMessageProps } from "types/type";
 import { ConfirmPasswordTypes } from "types/type";
 
-const ConfirmPasswordError = (props: Error) => {
+const ConfirmPasswordError = (props: ErrorMessageProps) => {
   if (props.errorFlag === "true") {
     if (props.value === "empty" || props.value === "init") {
       return (
