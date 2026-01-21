@@ -22,7 +22,7 @@ import { sql } from "@vercel/postgres";
 
 let itemList: any;
 
-export default async (
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
   // res: NextApiResponse<ItemListApiResponse>
@@ -48,3 +48,5 @@ const fetchItemList = (id: number) => {
     return "ALL";
   }
 };
+
+export default handler;

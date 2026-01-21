@@ -53,6 +53,7 @@ export const ShoppingList = (props: { pageName: string }) => {
 
   const [totalPrice, setTotalPrice] = useState(Number(initTotalPrice));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   // データベースの値から算出した合計金額（initTotalPrice）と新たに定義した合計金額（totalPrice）が一致していない場合
   useEffect(() => {
     if (initTotalPrice !== 0) {
@@ -61,7 +62,7 @@ export const ShoppingList = (props: { pageName: string }) => {
         mutate();
       }
     }
-  }, [initTotalPrice]);
+  }, [mutate, initTotalPrice, totalPrice]);
 
   if (!data)
     return (

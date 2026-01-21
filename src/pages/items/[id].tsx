@@ -10,23 +10,23 @@ import { Loader } from "components/Atoms/loader";
 
 export const Details = (data: { item: ItemListTypes }) => {
   const router = useRouter();
-  const [gestIdValue, SetGestIdValue] = useState("");
-  const list: Array<string[]> = [];
+  const [gestIdValue, setGestIdValue] = useState("");
 
   useEffect(() => {
+    const list: string[][] = [];
     const splitCookie = document.cookie.split(";");
 
     for (let i = 0; i < splitCookie.length; i++) {
       list.push(splitCookie[i].split("="));
     }
-    console.log(4, typeof list);
 
-    list.map((cookieData: string[]) => {
+    for (const cookieData of list) {
       // ゲストID取得
       if (cookieData.includes("gestId")) {
-        SetGestIdValue(cookieData[1]);
+        setGestIdValue(cookieData[1]);
+        break;
       }
-    });
+    }
   }, []);
 
   if (!data.item) {
