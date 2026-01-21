@@ -9,7 +9,7 @@ export const Favorite = (props: {
   data?: { favoriteItem?: FavoriteItem; gestId?: string; id?: number };
 }) => {
   // const [favorite, SetFavorite] = useState(false);
-  const [gestIdValue, SetGestIdValue] = useState("");
+  const [, SetGestIdValue] = useState("");
   // const router = useRouter();
   const ref = useRef(false);
 
