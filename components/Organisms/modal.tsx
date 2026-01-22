@@ -1,5 +1,11 @@
-import Modal from "react-modal";
+import ReactModal from "react-modal";
+import type { ComponentType } from "react";
 import { useEffect, useState } from "react";
+
+const Modal = (ReactModal as unknown) as ComponentType<any> & {
+  // eslint-disable-next-line no-unused-vars
+  setAppElement: (element: Element | string) => void;
+};
 
 const customStyles = {
   overlay: {

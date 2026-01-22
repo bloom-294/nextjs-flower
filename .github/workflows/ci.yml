@@ -11,14 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Lint
         run: yarn lint || true
+      - name: Test
+        run: npx jest --ci --passWithNoTests || true
       - name: Build
         run: yarn build

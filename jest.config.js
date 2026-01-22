@@ -9,6 +9,17 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   // 個々のテスト実行前に処理されるファイル
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+    moduleNameMapper: {
+    // CSS modules -> identity-obj-proxy
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+
+    // Path alias mappings — components live at <rootDir>/components
+    "^components/(.*)$": "<rootDir>/components/$1",
+    "^@/components/(.*)$": "<rootDir>/components/$1",
+    "^@/(.*)$": "<rootDir>/$1",
+    "^styles/(.*)$": "<rootDir>/src/styles/$1",
+    "^images/(.*)$": "<rootDir>/public/$1"
+  },
   moduleDirectories: ['node_modules', '<rootDir>/src'],
   testEnvironment: 'jest-environment-jsdom',
 };

@@ -42,7 +42,7 @@ const HeaderListText = (props: { name: string; path: string }) => {
 };
 
 const headerIconStyles =
-  "float-left mx-8 py-2.5  flex flex-col justify-center items-center mx-auto text-gray-500 text-sm z-100";
+  "float-left mx-4 py-2.5 flex flex-col justify-center items-center text-gray-500 text-sm z-100";
 
 const HeaderListGoogleIconList = (props: {
   name: string;
