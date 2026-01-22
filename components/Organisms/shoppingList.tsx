@@ -6,13 +6,13 @@ import { Loader } from "components/Atoms/loader";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
-export const ShoppingList = (props: { pageName: string }) => {
+export const ShoppingList = ({ pageName = "Shopping" }: { pageName?: string }) => {
   const [gestIdValue, SetGestIdValue] = useState("");
   const [, SetLoginStatus] = useState("");
 
   useEffect(() => {
-    const splitCookie = document.cookie.split(";");
-    const list = [];
+    const splitCookie = document.cookie ? document.cookie.split(";") : [];
+    const list: string[][] = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
       list.push(splitCookie[i].split("="));
@@ -27,7 +27,7 @@ export const ShoppingList = (props: { pageName: string }) => {
         SetLoginStatus(cookieData[1]);
       }
     });
-  });
+  }, []);
 
   const { data, error, mutate } = useSWR(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/carts?gestId=${gestIdValue}`,
@@ -109,12 +109,10 @@ export const ShoppingList = (props: { pageName: string }) => {
                     id={shoppingItems.id}
                     gestId={shoppingItems.gestId}
                     orderPrice={shoppingItems.orderPrice}
-                    pageName={props.pageName}
+                    pageName={pageName}
                     totalPrice={totalPrice}
                     setTotalPrice={setTotalPrice}
-                    mutate={() => {
-                      mutate();
-                    }}
+                    mutate={mutate ?? (() => {})}
                   />
                 </div>
               );

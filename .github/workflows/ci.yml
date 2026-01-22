@@ -20,5 +20,7 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Lint
         run: yarn lint || true
+      - name: Test
+        run: npx jest --ci --passWithNoTests || true
       - name: Build
         run: yarn build
