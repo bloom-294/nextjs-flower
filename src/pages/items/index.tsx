@@ -328,7 +328,7 @@ export const Home = () => {
 };
 
 // export const getStaticProps = async () => {
-//   const res = await fetch(`${process.env.API_BASE_URL}/items`);
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`);
 //   const json = await res.json();
 
 //   return {

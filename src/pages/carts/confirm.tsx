@@ -79,7 +79,7 @@ export const Home = () => {
 
   const router = useRouter();
   const { data, error } = useSWR(
-    `${process.env.API_BASE_URL}/users?gestId=${gestIdValue}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users?gestId=${gestIdValue}`,
     fetcher
   );
 
@@ -235,7 +235,7 @@ export const Home = () => {
               const gestID = gestIdValue;
               const orderItemsList: any = [];
 
-              await fetch(`${process.env.API_BASE_URL}/carts?gestId=${gestIdValue}`)
+              await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts?gestId=${gestIdValue}`)
                 .then((res) => {
                   return res.json();
                 })
@@ -269,7 +269,7 @@ export const Home = () => {
                 orderItems: orderItemsList,
               };
 
-              await fetch(`${process.env.API_BASE_URL}/order`, {
+              await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/order`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -287,7 +287,7 @@ export const Home = () => {
                 });
 
               // カートのデータを削除
-              // await fetch(`${process.env.API_BASE_URL}/carts/?gestId=${gestIdValue}`, {
+              // await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/?gestId=${gestIdValue}`, {
               //   method: "DELETE",
               //   headers: {
               //     'Content-Type': 'application/json'

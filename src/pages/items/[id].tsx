@@ -45,7 +45,7 @@ export const Details = (data: { item: ItemListTypes }) => {
       gestId: gestIdValue,
     };
 
-    fetch(`${process.env.API_BASE_URL}/carts`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

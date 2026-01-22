@@ -61,7 +61,7 @@ const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
       id: props.id,
     };
 
-    fetch(`${process.env.API_BASE_URL}/carts/${props.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -125,7 +125,7 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
   const [itemsPriceChange, setItemsPriceChange] = useState(props.price);
 
   const deleteItems = () => {
-    fetch(`${process.env.API_BASE_URL}/carts/${props.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
       method: "DELETE",
     })
       .then(() => {

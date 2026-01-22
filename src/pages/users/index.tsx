@@ -105,7 +105,7 @@ export const Home = () => {
         password: password,
       };
 
-      await fetch(`${process.env.API_BASE_URL}/users`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
