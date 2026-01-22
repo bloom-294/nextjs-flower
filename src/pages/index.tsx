@@ -27,7 +27,7 @@ export const Home = ({ data }: any) => {
         <div className="mb-10 -translate-y-10 abusolute">
           <Slide />
           <h3 className="sm:text-2xl mx-8 mt-10">特集</h3>
-          <div className="bg-gray-5  sm:mt-4 mt-2">
+          <div className="bg-gray-5 sm:mt-4 mt-2">
             <SlideCursor />
           </div>
         </div>

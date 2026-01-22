@@ -24,7 +24,7 @@ export const Slide = () => {
 
   return (
     <>
-      <div className=" sm:block sm:container mx-auto hidden">
+      <div className="sm:block sm:container mx-auto hidden">
         <Swiper
           slidesPerView={1}
           centeredSlides={true}
@@ -61,7 +61,7 @@ export const Slide = () => {
           })}
         </Swiper>
       </div>
-      <div className=" sm:hidden  mx-auto w-96">
+      <div className=" sm:hidden mx-auto sm:w-96 w-[100vw]">
         <Swiper
           slidesPerView={1}
           centeredSlides={true}
