@@ -52,7 +52,7 @@ export const Favorite = (props: {
             //     gestId: gestIdValue,
             //   };
 
-            //   fetch(`http://localhost:8000/favorite`, {
+            //   fetch(`${process.env.API_BASE_URL}/favorite`, {
             //     method: "POST",
             //     headers: {
             //       "Content-Type": "application/json",
