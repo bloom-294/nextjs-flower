@@ -30,7 +30,7 @@ export const ShoppingList = (props: { pageName: string }) => {
   });
 
   const { data, error, mutate } = useSWR(
-    `http://localhost:8000/carts?gestId=${gestIdValue}`,
+    `${process.env.API_BASE_URL}/carts?gestId=${gestIdValue}`,
     fetcher
   );
 
