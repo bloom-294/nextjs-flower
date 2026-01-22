@@ -63,7 +63,7 @@ export const Home = () => {
       };
 
       // ログインstatus追加
-      fetch(`${process.env.API_BASE_URL}/users/${props[0].id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${props[0].id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -171,7 +171,7 @@ export const Home = () => {
                   if (mailErrorState === "ok" && passwordErrorState === "ok") {
                     // console.log(password);
                     await fetch(
-                      `${process.env.API_BASE_URL}/users?mail=${mailValue}&&password=${password}`
+                      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users?mail=${mailValue}&&password=${password}`
                     )
                       .then((response) => response.json())
                       .then((data) => {

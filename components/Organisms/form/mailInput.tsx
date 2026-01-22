@@ -114,7 +114,7 @@ export const MailInput = (props: MailTypes) => {
 
   const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     if (props.mailErrorState === "ok" && props.register === "register") {
-      fetch(`${process.env.API_BASE_URL}/users?mail=${ev.target.value}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users?mail=${ev.target.value}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.length !== 0) {

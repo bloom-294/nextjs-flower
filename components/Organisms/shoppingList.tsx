@@ -30,7 +30,7 @@ export const ShoppingList = (props: { pageName: string }) => {
   });
 
   const { data, error, mutate } = useSWR(
-    `${process.env.API_BASE_URL}/carts?gestId=${gestIdValue}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/carts?gestId=${gestIdValue}`,
     fetcher
   );
 

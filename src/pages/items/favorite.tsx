@@ -24,7 +24,7 @@ export const Favorite = () => {
     // API取得
     const fetchFavorites = async () => {
       try {
-        const res = await fetch(`${process.env.API_BASE_URL}/favorite`); 
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/favorite`); 
         const json = await res.json();
         setData(json);
       } catch {
