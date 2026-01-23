@@ -32,7 +32,7 @@ const Logo = (props: { path: string }) => {
 const HeaderListText = (props: { name: string; path: string }) => {
   return (
     <>
-      <li className={`float-left mx-8 py-2.5  ${style.link}`}>
+      <li className={`float-left mx-8 py-2.5 text-center  ${style.link}`}>
         <Link href={props.path}>
           <a>{props.name}</a>
         </Link>
@@ -166,14 +166,15 @@ export const Header = () => {
     if (hamburgerMenuDisplayState === true) {
       return (
         <div
-          className=" pb-5  bg-white shadow-2xl rounded-md
-        absolute  z-20 translate-y-16 -translate-x-4  md:hidden text-gray-500
+          className="py-5 bg-white shadow-md rounded-md
+        absolute z-20 right-0 top-0 md:hidden text-gray-500
+        w-[50vw]
         "
         >
           <ul className="flex flex-col">
-            <li>
+            <li className="h-11">
               <button
-                className={`float-right ${style.close} `}
+                className={`float-right pr-4 ${style.close} `}
                 onClick={() => {
                   SetHamburgerMenuDisplayState(false);
                 }}
@@ -245,7 +246,7 @@ export const Header = () => {
           </button>
         </div>
       </div>
-      <div className="container flex flex-wrap justify-end items-center mx-auto  py-5  ">
+      <div className="container flex flex-wrap justify-end items-center mx-auto py-5">
         <HumburgerList />
       </div>
       {/* </nav> */}
