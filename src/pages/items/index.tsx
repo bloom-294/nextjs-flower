@@ -295,13 +295,10 @@ export const Home = () => {
             </div>
 
             <div
-              className=" my-12 grid gap-10 grid-cols-1 mx-32
-          sm:grid-cols-2  sm:mx-1
-          md:grid-cols-2
+              className=" my-12 grid grid-cols-2 w-[100%] 
+          sm:grid-cols-2 sm:gap-10 sm:mx-0 sm:w-auto
           lg:grid-cols-3
-          xl:grid-cols-4
-          2xl:grid-cols-5
-          
+          2xl:grid-cols-5        
       "
             >
               {itemList.map(

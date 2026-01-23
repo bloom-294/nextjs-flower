@@ -34,7 +34,10 @@ import { ItemCardsWrapTypes, ItemCardsWrapRecognizeTypes } from "types/type";
 
 export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
   return (
-    <div className="w-48 h-80  rounded-lg   shadow-lg  cursor-pointer">
+    <div className="
+    sm:h-80 sm:w-48 
+    w-[95%] m-auto rounded-lg shadow-md cursor-pointer mb-4
+    ">
       <Link href={`/items/${props.id}`}>
         <a>
           <Image
