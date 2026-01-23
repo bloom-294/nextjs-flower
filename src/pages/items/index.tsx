@@ -196,8 +196,8 @@ export const Home = () => {
   mutate();
   return (
     <>
-      <div className="container flex flex-wrap justify-center items-center mx-auto py-5 px-5   ">
-        <div className=" flex flex-nowrap " style={{ height: "100%" }}>
+      <div className="container sm:flex flex-wrap justify-center items-center mx-auto sm:py-5 px-5">
+        <div className=" flex flex-nowrap justify-center" style={{ height: "100%" }}>
           <div className="hidden md:flex  flex-col">
             <p className=" text-md mb-4">
               <span className="">Home</span> &gt; {categoryWord}
@@ -219,7 +219,7 @@ export const Home = () => {
           </div>
 
           <div className="float-right " style={{ height: "100%" }}>
-            <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5  ">
+            <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5 a">
               <SearchForm
                 setSearchWord={setSearchWord}
                 setSearchState={setSearchState}
