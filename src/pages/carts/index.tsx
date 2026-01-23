@@ -31,7 +31,7 @@ export const Home = () => {
   return (
     <>
       <div className="mb-7">
-        <div className=" flex flex-wrap justify-center items-center mt-7">
+        <div className="mt-7 text-center">
           <h1 className="text-bold text-[#75ad9d] text-[30px]">
             ショッピングカート
           </h1>

@@ -97,7 +97,7 @@ export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
 export const ItemCardsWrapRecognize = (props: ItemCardsWrapRecognizeTypes) => {
   let id = props.id;
   return (
-    <div className=" w-[150px]   h-[250px] sm:h-[250px] cursor-pointer mx-1 shadow-md rounded-md">
+    <div className=" w-[150px] h-[250px] sm:h-[250px] cursor-pointer mx-1 shadow-md rounded-md">
       <Link href={`/items/${id}`}>
         <a>
           <Image
