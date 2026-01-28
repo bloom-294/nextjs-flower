@@ -3,6 +3,12 @@
   margin: 10px auto;
 }
 
+@media (max-width: 600px) {
+  .line {
+  width: 100%;
+  }
+}
+
 .gridWidth {
   width: 700px;
 }
