@@ -93,9 +93,9 @@ export const RecognizeList = (props: {
 
   return (
     <>
-      <div className={` my-5`}>
-        <h5 className="sm:mb-5">{props.title}</h5>
-        <div className="flex  ">
+      <div className="my-5 overflow-scroll w-[100%]">
+        <h5 className="sm:mb-5 mb-2">{props.title}</h5>
+        <div className="flex">
           {recommendItemList.map(
             (items: ItemCardsWrapRecognizeSqlTypes) => {
               return (

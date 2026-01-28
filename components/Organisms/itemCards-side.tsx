@@ -6,7 +6,7 @@ import { ItemCardsSideTypes, ItemCardsSideCountTypes } from "types/type";
 const ItemCardsSideImage = (props: { imagePath: string }) => {
   return (
     <>
-      <div className="flex flex-wrap  mb-2">
+      <div className="flex flex-wrap mb-2">
         <Image src={props.imagePath} alt="" width={200} height={200} />
       </div>
     </>
@@ -142,7 +142,7 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
     return (
       <>
         <ItemCardsSideImage imagePath={props.imagePath} />
-        <div className=" container m-auto justify-center items-center col-span-2 ">
+        <div className="container m-auto justify-center items-center col-span-2 sm">
           <ItemCardsSideName name={props.name} />
           <ItemCardsSideQuentity quentity={props.quantity} />
         </div>
@@ -165,10 +165,12 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
   } else {
     return (
       <>
+        <div className="sm:hidden block">
         <ItemCardsSideImage imagePath={props.imagePath} />
         <ItemCardsSideName name={props.name} />
+        </div>
+        <div>
         <ItemCardsSidePrice price={props.orderPrice} />
-
         <div className=" container flex flex-wrap justify-center items-center ">
           <ItemCardsSideCount
             quantityAdd={quantityAdd}
@@ -184,6 +186,7 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
             id={props.id}
             gestId={props.gestId}
           />
+        </div>
         </div>
         <button
           className={`mx-6 text-gray-500 ${style.deleteButtonItemCards}`}

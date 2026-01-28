@@ -97,7 +97,10 @@ export const ShoppingList = ({ pageName = "Shopping" }: { pageName?: string }) =
             ) => {
               return (
                 <div
-                  className={` mb-1 grid sm:gap-1 grid-cols-5 rounded-md md:w-[800px] 
+                  className={` 
+                  mb-1 grid rounded-md grid-cols-3
+                  sm:gap-1 sm:grid-cols-5 
+                  md:w-[800px]
                         `}
                   key={index}
                 >

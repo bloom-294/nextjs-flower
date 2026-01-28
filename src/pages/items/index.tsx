@@ -196,9 +196,9 @@ export const Home = () => {
   mutate();
   return (
     <>
-      <div className="container flex flex-wrap justify-center items-center mx-auto py-5 px-5   ">
-        <div className=" flex flex-nowrap " style={{ height: "100%" }}>
-          <div className="hidden md:flex  flex-col">
+      <div className="container sm:flex flex-wrap justify-center items-center mx-auto sm:py-5 px-5">
+        <div className=" flex flex-nowrap justify-center" style={{ height: "100%" }}>
+          <div className="hidden md:flex flex-col">
             <p className=" text-md mb-4">
               <span className="">Home</span> &gt; {categoryWord}
             </p>
@@ -219,7 +219,7 @@ export const Home = () => {
           </div>
 
           <div className="float-right " style={{ height: "100%" }}>
-            <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5  ">
+            <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5 a">
               <SearchForm
                 setSearchWord={setSearchWord}
                 setSearchState={setSearchState}
@@ -233,12 +233,12 @@ export const Home = () => {
               {/* <ErrorMessage /> */}
             </div>
 
-            <div className="flex flex-wrap justify-center items-center mt-8">
+            <div className="flex flex-wrap justify-center items-center mt-8 my-auto">
               <ul className="flex float-right">
-                <li className="mr-4 ">
+                <li className="sm:mr-4 mr-2">
                   <button
                     type="button"
-                    className="border-b 
+                    className="border-b whitespace-nowrap 
                   text-gray-400
                   focus:text-[#75ad9d]
                   focus:border-[#75ad9d] text-md"
@@ -249,10 +249,10 @@ export const Home = () => {
                     おすすめ順
                   </button>
                 </li>
-                <li className="mr-4 ">
+                <li className="sm:mr-4 mr-2">
                   <button
                     type="button"
-                    className="border-b 
+                    className="border-b whitespace-nowrap
                   text-gray-400
                   focus:text-[#75ad9d]
                   focus:border-[#75ad9d] text-md"
@@ -263,10 +263,10 @@ export const Home = () => {
                     人気順
                   </button>
                 </li>
-                <li className="mr-4 ">
+                <li className="sm:mr-4 mr-2">
                   <button
                     type="button"
-                    className="border-b 
+                    className="border-b whitespace-nowrap
                   text-gray-400
                   focus:text-[#75ad9d]
                   focus:border-[#75ad9d] text-md"
@@ -277,10 +277,10 @@ export const Home = () => {
                     価格が安い順
                   </button>
                 </li>
-                <li className="mr-4 ">
+                <li className="sm:mr-4 mr-0">
                   <button
                     type="button"
-                    className="border-b 
+                    className="border-b whitespace-nowrap
                   text-gray-400
                   focus:text-[#75ad9d]
                   focus:border-[#75ad9d] text-md"
@@ -295,13 +295,10 @@ export const Home = () => {
             </div>
 
             <div
-              className=" my-12 grid gap-10 grid-cols-1 mx-32
-          sm:grid-cols-2  sm:mx-1
-          md:grid-cols-2
+              className=" my-12 grid grid-cols-2 w-[100%] 
+          sm:grid-cols-2 sm:gap-10 sm:mx-0 sm:w-auto
           lg:grid-cols-3
-          xl:grid-cols-4
-          2xl:grid-cols-5
-          
+          2xl:grid-cols-5        
       "
             >
               {itemList.map(

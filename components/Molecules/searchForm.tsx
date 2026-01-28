@@ -14,7 +14,7 @@ export const SearchForm = (props: {
         id="search"
         name=""
         placeholder={`${props.categoryWord}から探す`}
-        className="relative shadow border rounded-lg w-[500px] h-14 max-w-lg py-2 px-8 text-gray-700 focus:outline-none focus:ring-2 z-1 text-lg"
+        className="relative shadow border rounded-lg sm:w-[500px] w-[90vw] h-14 max-w-lg py-2 sm:px-8 px-4 text-gray-700 focus:outline-none focus:ring-2 z-1 text-lg"
         onChange={(ev) => {
           props.setSearchWord(ev.target.value);
         }}
@@ -33,7 +33,7 @@ export const SearchForm = (props: {
           // console.log(ev.code);
         }}
       />
-      <span className="material-icons absolute translate-x-52 text-gray-400 z-10">
+      <span className="material-icons absolute sm:translate-x-52 translate-x-0 sm:right-auto right-[10%] text-gray-400 z-10">
         search
       </span>
       {/* </form> */}

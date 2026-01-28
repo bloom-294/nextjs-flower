@@ -65,7 +65,7 @@ export const SlideCursor = () => {
           })}
         </Swiper>
       </div>
-      <div className=" w-96 mx-auto sm:hidden">
+      <div className="mx-auto sm:hidden sm:w-auto w-[100vw]">
         <Swiper
           slidesPerView={2}
           centeredSlides={true}
