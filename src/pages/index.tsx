@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Loader } from "components/Atoms/loader";
 import { Information } from "components/Molecules/Information";
 import { Map } from "components/Molecules/map";
@@ -11,6 +11,13 @@ import { Slide } from "components/Molecules/swiper";
 import { SlideCursor } from "components/Molecules/swiperCursor";
 
 export const Home = ({ data }: any) => {
+
+    useEffect(() => {
+      document.body.classList.add('loaded');
+      return () => {
+        document.body.classList.remove('loaded');
+      };
+    }, []);
 
   if (!data)
     return (
