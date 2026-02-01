@@ -6,7 +6,7 @@ import { ItemCardsSideTypes, ItemCardsSideCountTypes } from "types/type";
 const ItemCardsSideImage = (props: { imagePath: string }) => {
   return (
     <>
-      <div className="flex flex-wrap mb-2">
+      <div className="flex flex-wrap mb-2 m-auto col-span-2">
         <Image src={props.imagePath} alt="" width={200} height={200} />
       </div>
     </>
@@ -165,28 +165,26 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
   } else {
     return (
       <>
-        <div className="sm:hidden block">
         <ItemCardsSideImage imagePath={props.imagePath} />
-        <ItemCardsSideName name={props.name} />
+        <div className="m-auto col-span-2">
+          <ItemCardsSideName name={props.name} />
+          <ItemCardsSidePrice price={props.orderPrice} />
         </div>
-        <div>
-        <ItemCardsSidePrice price={props.orderPrice} />
-        <div className=" container flex flex-wrap justify-center items-center ">
-          <ItemCardsSideCount
-            quantityAdd={quantityAdd}
-            setQuantityAdd={setQuantityAdd}
-            itemsPriceChange={itemsPriceChange}
-            setItemsPriceChange={setItemsPriceChange}
-            totalPrice={props.totalPrice}
-            setTotalPrice={props.setTotalPrice}
-            name={props.name}
-            imagePath={props.imagePath}
-            price={props.price}
-            quantity={props.quantity}
-            id={props.id}
-            gestId={props.gestId}
-          />
-        </div>
+        <div className="m-auto">
+            <ItemCardsSideCount
+              quantityAdd={quantityAdd}
+              setQuantityAdd={setQuantityAdd}
+              itemsPriceChange={itemsPriceChange}
+              setItemsPriceChange={setItemsPriceChange}
+              totalPrice={props.totalPrice}
+              setTotalPrice={props.setTotalPrice}
+              name={props.name}
+              imagePath={props.imagePath}
+              price={props.price}
+              quantity={props.quantity}
+              id={props.id}
+              gestId={props.gestId}
+            />
         </div>
         <button
           className={`mx-6 text-gray-500 ${style.deleteButtonItemCards}`}
