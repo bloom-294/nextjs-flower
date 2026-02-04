@@ -127,7 +127,7 @@ export const ShoppingList = ({ pageName = "Shopping" }: { pageName?: string }) =
         <div className=" mt-10 mb-5 px-5 ">
           <p className="text-sm">
             合計金額&nbsp;&nbsp;&nbsp;
-            <span className="text-[35px]  text-[#75ad9d]  ">
+            <span className="text-[35px]  text-[#75ad9d] ">
               {totalPrice.toLocaleString()}
             </span>{" "}
             &nbsp;円(税込)
