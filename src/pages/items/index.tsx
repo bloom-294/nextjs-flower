@@ -118,16 +118,16 @@ export const Home = () => {
   let itemList: any = [];
   // フォームで検索
   // Enterが押された時
-  // if (searchState === true) {
-  // categoryitemList.map((ItemData: { name: string }, index: number) => {
-  //   // 検索ワードと一致した場合
-  //   if (ItemData.name.match(searchWord)) {
-  //     itemList.push(ItemData);
-  //   }
-  // });
-  // } else {
-  //   itemList = categoryitemList;
-  // }
+  if (searchState === true) {
+  categoryitemList.map((ItemData: { name: string }) => {
+    // 検索ワードと一致した場合
+    if (ItemData.name.match(searchWord)) {
+      itemList.push(ItemData);
+    }
+  });
+  } else {
+    itemList = categoryitemList;
+  }
 
   // フォームで検索
   categoryitemList.map((ItemData: { name: string }) => {
@@ -148,8 +148,9 @@ export const Home = () => {
 
   // 該当商品がない場合、全ての商品を表示
   const SearchItemsNone = () => {
-    // console.log(itemList.length)
+    console.log(itemList.length)
     if (itemList.length === 0) {
+      ErrorMessage();
       if(searchState === false) {
         ErrorMessage();
       } 
