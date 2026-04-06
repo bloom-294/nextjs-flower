@@ -1,5 +1,4 @@
-
-import React, { useState} from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { ItemCardsWrap } from "../../../components/Organisms/itemCards-wrap";
@@ -11,227 +10,162 @@ import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 import Swal from "sweetalert2";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 2000,
+});
 
 export const Home = () => {
   const [searchWord, setSearchWord] = useState("");
-  // 検索フォームでEnterが押されたかどうか
   const [searchState, setSearchState] = useState(false);
-  const [sort, setSort]: any = useState("");
-
+  const [sort, setSort] = useState("");
+  
+  
   const router = useRouter();
   let categoryWord: string | string[] = "";
-
-  // routerで引き渡された値をセット
+  
   if (router.query.category) {
     categoryWord = router.query.category;
   } else {
-    // リンクで飛んだ場合
     categoryWord = "全ての商品";
   }
+  
+  const { data, error } = useSWR(`/api/itemList`, fetcher);
+  const sourceItemList = data?.itemList ?? [];
 
-  const { data, error, mutate } = useSWR(`/api/itemList`, fetcher);
+  const safeCategoryWord =
+  typeof categoryWord === "string"
+    ? categoryWord
+    : categoryWord?.[0] ?? "全ての商品";
 
-  if (error)
-    return (
-      <div className="container flex flex-wrap justify-center items-center mx-auto py-48 px-5 ">
-        An error has occurred.
-      </div>
-    );
+  // 1. カテゴリで絞り込む
+  const categoryFilteredList =
+    safeCategoryWord !== "全ての商品"
+      ? sourceItemList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
+          (item.category ?? []).includes(safeCategoryWord)
+        )
+      : sourceItemList;
+      
+  // 2. 検索ワードで絞り込む
+  const searchedList = searchState
+    ? categoryFilteredList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
+        item.name?.includes(searchWord)
+      )
+    : categoryFilteredList;
 
-  if (!data)
-    return (
-      <>
-        <Loader />
-      </>
-    );
+  // 3. 並び替え
+  const itemList = [...searchedList];
+  
 
-  // console.log(categoryWord.length)
-  const categoryitemList: any = [];
-  // カテゴリ検索
-  data.itemList.map((ItemData: { category: any }) => {
-    if (categoryWord !== "全ての商品") {
-      if (ItemData.category.includes(categoryWord)) {
-        categoryitemList.push(ItemData);
-      }
-    } else {
-      categoryitemList.push(ItemData);
-    }
-  });
-
-  if (sort.length !== 0) {
-    if (sort === "安い") {
-      categoryitemList.sort(function (a: any, b: any) {
-        if (a.price > b.price) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    }
-    if (sort === "高い") {
-      categoryitemList.sort(function (a: any, b: any) {
-        if (a.price < b.price) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    }
-    if (sort === "おすすめ") {
-      categoryitemList.sort(function (a: any, b: any) {
-        if (a.recommend > b.recommend) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    }
-    if (sort === "人気") {
-      categoryitemList.sort(function (a: any, b: any) {
-        if (a.popular > b.popular) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    }
+  if (sort === "安い") {
+    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
+      return (a.price ?? 0) - (b.price ?? 0);
+    });
   }
 
-  // console.log(categoryitemList)
-  // エラー表示
-  const ErrorMessage = () => {
-    if (itemList.length === 0) {
-        Swal.fire({
-          icon: "error",
-          text: "該当する商品がありません",
-          confirmButtonText: "OK",
-          confirmButtonColor: "#75ad9d",
-        });
-        router.push("/items");
-        return;
-    } else {
-      return;
-    }
-  };
-
-
-  let itemList: any = [];
-  // フォームで検索
-  // Enterが押された時
-  if (searchState === true) {
-  categoryitemList.map((ItemData: { name: string }) => {
-    // 検索ワードと一致した場合
-    if (ItemData.name.match(searchWord)) {
-      itemList.push(ItemData);
-    }
-  });
-  } else {
-    itemList = categoryitemList;
+  if (sort === "高い") {
+    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
+      return (b.price ?? 0) - (a.price ?? 0);
+    });
   }
 
-  // フォームで検索
-  categoryitemList.map((ItemData: { name: string }) => {
-    // Enterが押された時
-    if (searchState === true) {
-      // 検索ワードと一致した場合
-      if (ItemData.name.match(searchWord)) {
-        itemList.push(ItemData);
-      } else {
-        return;
-      }
-    } else {
-      itemList.push(ItemData);
-    }
-  });
+  if (sort === "おすすめ") {
+    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
+      return (b.recommend ?? 0) - (a.recommend ?? 0);
+    });
+  }
 
-  const itemListLength:boolean = (itemList.length === 0);
+  if (sort === "人気") {
+    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
+      return (b.popular ?? 0) - (a.popular ?? 0);
+    });
+  }
 
-  // 該当商品がない場合、全ての商品を表示
-  const SearchItemsNone = () => {
-    console.log(itemList.length)
-    if (itemList.length === 0) {
-      ErrorMessage();
-      if(searchState === false) {
-        ErrorMessage();
-      } 
-      return (
-        <>
-          {data.itemList.map(
-            (itemData: ItemCardsWrapRecognizeSqlTypes, index: number) => {
-              return (
-                <ItemCardsWrap
-                  name={itemData.name}
-                  price={itemData.price}
-                  imagePath={itemData.imagepath}
-                  key={index}
-                  id={itemData.id}
-                />
-              );
-            }
-          )}
-        </>
-      );
-    } else {
-      return <></>;
-    }
-  };
+  const shouldRedirectToAllItems =
+  !!data &&
+  itemList.length === 0 &&
+  (
+    searchState || safeCategoryWord !== "全ての商品"
+  );
 
-  // if(searchState === true) {
-  //   ErrorMessage();
-  //   return;
-  //   if(itemList.length === 0) {
-  //      Swal.fire({
-  //       icon: "error",
-  //       text: "該当する商品がありません",
-  //       confirmButtonText: "OK",
-  //       confirmButtonColor: "#75ad9d",
-  //     });
-  //     router.push("/items")
-  //     return;
-  //   }
-  // }else {
-  //   console.log("hi")
-  // }
-  console.log(searchState);
+  // 4. 検索結果が0件ならポップを出して商品一覧へ遷移
+  useEffect(() => {
+    if (!shouldRedirectToAllItems) return;
 
-  mutate();
+    const showToast = async () => {
+      Toast.fire({
+        icon: "error",
+        title: "該当する商品がありません",
+      });
+
+      setSearchState(false);
+      setSearchWord("");
+      router.replace("/items");
+    };
+    showToast();
+  }, [shouldRedirectToAllItems, router]);
+
+  const itemListLength: boolean = itemList.length === 0;
+
+
+  useEffect(() => {
+    if (!searchState) return;
+    if (!data) return;
+    if (itemList.length === 0) return;
+
+    Toast.fire({
+      icon: "success",
+      title: `${itemList.length}件見つかりました`,
+    });
+  }, [searchState, itemList.length, data]);
+
+  if (error) {
+    return <div>Error</div>;
+  }
+
+  if (!data) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="container sm:flex flex-wrap justify-center items-center mx-auto sm:py-5 px-5">
-        <div className=" flex flex-nowrap justify-center" style={{ height: "100%" }}>
+        <div className="flex flex-nowrap justify-center" style={{ height: "100%" }}>
           <div className="hidden md:flex flex-col">
-            <p className=" text-md mb-4">
-              <span className="">Home</span> &gt; {categoryWord}
+            <p className="text-md mb-4">
+              <span>Home</span> &gt; {categoryWord}
             </p>
-            <div className="bg-gray-100 rounded-md w-48 py-1 ">
+
+            <div className="bg-gray-100 rounded-md w-48 py-1">
               <h3
-                className="bg-gray-100 flex   
-              rounded-md
-              justify-center items-end mx-auto h-12 pb-1"
+                className="bg-gray-100 flex rounded-md justify-center items-end mx-auto h-12 pb-1"
               >
                 該当商品
                 <span className="mx-4 translate-y-2">
-                  <Countup end={itemList.length} duration={0.3} className="text-[#75ad9d] text-[30px]" />
+                  <Countup
+                    end={itemList.length}
+                    duration={0.3}
+                    className="text-[#75ad9d] text-[30px]"
+                  />
                 </span>
                 件
               </h3>
             </div>
+
             <SearchNavigationbar />
           </div>
 
-          <div className="float-right " style={{ height: "100%" }}>
+          <div className="float-right" style={{ height: "100%" }}>
             <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5 a">
               <SearchForm
                 setSearchWord={setSearchWord}
                 setSearchState={setSearchState}
                 categoryWord={categoryWord}
-                mutate={mutate}
                 itemListLength={itemListLength}
                 onChange={() => {}}
               />
-            </div>
-            <div className=" flex flex-wrap justify-center items-center mr-36   ">
-              {/* <ErrorMessage /> */}
             </div>
 
             <div className="flex flex-wrap justify-center items-center mt-8 my-auto">
@@ -239,10 +173,7 @@ export const Home = () => {
                 <li className="sm:mr-4 mr-2">
                   <button
                     type="button"
-                    className="border-b whitespace-nowrap 
-                  text-gray-400
-                  focus:text-[#75ad9d]
-                  focus:border-[#75ad9d] text-md"
+                    className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
                       setSort("おすすめ");
                     }}
@@ -250,13 +181,11 @@ export const Home = () => {
                     おすすめ順
                   </button>
                 </li>
+
                 <li className="sm:mr-4 mr-2">
                   <button
                     type="button"
-                    className="border-b whitespace-nowrap
-                  text-gray-400
-                  focus:text-[#75ad9d]
-                  focus:border-[#75ad9d] text-md"
+                    className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
                       setSort("人気");
                     }}
@@ -264,13 +193,11 @@ export const Home = () => {
                     人気順
                   </button>
                 </li>
+
                 <li className="sm:mr-4 mr-2">
                   <button
                     type="button"
-                    className="border-b whitespace-nowrap
-                  text-gray-400
-                  focus:text-[#75ad9d]
-                  focus:border-[#75ad9d] text-md"
+                    className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
                       setSort("安い");
                     }}
@@ -278,13 +205,11 @@ export const Home = () => {
                     価格が安い順
                   </button>
                 </li>
+
                 <li className="sm:mr-4 mr-0">
                   <button
                     type="button"
-                    className="border-b whitespace-nowrap
-                  text-gray-400
-                  focus:text-[#75ad9d]
-                  focus:border-[#75ad9d] text-md"
+                    className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
                       setSort("高い");
                     }}
@@ -296,11 +221,7 @@ export const Home = () => {
             </div>
 
             <div
-              className=" my-12 grid grid-cols-2 w-[100%] 
-          sm:grid-cols-2 sm:gap-10 sm:mx-0 sm:w-auto
-          lg:grid-cols-3
-          2xl:grid-cols-5        
-      "
+              className="my-12 grid grid-cols-2 w-[100%] sm:grid-cols-2 sm:gap-10 sm:mx-0 sm:w-auto lg:grid-cols-3 2xl:grid-cols-5"
             >
               {itemList.map(
                 (itemData: ItemCardsWrapRecognizeSqlTypes, index: number) => {
@@ -316,7 +237,6 @@ export const Home = () => {
                   );
                 }
               )}
-              <SearchItemsNone />
             </div>
           </div>
         </div>
@@ -324,15 +244,5 @@ export const Home = () => {
     </>
   );
 };
-
-// export const getStaticProps = async () => {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`);
-//   const json = await res.json();
-
-//   return {
-//     props: { data: json },
-//     revalidate: 1
-//   }
-// }
 
 export default Home;
