@@ -218,4 +218,7 @@ export type ItemCardsWrapRecognizeSqlTypes = {
   imagepath: string;
   name?: string;
   price?: number;
+  recommend?: number;
+  popular?: number;
+  category?: string | string[];
 };
