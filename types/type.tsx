@@ -38,7 +38,7 @@ export type ItemListTypes = {
   name: string;
   price: number;
   info: string;
-  imagepath: string;
+  imagePath: string;
   category: string;
   recommend: number;
   popular: number;
@@ -215,7 +215,7 @@ export type ItemCardsWrapRecognizeTypes = {
 
 export type ItemCardsWrapRecognizeSqlTypes = {
   id?: number;
-  imagepath: string;
+  imagePath: string;
   name?: string;
   price?: number;
   recommend?: number;

@@ -41,7 +41,7 @@ export const Details = (data: { item: ItemListTypes }) => {
       price: data.item.price,
       orderPrice: data.item.price,
       quantity: 1,
-      imagePath: data.item.imagepath,
+      imagePath: data.item.imagePath,
       gestId: gestIdValue,
     };
 
@@ -85,7 +85,7 @@ export const Details = (data: { item: ItemListTypes }) => {
             <div className={`  `}>
               <div className={`z-1`}>
                 <Image
-                  src={data.item?.imagepath}
+                  src={data.item?.imagePath}
                   alt=""
                   width={500}
                   height={500}
@@ -157,12 +157,12 @@ export const Details = (data: { item: ItemListTypes }) => {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`https://nextjs-flower-api.vercel.app/api/itemList`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`);
   const json = await res.json();
   const list: any = [];
 
   for (let i = 1; i <= json.length; i++) {
-    list.push({ params: { id: i } });
+    list.push({ params: { id: String(i) } });
   }
 
   return {
@@ -173,10 +173,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: any) => {
   const res = await fetch(
-    `https://nextjs-flower-api.vercel.app/api/itemList?id=${Number(params.id)}`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/items?id=${Number(params.id)}`
   );
   const json = await res.json();
-  const itemLists = await json.itemList[0];
+  const itemLists = await json[0];
 
   return {
     props: { item: itemLists, id: params },

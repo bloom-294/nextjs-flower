@@ -32,13 +32,27 @@ export const Home = () => {
     categoryWord = "全ての商品";
   }
   
-  const { data, error } = useSWR(`/api/itemList`, fetcher);
-  const sourceItemList = data?.itemList ?? [];
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`,
+  fetcher);
+  const sourceItemList = data ?? [];
 
   const safeCategoryWord =
   typeof categoryWord === "string"
     ? categoryWord
     : categoryWord?.[0] ?? "全ての商品";
+
+  const toKatakana = (str: string) => {
+    return str.replace(/[\u3041-\u3096]/g, (match) =>
+      String.fromCharCode(match.charCodeAt(0) + 0x60)
+    );
+  };
+
+  const normalizeSearchText = (str: string) => {
+    return toKatakana(str)
+      .normalize("NFKC")
+      .replace(/\s+/g, "")
+      .toLowerCase();
+  };
 
   // 1. カテゴリで絞り込む
   const categoryFilteredList =
@@ -51,8 +65,9 @@ export const Home = () => {
   // 2. 検索ワードで絞り込む
   const searchedList = searchState
     ? categoryFilteredList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
-        item.name?.includes(searchWord)
-      )
+        normalizeSearchText(item.name ?? "").includes(
+        normalizeSearchText(searchWord)
+      ))
     : categoryFilteredList;
 
   // 3. 並び替え
@@ -229,7 +244,7 @@ export const Home = () => {
                     <ItemCardsWrap
                       name={itemData.name}
                       price={itemData.price}
-                      imagePath={itemData.imagepath}
+                      imagePath={itemData.imagePath}
                       key={index}
                       id={itemData.id}
                       data={itemData}

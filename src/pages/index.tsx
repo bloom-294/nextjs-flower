@@ -52,7 +52,7 @@ export const Home = ({ data }: any) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`https://nextjs-flower-api.vercel.app/api/itemList`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`);
   const json = await res.json();
 
   return {

@@ -6,7 +6,7 @@ import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 export const TopRecognizeList = (props: { title?: string }) => {
-  const { data, error} = useSWR(`/api/itemList`, fetcher);
+  const { data, error} = useSWR(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`, fetcher);
 
   if (error) return <div></div>;
 
@@ -18,9 +18,8 @@ export const TopRecognizeList = (props: { title?: string }) => {
       </>
     );
 
-  const recommendItemList = [];
 
-  let itemList = data.itemList.sort(function (a: any, b: any) {
+  const itemList = [...data].sort((a: any, b: any) => {
     if (a.recommend > b.recommend) {
       return 1;
     } else {
@@ -29,9 +28,7 @@ export const TopRecognizeList = (props: { title?: string }) => {
   });
   console.log("b", itemList);
 
-  for (let i = 0; i < 10; i++) {
-    recommendItemList.push(itemList[i]);
-  }
+  const recommendItemList: ItemCardsWrapRecognizeSqlTypes[] = itemList.slice(0, 10);
 
   // console.log("c",recommendItemList)
 
@@ -48,7 +45,7 @@ export const TopRecognizeList = (props: { title?: string }) => {
                 <ItemCardsWrapRecognize
                   name={items.name}
                   price={items.price}
-                  imagePath={items.imagepath}
+                  imagePath={items.imagePath}
                   id={items.id}
                   key={items.id}
                 />

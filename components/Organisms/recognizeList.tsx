@@ -10,7 +10,8 @@ export const RecognizeList = (props: {
   itemId: number;
   title: string;
 }) => {
-  const { data, error } = useSWR(`/api/itemList`, fetcher);
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`,
+  fetcher);
 
   if (error) return <div></div>;
 
@@ -26,7 +27,7 @@ export const RecognizeList = (props: {
   const recommendItemList = [];
 
   if (props.category && props.category.length !== 0) {
-    data.itemList.map(
+    data.map(
       (items: { category: string; id: number }) => {
         if (
           (props.category.includes(items.category) ||
@@ -58,7 +59,7 @@ export const RecognizeList = (props: {
     }
     // console.log("b",recommendItemList.length)
   } else {
-    data.itemList.sort(function (a: any, b: any) {
+    data.sort(function (a: any, b: any) {
       if (a.recommend > b.recommend) {
         return 1;
       } else {
@@ -66,12 +67,12 @@ export const RecognizeList = (props: {
       }
     });
     for (let i: number = 0; i < 5; i++) {
-      recommendItemList.push(data.itemList[i]);
+      recommendItemList.push(data[i]);
     }
   }
 
   if (recommendItemList.length < 5) {
-    data.itemList.sort(function (a: any, b: any) {
+    data.sort(function (a: any, b: any) {
       if (a.recommend > b.recommend) {
         return 1;
       } else {
@@ -80,16 +81,19 @@ export const RecognizeList = (props: {
     });
 
     let number: number = 0;
-    while (recommendItemList.length < 4) {
-      if (props.itemId !== data.itemList.id) {
-        recommendItemList.push(data.itemList[number]);
-        number++;
+    while (recommendItemList.length < 5 && number < data.length) {
+      const item = data[number];
+      const alreadyExists = recommendItemList.some((v) => v.id === item.id);
+
+      if (props.itemId !== item.id && !alreadyExists) {
+        recommendItemList.push(item);
       }
+
+      number++;
     }
   }
 
   console.log("c", recommendItemList);
-  // console.log(categoryitemList)
 
   return (
     <>
@@ -102,7 +106,7 @@ export const RecognizeList = (props: {
                 <ItemCardsWrapRecognize
                   name={items.name}
                   price={items.price}
-                  imagePath={items.imagepath}
+                  imagePath={items.imagePath}
                   id={items.id}
                   key={items.id}
                 />
