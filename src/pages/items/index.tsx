@@ -8,6 +8,7 @@ import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
 import Countup from "react-countup";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 import Swal from "sweetalert2";
+import { API_BASE_URL } from "src/config/publicEnv";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const Toast = Swal.mixin({
@@ -32,8 +33,9 @@ export const Home = () => {
     categoryWord = "全ての商品";
   }
   
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`,
-  fetcher);
+  const itemsEndpoint = new URL("/items", API_BASE_URL).toString();
+  const { data, error } = useSWR(itemsEndpoint, fetcher);
+
   const sourceItemList = data ?? [];
 
   const safeCategoryWord =
