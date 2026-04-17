@@ -65,11 +65,13 @@ export const Home = () => {
       : sourceItemList;
       
   // 2. 検索ワードで絞り込む
+
+  const normalizedSearchWord = normalizeSearchText(searchWord);
+
   const searchedList = searchState
     ? categoryFilteredList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
-        normalizeSearchText(item.name ?? "").includes(
-        normalizeSearchText(searchWord)
-      ))
+        normalizeSearchText(item.name ?? "").includes(normalizedSearchWord)
+      )
     : categoryFilteredList;
 
   // 3. 並び替え
