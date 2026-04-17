@@ -18,6 +18,19 @@ const Toast = Swal.mixin({
   timer: 2000,
 });
 
+const toKatakana = (str: string) => {
+  return str.replace(/[\u3041-\u3096]/g, (match) =>
+    String.fromCharCode(match.charCodeAt(0) + 0x60)
+  );
+};
+
+const normalizeSearchText = (str: string) => {
+  return toKatakana(str)
+    .normalize("NFKC")
+    .replace(/\s+/g, "")
+    .toLowerCase();
+};
+
 export const Home = () => {
   const [searchWord, setSearchWord] = useState("");
   const [searchState, setSearchState] = useState(false);
@@ -42,19 +55,6 @@ export const Home = () => {
   typeof categoryWord === "string"
     ? categoryWord
     : categoryWord?.[0] ?? "全ての商品";
-
-  const toKatakana = (str: string) => {
-    return str.replace(/[\u3041-\u3096]/g, (match) =>
-      String.fromCharCode(match.charCodeAt(0) + 0x60)
-    );
-  };
-
-  const normalizeSearchText = (str: string) => {
-    return toKatakana(str)
-      .normalize("NFKC")
-      .replace(/\s+/g, "")
-      .toLowerCase();
-  };
 
   // 1. カテゴリで絞り込む
   const categoryFilteredList =
