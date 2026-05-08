@@ -159,11 +159,10 @@ export const Details = (data: { item: ItemListTypes }) => {
 export const getStaticPaths = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`);
   const json = await res.json();
-  const list: any = [];
 
-  for (let i = 1; i <= json.length; i++) {
-    list.push({ params: { id: String(i) } });
-  }
+  const list = json.map((item: any) => ({
+    params: { id: String(item.id) }
+  }));
 
   return {
     paths: list,
