@@ -8,6 +8,7 @@ import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
 import Countup from "react-countup";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 import Swal from "sweetalert2";
+import { API_BASE_URL } from "src/config/publicEnv";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const Toast = Swal.mixin({
@@ -16,6 +17,19 @@ const Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 2000,
 });
+
+const toKatakana = (str: string) => {
+  return str.replace(/[\u3041-\u3096]/g, (match) =>
+    String.fromCharCode(match.charCodeAt(0) + 0x60)
+  );
+};
+
+const normalizeSearchText = (str: string) => {
+  return toKatakana(str)
+    .normalize("NFKC")
+    .replace(/\s+/g, "")
+    .toLowerCase();
+};
 
 export const Home = () => {
   const [searchWord, setSearchWord] = useState("");
@@ -32,8 +46,15 @@ export const Home = () => {
     categoryWord = "全ての商品";
   }
   
-  const { data, error } = useSWR(`/api/itemList`, fetcher);
-  const sourceItemList = data?.itemList ?? [];
+  const normalizedApiBaseUrl = API_BASE_URL.endsWith("/")
+  ? API_BASE_URL
+  : `${API_BASE_URL}/`;
+
+  const itemsEndpoint = new URL("items", normalizedApiBaseUrl).toString();
+
+  const { data, error } = useSWR(itemsEndpoint, fetcher);
+
+  const sourceItemList = data ?? [];
 
   const safeCategoryWord =
   typeof categoryWord === "string"
@@ -49,9 +70,12 @@ export const Home = () => {
       : sourceItemList;
       
   // 2. 検索ワードで絞り込む
+
+  const normalizedSearchWord = normalizeSearchText(searchWord);
+
   const searchedList = searchState
     ? categoryFilteredList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
-        item.name?.includes(searchWord)
+        normalizeSearchText(item.name ?? "").includes(normalizedSearchWord)
       )
     : categoryFilteredList;
 
@@ -229,7 +253,7 @@ export const Home = () => {
                     <ItemCardsWrap
                       name={itemData.name}
                       price={itemData.price}
-                      imagePath={itemData.imagepath}
+                      imagePath={itemData.imagePath}
                       key={index}
                       id={itemData.id}
                       data={itemData}
