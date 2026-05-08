@@ -176,7 +176,7 @@ export const getStaticProps = async ({ params }: any) => {
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/items?id=${Number(params.id)}`
   );
   const json = await res.json();
-  const itemLists = await json[0];
+  const itemLists = json[0];
 
   return {
     props: { item: itemLists, id: params },
