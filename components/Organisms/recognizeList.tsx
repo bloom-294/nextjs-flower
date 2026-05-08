@@ -67,9 +67,9 @@ const { data, error } = useSWR(`${API_BASE_URL}/items`, fetcher);
       return a.recommend > b.recommend ? 1 : -1;
     });
 
-    for (let i: number = 0; i < 5; i++) {
-      recommendItemList.push(sorted[i]);
-    }
+    sorted.slice(0, 5).forEach((item) => {
+      recommendItemList.push(item);
+    });
   }
 
   if (recommendItemList.length < 5) {
