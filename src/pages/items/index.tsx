@@ -46,7 +46,12 @@ export const Home = () => {
     categoryWord = "全ての商品";
   }
   
-  const itemsEndpoint = new URL("/items", API_BASE_URL).toString();
+  const normalizedApiBaseUrl = API_BASE_URL.endsWith("/")
+  ? API_BASE_URL
+  : `${API_BASE_URL}/`;
+
+  const itemsEndpoint = new URL("items", normalizedApiBaseUrl).toString();
+
   const { data, error } = useSWR(itemsEndpoint, fetcher);
 
   const sourceItemList = data ?? [];
