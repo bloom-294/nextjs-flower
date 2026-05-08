@@ -176,9 +176,12 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: any) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/items?id=${Number(params.id)}`
-  );
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (!API_BASE_URL) {
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
+  }
+
+  const res = await fetch(`${API_BASE_URL}/items?id=${Number(params.id)}`);
   const json = await res.json();
   const itemLists = json[0];
 
