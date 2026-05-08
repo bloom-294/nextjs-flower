@@ -59,15 +59,12 @@ export const RecognizeList = (props: {
     }
     // console.log("b",recommendItemList.length)
   } else {
-    data.sort(function (a: any, b: any) {
-      if (a.recommend > b.recommend) {
-        return 1;
-      } else {
-        return -1;
-      }
+    const sorted = [...data].sort((a: any, b: any) => {
+      return a.recommend > b.recommend ? 1 : -1;
     });
+
     for (let i: number = 0; i < 5; i++) {
-      recommendItemList.push(data[i]);
+      recommendItemList.push(sorted[i]);
     }
   }
 
