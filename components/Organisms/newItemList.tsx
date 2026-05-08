@@ -7,11 +7,17 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const NewItemsList = (props: { title?: string }) => {
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-  if (!API_BASE_URL) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
-  }
-  const { data, error } = useSWR(`${API_BASE_URL}/items`, fetcher);
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+if (!API_BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
+}
+
+const normalizedBaseUrl = API_BASE_URL.endsWith("/")
+  ? API_BASE_URL
+  : `${API_BASE_URL}/`;
+
+const { data, error } = useSWR(new URL("items", normalizedBaseUrl).toString(),
+  fetcher);
 
   if (error) return <div></div>;
 

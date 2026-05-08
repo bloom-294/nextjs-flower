@@ -11,11 +11,17 @@ export const RecognizeList = (props: {
   title: string;
 }) => {
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-if (!API_BASE_URL) {
-  throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
-}
-const { data, error } = useSWR(`${API_BASE_URL}/items`, fetcher);
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? null;
+
+const getItemsUrl = (base: string) => {
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  return new URL("items", normalizedBase).toString();
+};
+
+const { data, error } = useSWR(
+  API_BASE_URL ? getItemsUrl(API_BASE_URL) : null,
+  fetcher
+);
 
   if (error) return <div></div>;
 

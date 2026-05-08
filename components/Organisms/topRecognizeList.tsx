@@ -9,8 +9,16 @@ export const TopRecognizeList = (props: { title?: string }) => {
 
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? null;
-  const { data, error } = useSWR(API_BASE_URL ? `${API_BASE_URL}/items` 
-    : null, fetcher);
+
+  const getItemsUrl = (base: string) => {
+    const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+    return new URL("items", normalizedBase).toString();
+  };
+
+  const { data, error } = useSWR(
+    API_BASE_URL ? getItemsUrl(API_BASE_URL) : null,
+    fetcher
+  );
 
   if (error) return <div></div>;
 
