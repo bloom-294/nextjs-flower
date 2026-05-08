@@ -6,7 +6,11 @@ import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 export const TopRecognizeList = (props: { title?: string }) => {
-  const { data, error} = useSWR(`${process.env.NEXT_PUBLIC_API_BASE_URL}/items`, fetcher);
+
+
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? null;
+  const { data, error } = useSWR(API_BASE_URL ? `${API_BASE_URL}/items` 
+    : null, fetcher);
 
   if (error) return <div></div>;
 
