@@ -24,11 +24,9 @@ export const TopRecognizeList = (props: { title?: string }) => {
 
 
   const itemList = [...data].sort((a: any, b: any) => {
-    if (a.recommend > b.recommend) {
-      return 1;
-    } else {
-      return -1;
-    }
+    if (a.recommend > b.recommend) return 1;
+    if (a.recommend < b.recommend) return -1;
+    return 0;
   });
   console.log("b", itemList);
 
