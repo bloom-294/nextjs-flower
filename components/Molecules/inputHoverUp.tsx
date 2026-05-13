@@ -1,39 +1,40 @@
-import React from "react";
-
-export const inputHoverUp = () => {
+export const InputHoverUp = () => {
   return (
-    <>
-      <div>
-        <label htmlFor="nameForm">
-          <div
-            className=" 
-              translate-y-2
-              translate-x-6
-              absolute
-              z-10
-              text-black-500
-              bg-white
-              hover:text-black
-              rounded-full
-               "
-          >
-            姓
-          </div>
-        </label>
-        <input
-          type="text"
-          className="name
-              z-1
-              border mr-4 py-1 px-3 rounded-md
-              absolute
-              focus:translate-y-5 translate-y-1
-              translate-x-3   text-gray-400   focus:ease-in-out focus:duration-300 
-              focus:z-1
-              "
-          id="nameForm"
-          required
-        />
-      </div>
-    </>
+    <div>
+      <label
+        htmlFor="nameForm"
+        className="
+          absolute
+          z-10
+          translate-x-6
+          translate-y-2
+          rounded-full
+          bg-white
+          text-black-500
+          hover:text-black
+        "
+      >
+        姓
+      </label>
+      <input
+        type="text"
+        className="
+          absolute
+          mr-4
+          translate-x-3
+          translate-y-1
+          rounded-md
+          border
+          px-3
+          py-1
+          text-gray-400
+          focus:translate-y-5
+          focus:duration-300
+          focus:ease-in-out
+          "
+        id="nameForm"
+        required
+      />
+    </div>
   );
 };
