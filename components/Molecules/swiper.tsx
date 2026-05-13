@@ -19,13 +19,13 @@ SwiperCore.use([
   EffectFade,
 ]);
 
-export const Slide = () => {
-  const images = [
-    "/topImageDryFlower.png",
-    "/topImageGreenPlants.png",
-    "/topImageTulip.png",
-  ];
+const images = [
+  "/topImageDryFlower.png",
+  "/topImageGreenPlants.png",
+  "/topImageTulip.png",
+];
 
+export const Slide = () => {
   return (
     <div className="mx-auto w-[100vw] sm:container sm:w-auto">
       <Swiper
