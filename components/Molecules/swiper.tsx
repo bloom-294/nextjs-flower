@@ -1,19 +1,23 @@
-import React from "react";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
+  Autoplay,
+  EffectFade,
   Navigation,
   Pagination,
-  EffectFade,
-  Autoplay,
 } from "swiper";
-SwiperCore.use([Navigation]);
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import Image from "next/image";
 
-SwiperCore.use([Pagination, Autoplay, EffectFade]);
+SwiperCore.use([
+  Navigation,
+  Pagination,
+  Autoplay,
+  EffectFade,
+]);
 
 export const Slide = () => {
   const images = [
@@ -23,81 +27,33 @@ export const Slide = () => {
   ];
 
   return (
-    <>
-      <div className="sm:block sm:container mx-auto hidden">
-        <Swiper
-          slidesPerView={1}
-          centeredSlides={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
-          }}
-          // navigation={true}
-          speed={1000}
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          loop={true}
-
-          // // スライドが切り替わるたび実行される。
-          // onSlideChange={(swiper) => console.log('スライドが変更されました。')}
-          // // スライドが表示された最初の1回に実行されます。
-          // onSwiper={(swiper) => console.log('スライドが生成されました')}
-        >
-          {images.map((src: string, index: number) => {
-            return (
-              <SwiperSlide key={`${index}`}>
-                <Image
-                  src={src}
-                  layout="responsive"
-                  width={1280}
-                  height={550}
-                  alt="top"
-                  priority={true}
-                  className="z-1"
-                />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-      <div className=" sm:hidden mx-auto sm:w-96 w-[100vw]">
-        <Swiper
-          slidesPerView={1}
-          centeredSlides={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
-          }}
-          // navigation={true}
-          speed={1000}
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          loop={true}
-
-          // // スライドが切り替わるたび実行される。
-          // onSlideChange={(swiper) => console.log('スライドが変更されました。')}
-          // // スライドが表示された最初の1回に実行されます。
-          // onSwiper={(swiper) => console.log('スライドが生成されました')}
-        >
-          {images.map((src: string, index: number) => {
-            return (
-              <SwiperSlide key={`${index}`}>
-                <Image
-                  src={src}
-                  layout="responsive"
-                  width={1280}
-                  height={700}
-                  alt="top"
-                  priority={true}
-                  className="z-1"
-                />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-    </>
+    <div className="mx-auto w-[100vw] sm:container sm:w-auto">
+      <Swiper
+        slidesPerView={1}
+        centeredSlides
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true,
+        }}
+        speed={1000}
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        loop
+      >
+        {images.map((src) => (
+          <SwiperSlide key={src}>
+            <Image
+              src={src}
+              alt="top"
+              layout="responsive"
+              width={1280}
+              height={550}
+              priority
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
