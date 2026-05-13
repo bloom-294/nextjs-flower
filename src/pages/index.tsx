@@ -46,10 +46,10 @@ const Home = ({ data }: HomeProps) => {
           </div>
 
           <div className="h-full">
-            <ItemsSection title="新入荷">
+            <ItemsSection title="新入荷" titleClassName="mt-8">
               <NewItemsList />
             </ItemsSection>
-            <ItemsSection title="おすすめ">
+            <ItemsSection title="おすすめ" titleClassName="mt-12">
               <TopRecognizeList />
             </ItemsSection>
             <Information />
