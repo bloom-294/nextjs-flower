@@ -46,13 +46,13 @@ export type ItemListTypes = {
 };
 
 export type ErrorMessageProps = {
-  errorFlag: string;
+  errorFlag: boolean;
   value: string;
   text: string;
 };
 
 export type NameError = {
-  errorFlag: string;
+  errorFlag: boolean;
   value1: string;
   value2: string;
   text: string;
@@ -65,7 +65,7 @@ export type AddressTypes = {
   SetAddressErrorState: React.FC | Function;
   SetOrdererAddress?: React.FC | Function;
   addressErrorState: string;
-  errorFlag: string;
+  errorFlag: boolean;
 };
 
 export type ConfirmPasswordTypes = {
@@ -73,7 +73,7 @@ export type ConfirmPasswordTypes = {
   SetConfirmPasswordErrorState: React.FC | Function;
   confirmPasswordErrorState: string;
   passwordValue: string;
-  errorFlag: string;
+  errorFlag: boolean;
   confirmPasswordValue: string;
 };
 
@@ -84,7 +84,7 @@ export type MailTypes = {
   displayFlag: boolean;
   mailValue: string;
   ordererMail?: string;
-  errorFlag: string;
+  errorFlag: boolean;
   register?: string;
   mailErrorState: string;
 };
@@ -99,7 +99,7 @@ export type NameTypes = {
   displayFlag?: boolean;
   ordererLastName?: string;
   ordererFirstName?: string;
-  errorFlag: string;
+  errorFlag: boolean;
   lastNameErrorState: string;
   firstNameErrorState: string;
   lastNameValue: string;
@@ -113,7 +113,7 @@ export type PasswordTypes = {
   SetConfirmPasswordErrorState: React.FC | Function;
   passwordErrorState: string;
   passwordValue: string;
-  errorFlag: string;
+  errorFlag: boolean;
   displayFlag: boolean;
 };
 
@@ -124,7 +124,7 @@ export type TelTypes = {
   SetOrdererTel?: React.FC | Function;
   telValue: string;
   telErrorState: string;
-  errorFlag: string;
+  errorFlag: boolean;
 };
 
 export type ZipTypes = {
@@ -132,7 +132,7 @@ export type ZipTypes = {
   SetZipValue: React.FC | Function;
   zipErrorState: string;
   SetZipErrorState: React.FC | Function;
-  errorFlag: string;
+  errorFlag: boolean;
   ordererZip?: string;
   SetOrdererZip?: React.FC | Function;
 };
@@ -148,17 +148,28 @@ export type DateTypes = {
   ordererDate?: string;
 };
 
-export type ConfirmFromTypes = NameTypes &
+export type ConfirmFromTypes =
+  NameTypes &
   TelTypes &
   AddressTypes &
   ZipTypes &
   PaymethodTypes &
   DateTypes &
   MailTypes & {
-    SetOrdererName: React.FC | Function;
-    SetordererStateChange: React.FC | Function;
-    SetOrderUserInfoChange: React.FC | Function;
-    SetErrorFlag: React.FC | Function;
+    SetOrdererName: React.Dispatch<
+      React.SetStateAction<string>
+    >;
+
+    SetordererStateChange: React.Dispatch<
+      React.SetStateAction<boolean>
+    >;
+
+    SetOrderUserInfoChange: React.Dispatch<
+      React.SetStateAction<boolean>
+    >;
+
+    SetErrorFlag: React.Dispatch<React.SetStateAction<boolean>>;
+
     ordererName: string;
     ordererPayMethod: string;
     dateErrorState: string;

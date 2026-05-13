@@ -3,7 +3,7 @@ import { ErrorMessageProps } from "types/type";
 import { ConfirmPasswordTypes } from "types/type";
 
 const ConfirmPasswordError = (props: ErrorMessageProps) => {
-  if (props.errorFlag === "true") {
+  if (props.errorFlag === true) {
     if (props.value === "empty" || props.value === "init") {
       return (
         <>

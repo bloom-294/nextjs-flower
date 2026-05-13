@@ -38,7 +38,7 @@ export const DateInput = (props: {
   SetDateErrorState: Function | FC<{}> | undefined;
   SetOrdererDate: Function | FC<{}> | undefined;
   ordererDate: string | undefined;
-  errorFlag: string;
+  errorFlag: boolean;
 }) => {
   const [state, SetState] = useState(props?.ordererDateState?.current[1]);
 

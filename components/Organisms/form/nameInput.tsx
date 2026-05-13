@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { NameError, NameTypes } from "types/type";
 
 const Error3 = (props: NameError) => {
-  if (props.errorFlag === "true") {
+  if (props.errorFlag === true) {
     if (
       props.value1 === "empty" ||
       props.value2 === "empty" ||

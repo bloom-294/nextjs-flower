@@ -1,4 +1,3 @@
-import React from "react";
 import { TelInput } from "components/Organisms/form/telInput";
 import { ZipInput } from "components/Organisms/form/zipInput";
 import { AddressInput } from "components/Organisms/form/addressInput";
@@ -8,107 +7,98 @@ import { DateInput } from "./form/dateInput";
 import { ConfirmFromTypes } from "types/type";
 
 export const ConfirmFrom = (props: ConfirmFromTypes) => {
+  const isValidForm =
+    props.firstNameErrorState === "ok" &&
+    props.lastNameErrorState === "ok" &&
+    props.telErrorState === "ok" &&
+    props.zipErrorState === "ok" &&
+    props.addressErrorState === "ok" &&
+    (props.ordererDateState.current[1] === "ok" ||
+      props.ordererDateState.current[1] === "init");
   return (
-    <>
-      <div className="container flex flex-wrap justify-center items-center mx-auto py-5 px-5 bg-white-100 my-12">
-        <form className="bg-gray-50 p-4 rounded-xl">
-          <NameInput
-            lastNameValue={props.lastNameValue}
-            SetLastNameValue={props.SetLastNameValue}
-            firstNameValue={props.firstNameValue}
-            SetFirstNameValue={props.SetFirstNameValue}
-            firstNameErrorState={props.firstNameErrorState}
-            SetFirstNameErrorState={props.SetFirstNameErrorState}
-            lastNameErrorState={props.lastNameErrorState}
-            SetLastNameErrorState={props.SetLastNameErrorState}
-            errorFlag={props.errorFlag}
-            SetOrdererFirstName={props.SetOrdererFirstName}
-            SetOrdererLastName={props.SetOrdererLastName}
-            ordererLastName={props.ordererLastName}
-            ordererFirstName={props.ordererFirstName}
-            displayFlag={false}
-            // SetOrdererName={props.SetOrdererName}
-          />
-          <hr />
+    <div className="container mx-auto my-12 flex flex-wrap items-center justify-center bg-white-100 p-5">
+      <form className="bg-gray-50 p-4 rounded-xl">
+        <NameInput
+          lastNameValue={props.lastNameValue}
+          SetLastNameValue={props.SetLastNameValue}
+          firstNameValue={props.firstNameValue}
+          SetFirstNameValue={props.SetFirstNameValue}
+          firstNameErrorState={props.firstNameErrorState}
+          SetFirstNameErrorState={props.SetFirstNameErrorState}
+          lastNameErrorState={props.lastNameErrorState}
+          SetLastNameErrorState={props.SetLastNameErrorState}
+          errorFlag={props.errorFlag}
+          SetOrdererFirstName={props.SetOrdererFirstName}
+          SetOrdererLastName={props.SetOrdererLastName}
+          ordererLastName={props.ordererLastName}
+          ordererFirstName={props.ordererFirstName}
+          displayFlag={false}
+        />
+        <hr />
 
-          <TelInput
-            telValue={props.telValue}
-            SetTelValue={props.SetTelValue}
-            telErrorState={props.telErrorState}
-            SetTelErrorState={props.SetTelErrorState}
-            errorFlag={props.errorFlag}
-            ordererTel={props.ordererTel}
-            SetOrdererTel={props.SetOrdererTel}
-          />
-          <hr />
+        <TelInput
+          telValue={props.telValue}
+          SetTelValue={props.SetTelValue}
+          telErrorState={props.telErrorState}
+          SetTelErrorState={props.SetTelErrorState}
+          errorFlag={props.errorFlag}
+          ordererTel={props.ordererTel}
+          SetOrdererTel={props.SetOrdererTel}
+        />
+        <hr />
 
-          <ZipInput
-            zipValue={props.zipValue}
-            SetZipValue={props.SetZipValue}
-            zipErrorState={props.zipErrorState}
-            SetZipErrorState={props.SetZipErrorState}
-            errorFlag={props.errorFlag}
-            ordererZip={props.ordererZip}
-            SetOrdererZip={props.SetOrdererZip}
-          />
-          <hr />
-          <AddressInput
-            addressValue={props.addressValue}
-            SetAddressValue={props.SetAddressValue}
-            addressErrorState={props.addressErrorState}
-            SetAddressErrorState={props.SetAddressErrorState}
-            errorFlag={props.errorFlag}
-            ordererAddress={props.ordererAddress}
-            SetOrdererAddress={props.SetOrdererAddress}
-          />
-          <hr />
+        <ZipInput
+          zipValue={props.zipValue}
+          SetZipValue={props.SetZipValue}
+          zipErrorState={props.zipErrorState}
+          SetZipErrorState={props.SetZipErrorState}
+          errorFlag={props.errorFlag}
+          ordererZip={props.ordererZip}
+          SetOrdererZip={props.SetOrdererZip}
+        />
+        <hr />
+        <AddressInput
+          addressValue={props.addressValue}
+          SetAddressValue={props.SetAddressValue}
+          addressErrorState={props.addressErrorState}
+          SetAddressErrorState={props.SetAddressErrorState}
+          errorFlag={props.errorFlag}
+          ordererAddress={props.ordererAddress}
+          SetOrdererAddress={props.SetOrdererAddress}
+        />
+        <hr />
 
-          <PaymethodInput SetOrdererPayMethod={props.SetOrdererPayMethod} />
-          <hr />
+        <PaymethodInput SetOrdererPayMethod={props.SetOrdererPayMethod} />
+        <hr />
 
-          <DateInput
-            ordererDateState={props.ordererDateState}
-            SetDateErrorState={props.SetDateErrorState}
-            SetOrdererDate={props.SetOrdererDate}
-            ordererDate={props.ordererDate}
-            errorFlag={props.errorFlag}
-          />
+        <DateInput
+          ordererDateState={props.ordererDateState}
+          SetDateErrorState={props.SetDateErrorState}
+          SetOrdererDate={props.SetOrdererDate}
+          ordererDate={props.ordererDate}
+          errorFlag={props.errorFlag}
+        />
 
-          <div className="items-center justify-center flex flex-wrap my-4 ">
-            <button
-              type="button"
-              className="text-white px-6 py-3 rounded-md text-sm mr-3 mt-5 w-96 bg-[#75ad9d] shadow-md focus:shadow-none focus:opacity-70"
-              onClick={() => {
-                if (
-                  (props.firstNameErrorState === "ok" &&
-                    props.lastNameErrorState === "ok" &&
-                    props.telErrorState === "ok" &&
-                    props.zipErrorState === "ok" &&
-                    props.addressErrorState === "ok" &&
-                    // props.dateErrorState === "ok"
-                    props.ordererDateState.current[1] == "ok") ||
-                  props.ordererDateState.current[1] == "init"
-                ) {
-                  // console.log(props.ordererTel);
-                  props.SetOrdererName(
-                    `${props.ordererLastName} ${props.ordererFirstName}`
-                  );
-                  // props.SetOrdererMail(props.mailValue)
-                  // props.SetOrdererAddress(props.addressValue)
-                  // props.SetOrdererTel(props.telValue)
-                  // props.SetOrdererZip(props.zipValue)
-                  props.SetordererStateChange(false);
-                  props.SetOrderUserInfoChange(true);
-                } else {
-                  props.SetErrorFlag("true");
-                }
-              }}
-            >
-              変更
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+        <div className="my-4 flex flex-wrap items-center justify-center">
+          <button
+            type="button"
+            className="mt-5 w-96 rounded-md bg-[#75ad9d] px-6 py-3 text-sm text-white shadow-md focus:opacity-70 focus:shadow-none"
+            onClick={() => {
+              if (isValidForm) {
+                props.SetOrdererName(
+                  `${props.ordererLastName} ${props.ordererFirstName}`
+                );
+                props.SetordererStateChange(false);
+                props.SetOrderUserInfoChange(true);
+              } else {
+                props.SetErrorFlag(true);
+              }
+            }}
+          >
+            変更
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };

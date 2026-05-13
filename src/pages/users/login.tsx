@@ -12,7 +12,7 @@ export const Home = () => {
   const [passwordValue, SetPasswordValue] = useState("");
   const [passwordErrorState, SetPasswordErrorState] = useState("init");
 
-  const [errorFlag, SetErrorFlag] = useState("false");
+  const [errorFlag, SetErrorFlag] = useState(false);
   // ログイン状態
   const [loginStatus, SetLoginStatus] = useState(false);
 
@@ -144,7 +144,7 @@ export const Home = () => {
                 className="text-white px-12 py-2 rounded-md text-sm mr-3"
                 style={{ backgroundColor: "#75ad9d" }}
                 onClick={async () => {
-                  SetErrorFlag("true");
+                  SetErrorFlag(true);
 
                   let password = `${passwordValue}flower`;
                   const sha256 = async (text: string) => {

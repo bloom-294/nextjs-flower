@@ -55,7 +55,7 @@ export const Home = () => {
   const [addressValue, SetAddressValue] = useState("");
   const [addressErrorState, SetAddressErrorState] = useState("init");
 
-  const [errorFlag, SetErrorFlag] = useState("false");
+  const [errorFlag, SetErrorFlag] = useState(false);
 
   const [orderUserInfoChange, SetOrderUserInfoChange] = useState(false);
 

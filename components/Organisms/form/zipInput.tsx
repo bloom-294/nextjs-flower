@@ -45,7 +45,7 @@ const Navigation = (props: { value: string; text: string }) => {
 };
 
 const Error5 = (props: any) => {
-  if (props.errorFlag === "true") {
+  if (props.errorFlag === true) {
     if (props.value === "empty" || props.value === "init") {
       return (
         <>

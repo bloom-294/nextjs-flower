@@ -47,7 +47,7 @@ import { AddressTypes, ErrorMessageProps } from "types/type";
 // };
 
 const ErrorMessage = (props: ErrorMessageProps) => {
-  if (props.errorFlag === "true") {
+  if (props.errorFlag === true) {
     if (props.value === "empty" || props.value === "init") {
       return (
         <>
