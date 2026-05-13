@@ -1,53 +1,63 @@
-import React from "react";
 import { Loader } from "components/Atoms/loader";
 import { Information } from "components/Molecules/Information";
 import { Map } from "components/Molecules/map";
-import {
-  NewItemsSection,
-  RecognizeItesSection,
-} from "../../components/Molecules/topItemListSection";
-import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
 import { Slide } from "components/Molecules/swiper";
 import { SlideCursor } from "components/Molecules/swiperCursor";
+import { ItemsSection } from "components/Organisms/ItemsSection";
+import { NewItemsList } from "components/Organisms/newItemList";
+import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
+import { TopRecognizeList } from "components/Organisms/topRecognizeList";
 
-export const Home = ({ data }: any) => {
+type Item = {
+  category: string;
+  id: number;
+  imagePath: string;
+  info: string;
+  name: string;
+  popular: number;
+  price: string;
+  recommend: number;
+};
 
-  if (!data)
-    return (
-      <>
-        <Loader />
-      </>
-    );
+type HomeProps = {
+  data: Item[];
+};
 
-  // console.log(data.itemList[1])
+const Home = ({ data }: HomeProps) => {
+
+  if (!data) {
+    return <Loader />;
+  }
 
   return (
-    <>
-      <div className="container flex flex-wrap justify-center items-center mx-auto">
-        <div className="mb-10 -translate-y-10 abusolute">
-          <Slide />
-          <h3 className="sm:text-2xl mx-8 mt-10">特集</h3>
-          <div className="bg-gray-5 sm:mt-4 mt-2">
-            <SlideCursor />
+    <div className="container flex flex-wrap justify-center items-center mx-auto">
+      <div className="-translate-y-10">
+        <Slide />
+        <h3 className="sm:text-2xl mx-8 mt-10">特集</h3>
+        <div className="bg-gray-5 sm:mt-4 mt-2">
+          <SlideCursor />
+        </div>
+      </div>
+
+      <section className="mb-5 flex flex-wrap justify-center items-center mx-auto">
+        <div className="flex h-full">
+          <div className="hidden xl:flex xl:flex-nowrap xl:justify-start mx-auto">
+            <SearchNavigationbar />
+          </div>
+
+          <div className="h-full">
+            <ItemsSection title="新入荷">
+              <NewItemsList />
+            </ItemsSection>
+            <ItemsSection title="おすすめ">
+              <TopRecognizeList />
+            </ItemsSection>
+            <Information />
+            <Map />
           </div>
         </div>
-
-        <main className="mb-5 container flex flex-wrap justify-center items-center mx-auto ">
-          <div className=" flex " style={{ height: "100%" }}>
-            <div className="hidden xl:flex xl:felx-nowrap xl:justify-start mx-auto">
-              <SearchNavigationbar />
-            </div>
-
-            <div className="float-right " style={{ height: "100%" }}>
-              <NewItemsSection />
-              <RecognizeItesSection />
-              <Information />
-              <Map />
-            </div>
-          </div>
-        </main>
-      </div>
-    </>
+      </section>
+    </div>
   );
 };
 
@@ -61,7 +71,7 @@ export const getStaticProps = async () => {
     ? API_BASE_URL
     : `${API_BASE_URL}/`;
   const res = await fetch(new URL("items", normalizedBaseUrl).toString());
-  const json = await res.json();
+  const json: Item[] = await res.json();
 
   return {
     props: { data: json },

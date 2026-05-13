@@ -4,7 +4,7 @@ export const Information = () => {
   return (
     <>
       <section className="wrapper">
-        <h2 className="flex flex-wrap items-center  justify-center  mt-24 sm:text-2xl">
+        <h2 className="flex flex-wrap items-center  justify-center mt-12 sm:text-2xl">
           お知らせ
         </h2>
         <ul className="sm:py-8 py-4 px-12  rounded-xl">
