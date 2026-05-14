@@ -91,23 +91,20 @@ export const TelInput = (props: TelTypes) => {
       }
     }
   };
-  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
-    if (!props.ordererTel) {
-      props.SetTelValue(ev.target.value);
+const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
+  const value = ev.target.value;
 
-      if (props.SetOrdererTel) {
-        props.SetOrdererTel(ev.target.value);
-      }
+  props.SetTelValue(value);
+  props.SetOrdererTel?.(value);
 
-      if (!ev.target.value) {
-        props.SetTelErrorState("empty");
-      } else if (!ev.target.value.includes("-")) {
-        props.SetTelErrorState("format-incorrect");
-      } else {
-        props.SetTelErrorState("ok");
-      }
-    }
-  };
+  if (!value) {
+    props.SetTelErrorState("empty");
+  } else if (!value.includes("-")) {
+    props.SetTelErrorState("format-incorrect");
+  } else {
+    props.SetTelErrorState("ok");
+  }
+};
 
   return (
     <>

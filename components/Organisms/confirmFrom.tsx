@@ -17,6 +17,16 @@ export const ConfirmFrom = (props: ConfirmFromTypes) => {
   (props.ordererDateState.current[1] === "ok" ||
     props.ordererDateState.current[1] === "init");
 
+
+    console.log({
+  firstName: props.firstNameErrorState,
+  lastName: props.lastNameErrorState,
+  tel: props.telErrorState,
+  zip: props.zipErrorState,
+  address: props.addressErrorState,
+  date: props.ordererDateState.current[1],
+});
+
   return (
     <div className="container mx-auto my-12 flex flex-wrap items-center justify-center bg-white-100 p-5">
       <form className="bg-gray-50 p-4 rounded-xl">
