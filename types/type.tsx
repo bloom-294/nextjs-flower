@@ -129,6 +129,7 @@ export type TelTypes = {
 
 export type ZipTypes = {
   zipValue: string;
+  register?: string;
   SetZipValue: React.FC | Function;
   zipErrorState: string;
   SetZipErrorState: React.FC | Function;

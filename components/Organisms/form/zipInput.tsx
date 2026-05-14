@@ -1,179 +1,162 @@
-import React, { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
+import { ErrorMessageProps, ZipTypes } from "types/type";
 
 const Navigation = (props: { value: string; text: string }) => {
-  if (props.value.length > 0) {
+  if (!props.value) {
+    return null;
+  }
+
+  const isValid = props.value.includes("-");
+
+  return (
+    <div className="mb-8 py-2 text-sm text-gray-500">
+      <p>
+        <span
+          className={`material-symbols-outlined mr-3 translate-y-1.5 rounded-full text-white ${
+            isValid ? "bg-[#75ad9d]" : "bg-gray-300"
+          }`}
+        >
+          check_circle
+        </span>
+        {props.text}
+      </p>
+    </div>
+  );
+};
+
+const Error5 = ({
+  errorFlag,
+  value,
+  text,
+}: ErrorMessageProps) => {
+  if (!errorFlag) {
+    return null;
+  }
+
+  if (value === "empty" || value === "init") {
     return (
-      <>
-        <div className="py-2 text-gray-500 text-sm mb-8">
-          <p>
-            {(() => {
-              if (props.value.includes("-")) {
-                return (
-                  <>
-                    <span
-                      className="material-symbols-outlined 
-                  rounded-full mr-3 text-white translate-y-1.5
-                  "
-                      style={{ backgroundColor: "#75ad9d" }}
-                    >
-                      check_circle
-                    </span>
-                  </>
-                );
-              } else {
-                return (
-                  <>
-                    <span
-                      className="material-symbols-outlined 
-                  rounded-full mr-3 text-white translate-y-1.5 bg-gray-300
-                  "
-                    >
-                      check_circle
-                    </span>
-                  </>
-                );
-              }
-            })()}
-            {props.text}
-          </p>
-        </div>
-      </>
+      <label className="Error ml-3 text-sm text-red-500">
+        {text}
+      </label>
     );
-  } else {
-    return <></>;
   }
+
+  if (value === "format-incorrect") {
+    return (
+      <label className="Error ml-3 text-sm text-red-500">
+        xxx-xxxxの形式で入力してください
+      </label>
+    );
+  }
+
+  if (value === "unexist") {
+    return (
+      <label className="Error ml-3 text-sm text-red-500">
+        存在する郵便番号を入力してください
+      </label>
+    );
+  }
+
+  return null;
 };
 
-const Error5 = (props: any) => {
-  if (props.errorFlag === true) {
-    if (props.value === "empty" || props.value === "init") {
-      return (
-        <>
-          <label className="Error text-red-500  ml-3 text-sm">
-            {props.text}
-          </label>
-        </>
-      );
-    } else if (props.value === "format-incorrect") {
-      return (
-        <label className="Error text-red-500  ml-3 text-sm">
-          xxx-xxxxの形式で入力してください
-        </label>
-      );
-    } else if (props.value === "unexist") {
-      return (
-        <label className="Error text-red-500  ml-3 text-sm">
-          存在する郵便番号を入力してください
-        </label>
-      );
-    } else {
-      return <></>;
+export const ZipInput = (props: ZipTypes) => {
+  const zip = props.ordererZip
+    ? props.ordererZip
+    : props.zipValue;
+
+  const validateZip = (value: string) => {
+    if (!value) {
+      props.SetZipErrorState("empty");
+      return false;
     }
-  } else {
-    return <></>;
-  }
-};
 
-export const ZipInput = (props: any) => {
-  let zip = "";
+    if (!value.match(/^\d{3}-\d{4}$/)) {
+      props.SetZipErrorState("format-incorrect");
+      return false;
+    }
 
-  if (props.ordererZip) {
-    zip = props.ordererZip;
-  } else {
-    zip = props.zipValue;
-  }
+    props.SetZipErrorState("ok");
+    return true;
+  };
 
-  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (
+    ev: ChangeEvent<HTMLInputElement>
+  ) => {
     if (!props.ordererZip) {
       props.SetZipValue(ev.target.value);
-
-      if (!ev.target.value) {
-        props.SetZipErrorState("empty");
-      } else if (!ev.target.value.includes("-")) {
-        props.SetZipErrorState("format-incorrect");
-      } else {
-        props.SetZipErrorState("ok");
-      }
+      validateZip(ev.target.value);
     }
   };
 
-  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
-    if (props.ordererZip) {
-      props.SetZipValue(ev.target.value);
+  const onBlurHandler = (
+    ev: ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = ev.target.value;
 
-      if (props.SetOrdererZip) {
-        props.SetOrdererZip(ev.target.value);
-      }
+    props.SetZipValue(value);
+    props.SetOrdererZip?.(value);
 
-      if (!ev.target.value) {
-        props.SetZipErrorState("empty");
-      } else if (
-        !(
-          ev.target.value.includes("-") ||
-          !ev.target.value.match(/^\d{3}-\d{4}$/)
-        )
-      ) {
-        props.SetZipErrorState("format-incorrect");
-      } else {
-        props.SetZipErrorState("ok");
-      }
+    const isValidZip = validateZip(value);
+
+    if (
+      props.register !== "register" ||
+      !isValidZip
+    ) {
+      return;
     }
 
-    if (props.register === "register" && props.zipErrorState === "ok") {
-      fetch(
-        `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${ev.target.value}`
-      )
-        .then((res) => res.json())
-        .then((json) => {
-          if (json.results === null) {
-            props.SetZipErrorState("unexist");
-          } else {
-            props.SetZipErrorState("ok");
-          }
-        })
-        .catch((error) => {
+    fetch(
+      `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${value}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.results === null) {
           props.SetZipErrorState("unexist");
-          console.log(error);
-        });
-    }
+          return;
+        }
+
+        props.SetZipErrorState("ok");
+      })
+      .catch((error) => {
+        props.SetZipErrorState("unexist");
+        console.log(error);
+      });
   };
 
   return (
-    <>
-      <div className="my-5 ml-5">
-        <div className="mb-2">
-          <label htmlFor="zip">郵便番号 </label>
-          <span
-            className="bg-red-600 rounded-md p-1 text-sm text-white "
-            style={{ fontSize: "12px" }}
-          >
-            必須
-          </span>
+    <div className="my-5 ml-5">
+      <div className="mb-2">
+        <label htmlFor="zip">郵便番号 </label>
+        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
+          必須
+        </span>
 
-          <Error5
-            text="郵便番号を入力してください"
-            value={props.zipErrorState}
-            SetZipErrorState={props.SetZipErrorState}
-            errorFlag={props.errorFlag}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            className="zip border mr-4 py-1 px-3 rounded-md w-full focus:outline-none focus:ring-2 z-1 h-10"
-            id="zip"
-            required
-            style={{ width: "230px" }}
-            onBlur={onBlurHandler}
-            onChange={onChangeHandler}
-            placeholder="例）123-1234"
-            defaultValue={zip}
-            autoComplete="postal-code"
-          />
-        </div>
-
-        <Navigation text="-（ハイフン）を含む形式" value={props.zipValue} />
+        <Error5
+          text="郵便番号を入力してください"
+          value={props.zipErrorState}
+          errorFlag={props.errorFlag}
+        />
       </div>
-    </>
+
+      <div>
+        <input
+          id="zip"
+          type="text"
+          required
+          className="zip mr-4 h-10 w-[230px] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
+          onBlur={onBlurHandler}
+          onChange={onChangeHandler}
+          placeholder="例）123-1234"
+          defaultValue={zip}
+          autoComplete="postal-code"
+        />
+      </div>
+
+      <Navigation
+        text="-（ハイフン）を含む形式"
+        value={props.zipValue}
+      />
+    </div>
   );
 };
