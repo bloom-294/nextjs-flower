@@ -7,14 +7,16 @@ import { DateInput } from "./form/dateInput";
 import { ConfirmFromTypes } from "types/type";
 
 export const ConfirmFrom = (props: ConfirmFromTypes) => {
-  const isValidForm =
-    props.firstNameErrorState === "ok" &&
-    props.lastNameErrorState === "ok" &&
-    props.telErrorState === "ok" &&
-    props.zipErrorState === "ok" &&
-    props.addressErrorState === "ok" &&
-    (props.ordererDateState.current[1] === "ok" ||
-      props.ordererDateState.current[1] === "init");
+  
+  const getIsValidForm = () =>
+  props.firstNameErrorState === "ok" &&
+  props.lastNameErrorState === "ok" &&
+  props.telErrorState === "ok" &&
+  props.zipErrorState === "ok" &&
+  props.addressErrorState === "ok" &&
+  (props.ordererDateState.current[1] === "ok" ||
+    props.ordererDateState.current[1] === "init");
+
   return (
     <div className="container mx-auto my-12 flex flex-wrap items-center justify-center bg-white-100 p-5">
       <form className="bg-gray-50 p-4 rounded-xl">
@@ -84,7 +86,7 @@ export const ConfirmFrom = (props: ConfirmFromTypes) => {
             type="button"
             className="mt-5 w-96 rounded-md bg-[#75ad9d] px-6 py-3 text-sm text-white shadow-md focus:opacity-70 focus:shadow-none"
             onClick={() => {
-              if (isValidForm) {
+              if (getIsValidForm()) {
                 props.SetOrdererName(
                   `${props.ordererLastName} ${props.ordererFirstName}`
                 );

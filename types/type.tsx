@@ -134,17 +134,21 @@ export type ZipTypes = {
   SetZipErrorState: React.FC | Function;
   errorFlag: boolean;
   ordererZip?: string;
-  SetOrdererZip?: React.FC | Function;
+  SetOrdererZip?: React.Dispatch<
+      React.SetStateAction<string>>;
 };
 
 export type PaymethodTypes = {
-  SetOrdererPayMethod: React.FC | Function;
+  SetOrdererPayMethod: React.Dispatch<
+      React.SetStateAction<string>>;
 };
 
 export type DateTypes = {
   ordererDateState?: { current: string[] } | any;
-  SetDateErrorState?: React.FC | Function;
-  SetOrdererDate?: React.FC | Function;
+  SetDateErrorState?: React.Dispatch<
+      React.SetStateAction<string>>;
+  SetOrdererDate?: React.Dispatch<
+      React.SetStateAction<string>>;
   ordererDate?: string;
 };
 
