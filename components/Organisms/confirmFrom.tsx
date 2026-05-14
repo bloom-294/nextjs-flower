@@ -2,12 +2,12 @@ import { TelInput } from "components/Organisms/form/telInput";
 import { ZipInput } from "components/Organisms/form/zipInput";
 import { AddressInput } from "components/Organisms/form/addressInput";
 import { NameInput } from "components/Organisms/form/nameInput";
-import PaymethodInput from "./form/paymethodInput";
+import { PaymethodInput } from "./form/paymethodInput";
 import { DateInput } from "./form/dateInput";
 import { ConfirmFromTypes } from "types/type";
 
 export const ConfirmFrom = (props: ConfirmFromTypes) => {
-  
+
   const getIsValidForm = () =>
   props.firstNameErrorState === "ok" &&
   props.lastNameErrorState === "ok" &&
@@ -70,7 +70,10 @@ export const ConfirmFrom = (props: ConfirmFromTypes) => {
         />
         <hr />
 
-        <PaymethodInput SetOrdererPayMethod={props.SetOrdererPayMethod} />
+        <PaymethodInput
+          ordererPayMethod={props.ordererPayMethod}
+          SetOrdererPayMethod={props.SetOrdererPayMethod}
+        />
         <hr />
 
         <DateInput
