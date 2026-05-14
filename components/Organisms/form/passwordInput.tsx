@@ -55,7 +55,7 @@ const ErrorMessage = (props: ErrorMessageProps) => {
           </label>
         </>
       );
-    } else if (props.value === "format-inccorect") {
+    } else if (props.value === "format-incorrect") {
       return (
         <label className="Error text-red-500  ml-3 text-sm">
           8文字以上12文字以下で入力してください
@@ -82,7 +82,7 @@ export const PasswordInput = (props: PasswordTypes) => {
     if (!ev.target.value) {
       props.SetPasswordErrorState("empty");
     } else if (ev.target.value.length < 8 || ev.target.value.length > 12) {
-      props.SetPasswordErrorState("format-inccorect");
+      props.SetPasswordErrorState("format-incorrect");
     } else {
       props.SetPasswordErrorState("ok");
     }

@@ -54,7 +54,7 @@ const Error5 = (props: any) => {
           </label>
         </>
       );
-    } else if (props.value === "format-inccorect") {
+    } else if (props.value === "format-incorrect") {
       return (
         <label className="Error text-red-500  ml-3 text-sm">
           xxx-xxxxの形式で入力してください
@@ -90,7 +90,7 @@ export const ZipInput = (props: any) => {
       if (!ev.target.value) {
         props.SetZipErrorState("empty");
       } else if (!ev.target.value.includes("-")) {
-        props.SetZipErrorState("format-inccorect");
+        props.SetZipErrorState("format-incorrect");
       } else {
         props.SetZipErrorState("ok");
       }
@@ -113,7 +113,7 @@ export const ZipInput = (props: any) => {
           !ev.target.value.match(/^\d{3}-\d{4}$/)
         )
       ) {
-        props.SetZipErrorState("format-inccorect");
+        props.SetZipErrorState("format-incorrect");
       } else {
         props.SetZipErrorState("ok");
       }

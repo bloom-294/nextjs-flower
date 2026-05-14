@@ -55,7 +55,7 @@ const Error4 = (props: ErrorMessageProps) => {
           </label>
         </>
       );
-    } else if (props.value === "format-inccorect") {
+    } else if (props.value === "format-incorrect") {
       return (
         <label className="Error text-red-500  ml-3 text-sm">
           xxx-xxxx-xxxxの形式で入力してください
@@ -85,7 +85,7 @@ export const TelInput = (props: TelTypes) => {
       if (!ev.target.value) {
         props.SetTelErrorState("empty");
       } else if (!ev.target.value.includes("-")) {
-        props.SetTelErrorState("format-inccorect");
+        props.SetTelErrorState("format-incorrect");
       } else {
         props.SetTelErrorState("ok");
       }
@@ -102,7 +102,7 @@ export const TelInput = (props: TelTypes) => {
       if (!ev.target.value) {
         props.SetTelErrorState("empty");
       } else if (!ev.target.value.includes("-")) {
-        props.SetTelErrorState("format-inccorect");
+        props.SetTelErrorState("format-incorrect");
       } else {
         props.SetTelErrorState("ok");
       }
