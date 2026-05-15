@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import React from "react";
 import { useState } from "react";
 
@@ -12,17 +13,17 @@ const Error = (props: {
 
   if (props.dateErrorState === "empty") {
     return (
-      <label className="Error ml-3 text-sm text-red-500">
+      <span className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
         {props.text}
-      </label>
+      </span>
     );
   }
 
   if (props.dateErrorState === "impossible") {
     return (
-      <label className="Error ml-3 text-sm text-red-500">
+      <span className="Error sm:ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
         ６日後以降を選択してください。
-      </label>
+      </span>
     );
   }
 
@@ -47,20 +48,15 @@ export const DateInput = (props: {
     <div className="my-5 ml-5">
       <div className="mb-2">
         <label htmlFor="address">配達日</label>
-        <span
-          className="bg-red-600 rounded-md p-1 text-sm text-white "
-          style={{ fontSize: "12px" }}
-        >
-          必須
-        </span>
+        <RequiredBadge />
         <Error
           text="配達日（６日後以降）を選択してください"
           state={deliveryType}
           dateErrorState={dateErrorState}
         />
       </div>
-      <div>
-        <label className="radio-inline">
+      <div className="">
+        <label className="radio-inline sm:inline-block block">
           <input
             className="pay mx-3"
             type="radio"
@@ -76,7 +72,7 @@ export const DateInput = (props: {
           />
           日時指定なし
         </label>
-        <label htmlFor="fixedDate">
+        <label htmlFor="fixedDate" className="sm:inline-block block">
           <input
             className="pay mx-3"
             type="radio"
@@ -92,7 +88,7 @@ export const DateInput = (props: {
           />
           日時指定あり
         </label>
-        <label htmlFor="sameDayDelivery">
+        <label htmlFor="sameDayDelivery" className="sm:inline-block block">
           <input
             className="pay mx-3"
             type="radio"

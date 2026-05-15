@@ -28,8 +28,8 @@ export const ConfirmFrom = (props: ConfirmFromTypes) => {
 });
 
   return (
-    <div className="container mx-auto my-12 flex flex-wrap items-center justify-center bg-white-100 p-5">
-      <form className="bg-gray-50 p-4 rounded-xl">
+    <div className="mx-auto sm:py-5 py-3 px-3 flex w-full max-w-md flex-wrap items-center justify-center bg-white-100 p-4">
+      <form className="w-auto rounded-xl bg-gray-50 p-4">
         <NameInput
           lastNameValue={props.lastNameValue}
           SetLastNameValue={props.SetLastNameValue}
@@ -97,7 +97,7 @@ export const ConfirmFrom = (props: ConfirmFromTypes) => {
         <div className="my-4 flex flex-wrap items-center justify-center">
           <button
             type="button"
-            className="mt-5 w-96 rounded-md bg-[#75ad9d] px-6 py-3 text-sm text-white shadow-md focus:opacity-70 focus:shadow-none"
+            className="mt-5 w-full rounded-md bg-[#75ad9d] px-6 py-3 text-sm text-white shadow-md focus:opacity-70 focus:shadow-none sm:w-96"
             onClick={() => {
               if (getIsValidForm()) {
                 props.SetOrdererName(

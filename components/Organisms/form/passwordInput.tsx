@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import type { ChangeEvent } from "react";
 import { ErrorMessageProps, PasswordTypes } from "types/type";
 
@@ -93,9 +94,7 @@ export const PasswordInput = (props: PasswordTypes) => {
     <div className="my-5 ml-5">
       <div className="mb-2">
         <label htmlFor="password">パスワード </label>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <RequiredBadge />
         <ErrorMessage
           text="パスワードを入力してください"
           value={props.passwordErrorState}

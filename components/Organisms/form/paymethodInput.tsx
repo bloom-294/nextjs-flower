@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import React from "react";
 
 type PaymethodInputProps = {
@@ -12,10 +13,8 @@ export const PaymethodInput = ({
   return (
     <div className="my-5 ml-5">
       <div className="mb-2">
-        <p>お支払い方法</p>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <label>お支払い方法</label>
+        <RequiredBadge />
       </div>
 
       <div>

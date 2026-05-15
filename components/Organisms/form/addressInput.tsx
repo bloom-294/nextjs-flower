@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import type { ChangeEvent } from "react";
 import { AddressTypes, ErrorMessageProps } from "types/type";
 
@@ -15,7 +16,7 @@ const ErrorMessage = ({
   }
 
   return (
-    <label className="Error ml-3 text-sm text-red-500">
+    <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
       {text}
     </label>
   );
@@ -56,10 +57,8 @@ export const AddressInput = (props: AddressTypes) => {
   return (
     <div className="my-5 ml-5">
       <div className="mb-2">
-        <label htmlFor="address">住所 </label>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <label htmlFor="address">住所</label>
+        <RequiredBadge />
         <ErrorMessage
           text="住所を入力してください"
           value={props.addressErrorState}
@@ -72,7 +71,7 @@ export const AddressInput = (props: AddressTypes) => {
           id="address"
           type="text"
           required
-          className="address mr-4 h-10 w-[430px] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
+          className="address mr-4 h-10 w-full sm:w-[430px] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
           onBlur={onBlurHandler}
           onChange={onChangeHandler}
           placeholder="例）東京都中央区"

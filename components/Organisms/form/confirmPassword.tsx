@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import type { ChangeEvent } from "react";
 import {
   ConfirmPasswordTypes,
@@ -59,9 +60,7 @@ export const ConfirmPasswordInput = (
     <div className="my-5 ml-5">
       <div className="mb-2">
         <label htmlFor="confirm">確認用パスワード </label>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <RequiredBadge />
 
         <ConfirmPasswordError
           text="確認用パスワードを入力してください"

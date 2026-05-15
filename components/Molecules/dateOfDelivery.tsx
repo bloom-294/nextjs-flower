@@ -54,8 +54,8 @@ export const DateOfDelivery = ({ ordererDateState }: DateOfDeliveryProps) => {
   }, [ordererDateState, deliveryText]);
 
   return (
-    <div className="grid h-24 grid-cols-7">
-      <p className="col-span-2 flex items-center justify-center">
+    <div className="grid min-h-24 grid-cols-7 py-4">
+      <p className="col-span-3 sm:col-span-2 flex sm:items-center justify-center">
         配達日時
       </p>
 

@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import type { ChangeEvent } from "react";
 import { ErrorMessageProps, ZipTypes } from "types/type";
 
@@ -35,7 +36,7 @@ const Error5 = ({
 
   if (value === "empty" || value === "init") {
     return (
-      <label className="Error ml-3 text-sm text-red-500">
+      <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block">
         {text}
       </label>
     );
@@ -43,7 +44,7 @@ const Error5 = ({
 
   if (value === "format-incorrect") {
     return (
-      <label className="Error ml-3 text-sm text-red-500">
+      <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
         xxx-xxxxの形式で入力してください
       </label>
     );
@@ -51,7 +52,7 @@ const Error5 = ({
 
   if (value === "unexist") {
     return (
-      <label className="Error ml-3 text-sm text-red-500">
+      <label className="Error ml-3 text-sm text-red-500 ssm:inline-block block sm:mt-0 mt-2 ">
         存在する郵便番号を入力してください
       </label>
     );
@@ -127,10 +128,8 @@ export const ZipInput = (props: ZipTypes) => {
   return (
     <div className="my-5 ml-5">
       <div className="mb-2">
-        <label htmlFor="zip">郵便番号 </label>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <label htmlFor="zip">郵便番号</label>
+        <RequiredBadge />
 
         <Error5
           text="郵便番号を入力してください"

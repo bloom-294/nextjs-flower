@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import type { ChangeEvent } from "react";
 import { ErrorMessageProps, MailTypes } from "types/type";
 
@@ -114,9 +115,7 @@ export const MailInput = (props: MailTypes) => {
     <div className="my-5 ml-5">
       <div className="mb-2">
         <label htmlFor="mail">メールアドレス </label>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <RequiredBadge />
         <ErrorMessage
           value={props.mailErrorState}
           text="メールアドレスを入力してください"

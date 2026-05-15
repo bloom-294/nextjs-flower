@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import type { ChangeEvent } from "react";
 import { NameError, NameTypes } from "types/type";
 
@@ -18,7 +19,7 @@ const Error3 = ({
     value2 === "init"
   ) {
     return (
-      <label className="Error ml-3 text-sm text-red-500">
+      <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2 ">
         {text}
       </label>
     );
@@ -90,10 +91,8 @@ export const NameInput = (props: NameTypes) => {
   return (
     <div className="my-5 ml-5">
       <div className="mb-2">
-        <label htmlFor="nameForm1">お名前 </label>
-        <span className="rounded-md bg-red-600 p-1 text-xs text-white">
-          必須
-        </span>
+        <label htmlFor="nameForm1">お名前</label>
+        <RequiredBadge />
         <Error3
           text="名前を入力してください"
           value1={props.lastNameErrorState}
@@ -106,7 +105,7 @@ export const NameInput = (props: NameTypes) => {
         <input
           id="nameForm1"
           type="text"
-          className="name mr-4 h-10 rounded-md border px-3 py-1 focus:border focus:border-gray-100 focus:outline-none focus:ring-2"
+          className="name mr-4 h-10 rounded-md border px-3 py-1 focus:border focus:border-gray-100 focus:outline-none focus:ring-2 mb-2 sm:mb-0"
           placeholder="例）田中"
           onBlur={onBlurHandlerLast}
           onChange={onChangeHandlerLast}
