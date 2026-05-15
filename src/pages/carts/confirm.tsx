@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { ShoppingList } from "components/Organisms/shoppingList";
 import { Loader } from "components/Atoms/loader";
 import styles from "../../styles/itemCards.module.css";
-import { UserInfomation } from "components/Organisms/userInfomation";
+import { UserInformation } from "components/Organisms/UserInformation";
 import { PayMethod } from "components/Molecules/payMethod";
 import { DateOfDelivery } from "components/Molecules/dateOfDelivery";
 import { ConfirmFrom } from "components/Organisms/confirmFrom";
@@ -153,7 +153,7 @@ export const Home = () => {
         return (
           <div className="rounded-md w-auto bg-gray-100 sm:py-5 py-3 px-3 md:grid md:grid-cols-7">
             <div className="col-span-6">
-              <UserInfomation
+              <UserInformation
                 name={`${ordererLastName || data[0].lastName} ${ordererFirstName || data[0].firstName}`}
                 address={ordererAddress || data[0].address}
                 tel={ordererTel || data[0].tel}
