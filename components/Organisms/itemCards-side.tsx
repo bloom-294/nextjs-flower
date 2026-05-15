@@ -1,6 +1,6 @@
 import Image from "next/image";
 import style from "../../src/styles/itemCards.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ItemCardsSideTypes, ItemCardsSideCountTypes } from "types/type";
 
 const ItemCardsSideImage = (props: { imagePath: string }) => {
@@ -49,69 +49,66 @@ const ItemCardsSideQuentity = (props: { quentity: number | string }) => {
 };
 
 const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
-  // const router = useRouter();
-  const change = () => {
+  const updateCartItem = async (quantity: number, orderPrice: number) => {
     const addCartItems = {
       name: props.name,
       price: props.price,
-      orderPrice: props.itemsPriceChange,
-      quantity: props.quantityAdd,
+      orderPrice,
+      quantity,
       imagePath: props.imagePath,
       gestId: props.gestId,
       id: props.id,
     };
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(addCartItems),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("通信に失敗しました", error);
-      });
+    });
+
+    props.mutate();
   };
 
-  change();
+  const handlePlus = async () => {
+    const nextQuantity = Number(props.quantityAdd) + 1;
+    const nextOrderPrice = Number(props.itemsPriceChange) + Number(props.price);
+
+    props.setQuantityAdd(nextQuantity);
+    props.setItemsPriceChange(nextOrderPrice);
+
+    await updateCartItem(nextQuantity, nextOrderPrice);
+  };
+
+  const handleMinus = async () => {
+    if (props.quantityAdd <= 1) return;
+
+    const nextQuantity = Number(props.quantityAdd) - 1;
+    const nextOrderPrice = Number(props.itemsPriceChange) - Number(props.price);
+
+    props.setQuantityAdd(nextQuantity);
+    props.setItemsPriceChange(nextOrderPrice);
+
+    await updateCartItem(nextQuantity, nextOrderPrice);
+  };
 
   return (
     <>
       <button
-        className={`float-right text-[#75ad9d] border border-gray-200 rounded-l-sm bg-gray-100 text-center  w-6`}
-        onClick={() => {
-          if (props.quantityAdd > 1) {
-            props.setItemsPriceChange(
-              Number(props.itemsPriceChange) - Number(props.price)
-            );
-            props.setQuantityAdd(Number(props.quantityAdd) - 1);
-            props.setTotalPrice(Number(props.totalPrice) - Number(props.price));
-          }
-
-          // change()
-          // router.push("/carts")
-        }}
+        className="float-right w-6 rounded-l-sm border border-gray-200 bg-gray-100 text-center text-[#75ad9d]"
+        onClick={handleMinus}
       >
         －
       </button>
-      <div className={`float-right border-y border-gray-200  w-7 text-center `}>
+
+      <div className="float-right w-7 border-y border-gray-200 text-center">
         {props.quantityAdd}
       </div>
+
       <button
-        className={`float-right  text-[#75ad9d] border border-gray-200 rounded-r-sm bg-gray-100 text-center  w-6`}
-        onClick={() => {
-          props.setItemsPriceChange(
-            Number(props.itemsPriceChange) + Number(props.price)
-          );
-          props.setQuantityAdd(Number(props.quantityAdd) + 1);
-          props.setTotalPrice(Number(props.totalPrice) + Number(props.price));
-          // props.setItemsPriceChange(props.itemsPriceChange * props.quantityAdd)
-          // router.push("/carts")
-          // change()
-        }}
+        className="float-right w-6 rounded-r-sm border border-gray-200 bg-gray-100 text-center text-[#75ad9d]"
+        onClick={handlePlus}
       >
         ＋
       </button>
@@ -120,16 +117,19 @@ const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
 };
 
 export const ItemCardsSide = (props: ItemCardsSideTypes) => {
+  const [quantityAdd, setQuantityAdd] = useState(props.quantity);
+  const [itemsPriceChange, setItemsPriceChange] = useState(props.orderPrice);
 
-  const [quantityAdd, setQuantityAdd] = useState(1);
-  const [itemsPriceChange, setItemsPriceChange] = useState(props.price);
+  useEffect(() => {
+    setQuantityAdd(props.quantity);
+    setItemsPriceChange(props.orderPrice);
+  }, [props.quantity, props.orderPrice]);
 
   const deleteItems = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
       method: "DELETE",
     })
       .then(() => {
-        // console.log(props.id);
         props.mutate();
       })
       .catch((error) => {
@@ -137,7 +137,6 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
       });
   };
 
-  props.mutate();
   if (props.pageName === "confirm") {
     return (
       <>
@@ -184,6 +183,7 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
               quantity={props.quantity}
               id={props.id}
               gestId={props.gestId}
+              mutate={props.mutate}
             />
         </div>
         <button

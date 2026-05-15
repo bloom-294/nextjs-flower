@@ -207,6 +207,7 @@ export type ItemCardsSideCountTypes = {
   setQuantityAdd: any;
   setTotalPrice: React.FC | Function;
   quantity: number;
+  mutate: () => void;
 };
 
 export type ItemCardsWrapTypes = {
