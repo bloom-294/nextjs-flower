@@ -1,13 +1,17 @@
+import { ReactNode } from "react";
 import Header from "./Organisms/header";
 import Footer from "./Organisms/footer";
-// import { Head } from "next/document"
-// import { Html, Head, Main, NextScript } from "next/document"
 
-export const Layout = ({ children }: any) => {
+type LayoutProps = {
+  children: ReactNode;
+};
+
+export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <div className="conatiner">
+      <div className="container">
         <Header />
+
         <main>{children}</main>
       </div>
       <Footer />
