@@ -1,31 +1,45 @@
-import React from "react";
+const informationList = [
+  {
+    date: "2022.XX.XX",
+    text: "新入荷しました！",
+  },
+  {
+    date: "2022.XX.XX",
+    text: "「ドライフラワー」の販売を開始します。",
+  },
+  {
+    date: "2022.XX.XX",
+    text: "【セール開催のお知らせ】Christmasセール",
+  },
+  {
+    date: "2022.XX.XX",
+    text: "雑誌「ＸＸＸＸＸＸ Vol.10』に掲載していただきました。",
+  },
+  {
+    date: "2022.XX.XX",
+    text: "【個展開催のお知らせ】",
+  },
+];
 
 export const Information = () => {
   return (
-    <>
-      <section className="wrapper">
-        <h2 className="flex flex-wrap items-center  justify-center  mt-24 sm:text-2xl">
-          お知らせ
-        </h2>
-        <ul className="sm:py-8 py-4 px-12  rounded-xl">
-          <hr />
-          <li>2022.XX.XX</li>
-          <li>新入荷しました！</li>
-          <hr />
-          <li>2022.XX.XX</li>
-          <li>「ドライフラワー」の販売を開始します。</li>
-          <hr />
-          <li>2022.XX.XX</li>
-          <li>【セール開催のお知らせ】Christmasセール</li>
-          <hr />
-          <li>2022.XX.XX</li>
-          <li>雑誌「ＸＸＸＸＸＸ Vol.10』に掲載していただきました。</li>
-          <hr />
-          <li>2022.XX.XX</li>
-          <li>【個展開催のお知らせ】</li>
-          <hr />
-        </ul>
-      </section>
-    </>
+    <section className="wrapper">
+      <h2 className="mt-12 flex flex-wrap items-center justify-center sm:text-2xl">
+        お知らせ
+      </h2>
+
+      <ul className="rounded-xl px-12 py-4 sm:py-8">
+        {informationList.map((item, index) => (
+          <li key={index}>
+            <hr />
+
+            <p>{item.date}</p>
+            <p>{item.text}</p>
+          </li>
+        ))}
+
+        <hr />
+      </ul>
+    </section>
   );
 };

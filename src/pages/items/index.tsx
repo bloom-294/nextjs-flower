@@ -131,7 +131,7 @@ export const Home = () => {
     showToast();
   }, [shouldRedirectToAllItems, router]);
 
-  const itemListLength: boolean = itemList.length === 0;
+  // const itemListLength: boolean = itemList.length === 0;
 
 
   useEffect(() => {
@@ -182,13 +182,11 @@ export const Home = () => {
           </div>
 
           <div className="float-right" style={{ height: "100%" }}>
-            <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5 a">
+            <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5">
               <SearchForm
                 setSearchWord={setSearchWord}
                 setSearchState={setSearchState}
                 categoryWord={categoryWord}
-                itemListLength={itemListLength}
-                onChange={() => {}}
               />
             </div>
 

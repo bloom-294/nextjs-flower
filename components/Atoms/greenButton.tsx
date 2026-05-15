@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../src/styles/itemListWrap.module.css";
+import style from "../../src/styles/itemListWrap.module.css";
 
 export const GreenButton = (props: { name: string }) => {
   return (

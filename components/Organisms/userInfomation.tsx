@@ -7,11 +7,11 @@ export const UserInfomation = (props: UserInfo) => {
   if (props.orderUserInfoChange === false) {
     return (
       <div className="mb-1 rounded-md">
-        <div className="grid gap-1 grid-cols-7  h-24 ">
-          <p className=" items-center flex justify-center col-span-2">
+        <div className="grid sm:gap-1 grid-cols-7 h-24">
+          <p className=" items-center flex justify-center col-span-3 sm:col-span-2">
             お届け先
           </p>
-          <div className="col-span-4 items-center flex ">
+          <div className="col-span-3 items-center flex">
             <ul>
               <li>{props.name}&nbsp;様</li>
               <li>〒{props.zip}</li>
@@ -27,10 +27,10 @@ export const UserInfomation = (props: UserInfo) => {
     return (
       <div className="mb-1 rounded-md">
         <div className="grid gap-1 grid-cols-7  h-24 ">
-          <p className=" items-center flex justify-center col-span-2">
+          <p className=" items-center flex justify-center col-span-3 sm:col-span-2">
             お届け先
           </p>
-          <div className="col-span-4 items-center flex ">
+          <div className="col-span-4 items-center flex">
             <ul>
               <li>{props.ordererName}&nbsp;様</li>
               <li>〒{props.ordererZip}</li>
