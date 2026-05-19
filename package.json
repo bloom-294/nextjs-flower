@@ -12,6 +12,8 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{ts,tsx,json}'",
     "mock-api": "json-server --watch data/db.json --port 8000",
     "storybook": "storybook dev -p 6006",
+    "story:generate": "node bin/generate-one.cjs",
+    "story:generate:all": "node bin/generate-all.cjs",
     "build-storybook": "storybook build"
   },
   "dependencies": {
