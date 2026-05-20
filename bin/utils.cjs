@@ -60,21 +60,19 @@ const createTemplate = (componentPath, componentName) => {
   const title = getStoryTitle(componentPath, componentName);
 
   return `
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 import { ${componentName} } from "./${file}";
 
-const meta: Meta<typeof ${componentName}> = {
+const meta = {
   title: "${title}",
   component: ${componentName},
   tags: ["autodocs"],
-};
+} as Meta<typeof ${componentName}>;
 
 export default meta;
 
-type Story = StoryObj<typeof ${componentName}>;
-
-export const Default: Story = {};
+export const Default = {};
 `;
 };
 
