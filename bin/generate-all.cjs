@@ -1,8 +1,10 @@
 const path = require("path");
+
 const {
   COMPONENT_ROOT,
   findComponentFiles,
   createStoryFile,
+  getNamedExports,
 } = require("./utils.cjs");
 
 const main = () => {
@@ -17,8 +19,39 @@ const main = () => {
   let skippedCount = 0;
 
   for (const file of files) {
-    const result = createStoryFile(file);
-    const relativePath = path.relative(process.cwd(), result.storyPath);
+    const exportNames = getNamedExports(file);
+
+    // exportなし
+    if (exportNames.length === 0) {
+      console.log(
+        `skip(no export): ${path.relative(process.cwd(), file)}`
+      );
+
+      skippedCount++;
+      continue;
+    }
+
+    // export複数
+    if (exportNames.length > 1) {
+      console.log(
+        `skip(multiple exports): ${path.relative(
+          process.cwd(),
+          file
+        )}`
+      );
+
+      skippedCount++;
+      continue;
+    }
+
+    const componentName = exportNames[0];
+
+    const result = createStoryFile(file, componentName);
+
+    const relativePath = path.relative(
+      process.cwd(),
+      result.storyPath
+    );
 
     if (result.status === "created") {
       createdCount++;
