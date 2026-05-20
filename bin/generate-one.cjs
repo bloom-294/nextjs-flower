@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const prompts = require("prompts");
 
@@ -6,13 +7,19 @@ const {
   findComponentFiles,
   createStoryFile,
   getNamedExports,
+  getStoryPath,
 } = require("./utils.cjs");
 
 const main = async () => {
   const files = findComponentFiles(COMPONENT_ROOT);
 
-  if (files.length === 0) {
-    console.log("生成対象の .tsx ファイルが見つかりませんでした。");
+  const filesWithoutStory = files.filter((file) => {
+    const storyPath = getStoryPath(file);
+    return !fs.existsSync(storyPath);
+  });
+
+  if (filesWithoutStory.length === 0) {
+    console.log("story 未作成の .tsx ファイルはありません。");
     return;
   }
 
@@ -20,7 +27,7 @@ const main = async () => {
     type: "select",
     name: "file",
     message: "story を生成するファイルを選択してください",
-    choices: files.map((file) => ({
+    choices: filesWithoutStory.map((file) => ({
       title: path.relative(process.cwd(), file),
       value: file,
     })),
@@ -66,12 +73,6 @@ const main = async () => {
 
   if (result.status === "created") {
     console.log(`created: ${relativePath}`);
-    return;
-  }
-
-  if (result.status === "skipped") {
-    console.log(`skipped: ${relativePath}`);
-    console.log("既に story ファイルが存在します。");
     return;
   }
 
