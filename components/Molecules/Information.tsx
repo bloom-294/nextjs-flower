@@ -1,4 +1,4 @@
-const informationList = [
+const defaultInformationList = [
   {
     date: "2022.XX.XX",
     text: "新入荷しました！",
@@ -21,7 +21,18 @@ const informationList = [
   },
 ];
 
-export const Information = () => {
+type InformationItem = {
+  date: string;
+  text: string;
+};
+
+type Props = {
+  informationList?: InformationItem[];
+};
+
+export const Information = ({
+  informationList = defaultInformationList,
+}: Props) => {
   return (
     <section className="wrapper">
       <h2 className="mt-12 flex flex-wrap items-center justify-center sm:text-2xl">
@@ -32,7 +43,6 @@ export const Information = () => {
         {informationList.map((item, index) => (
           <li key={index}>
             <hr />
-
             <p>{item.date}</p>
             <p>{item.text}</p>
           </li>
