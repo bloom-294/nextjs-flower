@@ -1,42 +1,68 @@
-export const SearchForm = (props: {
+import React from "react";
+
+type SearchFormProps = {
   categoryWord: string | string[];
-  setSearchWord: Function;
-  setSearchState: Function;
-  mutate?: Function;
-  itemListLength: boolean;
-  onChange: () => void;
-}) => {
+  setSearchWord: React.Dispatch<React.SetStateAction<string>>;
+  setSearchState: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const SearchForm = ({
+  categoryWord,
+  setSearchWord,
+  setSearchState,
+}: SearchFormProps) => {
   return (
-    <>
-      {/* <form id="search"> */}
+    <form
+      onSubmit={(ev) => {
+        ev.preventDefault();
+        setSearchState(true);
+      }}
+    >
       <input
-        type="text"
         id="search"
-        name=""
-        placeholder={`${props.categoryWord}から探す`}
-        className="relative shadow border rounded-lg sm:w-[500px] w-[90vw] h-14 max-w-lg py-2 sm:px-8 px-4 text-gray-700 focus:outline-none focus:ring-2 z-1 text-lg"
+        type="text"
+        placeholder={`${categoryWord}から探す`}
+        className="
+          h-14
+          w-[90vw]
+          max-w-lg
+          rounded-lg
+          border
+          px-4
+          py-2
+          text-lg
+          text-gray-700
+          shadow
+          focus:outline-none
+          focus:ring-2
+          sm:w-[500px]
+          sm:px-8
+        "
         onChange={(ev) => {
-          props.setSearchWord(ev.target.value);
-          props.setSearchState(false);
+          setSearchWord(ev.target.value);
+          setSearchState(false);
         }}
         onKeyDown={(ev) => {
           if (ev.nativeEvent.isComposing || ev.keyCode === 229) return;
 
-          if (ev.key === "Enter") {
-            ev.preventDefault();
-            props.setSearchState(true);
-          }
-
           if (ev.key === "Backspace" && ev.currentTarget.value === "") {
-            props.setSearchState(false);
+            setSearchState(false);
           }
-
         }}
       />
-      <span className="material-icons absolute sm:translate-x-52 translate-x-0 sm:right-auto right-[10%] text-gray-400 z-10">
+      <span 
+        className="
+          material-icons
+          absolute
+          right-[10%]
+          z-10
+          translate-x-0
+          text-gray-400
+          sm:right-auto
+          sm:translate-x-52
+      ">
         search
       </span>
-      {/* </form> */}
-    </>
+    </form>
   );
 };

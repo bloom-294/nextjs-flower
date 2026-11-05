@@ -1,69 +1,52 @@
 import useSWR from "swr";
 import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
-import React from "react";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json());
+type TopRecognizeListProps = {
+  title?: string;
+};
 
-export const TopRecognizeList = (props: { title?: string }) => {
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+const getItemsUrl = (base: string) => {
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  return new URL("items", normalizedBase).toString();
+};
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? null;
+const endpoint = API_BASE_URL ? getItemsUrl(API_BASE_URL) : null;
 
-  const getItemsUrl = (base: string) => {
-    const normalizedBase = base.endsWith("/") ? base : `${base}/`;
-    return new URL("items", normalizedBase).toString();
-  };
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  const { data, error } = useSWR(
-    API_BASE_URL ? getItemsUrl(API_BASE_URL) : null,
+export const TopRecognizeList = ({ title }: TopRecognizeListProps) => {
+  const { data, error } = useSWR<ItemCardsWrapRecognizeSqlTypes[]>(
+    endpoint,
     fetcher
   );
 
   if (error) return <div></div>;
 
-  if (!data)
-    return (
-      <>
-        {/* <div className="animate-ping h-4 w-4 bg-blue-600 rounded-full"></div> */}
-        <div></div>
-      </>
-    );
+  if (!data) return <div></div>;
 
-  const itemList = [...data].sort((a: any, b: any) => {
-    if (a.recommend > b.recommend) return 1;
-    if (a.recommend < b.recommend) return -1;
-    return 0;
-  });
-  console.log("b", itemList);
-
-  const recommendItemList: ItemCardsWrapRecognizeSqlTypes[] = itemList.slice(0, 10);
-
-  // console.log("c",recommendItemList)
-
-  // console.log(categoryitemList)
+  const recommendItemList = [...data]
+    .sort((a, b) => (a.recommend ?? 0) - (b.recommend ?? 0))
+    .slice(0, 10);
 
   return (
-    <>
-      <div className={` my-5`}>
-        <h5 className="sm:mb-5">{props.title}</h5>
-        <div className="grid grid-cols-2 sm:grid-cols-4  md:grid-cols-5 gap-y-3">
-          {recommendItemList.map(
-            (items: ItemCardsWrapRecognizeSqlTypes) => {
-              return (
-                <ItemCardsWrapRecognize
-                  name={items.name}
-                  price={items.price}
-                  imagePath={items.imagePath}
-                  id={items.id}
-                  key={items.id}
-                />
-              );
-            }
-          )}
-        </div>
+    <div className="my-5">
+      <h5 className="sm:mb-5">{title}</h5>
+
+      <div className="grid grid-cols-2 gap-y-3 sm:grid-cols-4 md:grid-cols-5">
+        {recommendItemList.map((item) => (
+          <ItemCardsWrapRecognize
+            key={item.id}
+            name={item.name}
+            price={item.price}
+            imagePath={item.imagePath}
+            id={item.id}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

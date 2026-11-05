@@ -1,126 +1,74 @@
-import React from "react";
+import { useEffect } from "react";
 
-export const DateOfDelivery = (props: {
+type DateOfDeliveryProps = {
   ordererDateState: { current: string[] };
-}) => {
-  // 購入日をセット
-  const orderDate = new Date();
-  // 年・月・日ごとに取り出す（本日）
-  const orderDateFullYear = orderDate.getFullYear();
-  const orderDateMonth = orderDate.getMonth() + 1;
-  const orderDateDate = orderDate.getDate();
+};
 
-  // 〇年〇月〇日に変換（本日）
-  const orderDateFormat = `${orderDateFullYear}-${orderDateMonth}-${orderDateDate}`;
+const formatDate = (date: Date, separator: "jp" | "hyphen" = "jp") => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
-  props.ordererDateState.current[4] = orderDateFormat;
-
-  if (props.ordererDateState.current[0] === "日時指定なし") {
-    const fiveDaysLater = new Date();
-    fiveDaysLater.setDate(fiveDaysLater.getDate() + 5);
-
-    const threeDaysLater = new Date();
-    threeDaysLater.setDate(threeDaysLater.getDate() + 3);
-
-    // 年・月・日ごとに取り出す（３日後）
-    const threeDaysLaterFullYear = threeDaysLater.getFullYear();
-    const threeDaysLaterMonth = threeDaysLater.getMonth() + 1;
-    const threeDaysLaterDate = threeDaysLater.getDate();
-
-    // 〇年〇月〇日に変換（３日後）
-    const threeDaysLaterFormat = `${threeDaysLaterFullYear}年${threeDaysLaterMonth}月${threeDaysLaterDate}日`;
-
-    // 年・月・日ごとに取り出す（５日後）
-    const fiveDaysLaterFullYear = fiveDaysLater.getFullYear();
-    const fiveDaysLaterMonth = fiveDaysLater.getMonth() + 1;
-    const fiveDaysLaterDate = fiveDaysLater.getDate();
-
-    // 〇年〇月〇日に変換（５日後）
-    const fiveDaysLaterFormat = `${fiveDaysLaterFullYear}年${fiveDaysLaterMonth}月${fiveDaysLaterDate}日`;
-
-    props.ordererDateState.current[5] = `${threeDaysLaterFormat}～${fiveDaysLaterFormat}`;
-    return (
-      <>
-        <div className="grid grid-cols-7 h-24">
-          <p className="items-center flex justify-center col-span-2">
-            配達日時
-          </p>
-          <ul className="items-center col-span-4  py-4">
-            <li className=" ">日時指定なし</li>
-            <li>
-              {" "}
-              {threeDaysLaterFormat}～{fiveDaysLaterFormat}{" "}
-              <span className="text-sm">発送予定</span>
-            </li>
-            <li className="text-sm">
-              ※即日配送・日時指定（６日以降）が可能です
-            </li>
-          </ul>
-        </div>
-      </>
-    );
-  } else if (props.ordererDateState.current[0] === "日時指定あり") {
-    // const Specified = new Date();
-    let split = props.ordererDateState.current[2].split("-");
-
-    // 〇年〇月〇日に変換（指定日）
-    const SpecifiedFormat = `${split[0]}年${split[1]}月${split[2]}日`;
-
-    props.ordererDateState.current[5] = `${SpecifiedFormat}`;
-    return (
-      <>
-        <div className="grid grid-cols-7 h-24">
-          <p className="items-center flex justify-center col-span-2">
-            配達日時
-          </p>
-          <ul className="items-center col-span-4  py-4">
-            <li className=" ">日時指定あり</li>
-            <li>
-              {" "}
-              {SpecifiedFormat} <span className="text-sm">到着予定</span>
-            </li>
-            <li className="text-sm">
-              （天候により到着が前後することがあります）
-            </li>
-          </ul>
-        </div>
-      </>
-    );
-  } else {
-    // 即日配送
-    // console.log(props.ordererDateState.current[0])
-
-    const OneDaysLater = new Date();
-
-    OneDaysLater.setDate(OneDaysLater.getDate() + 1);
-
-    // 年・月・日ごとに取り出す（1日後）
-    const OneDaysLaterFullYear = OneDaysLater.getFullYear();
-    const OneDaysLaterMonth = OneDaysLater.getMonth() + 1;
-    const OneDaysLaterDate = OneDaysLater.getDate();
-
-    // 〇年〇月〇日に変換（指定日）
-    const OneDaysLaterFormat = `${OneDaysLaterFullYear}年${OneDaysLaterMonth}月${OneDaysLaterDate}日`;
-
-    props.ordererDateState.current[5] = `${OneDaysLaterFormat}`;
-    return (
-      <>
-        <div className="grid grid-cols-7 h-24">
-          <p className="items-center flex justify-center col-span-2">
-            配達日時
-          </p>
-          <ul className="items-center col-span-4  py-4">
-            <li className=" ">即日配送</li>
-            <li>
-              {" "}
-              {OneDaysLaterFormat} <span className="text-sm">到着予定</span>
-            </li>
-            <li className="text-sm">
-              （天候により到着が前後することがあります）
-            </li>
-          </ul>
-        </div>
-      </>
-    );
+  if (separator === "hyphen") {
+    return `${year}-${month}-${day}`;
   }
+
+  return `${year}年${month}月${day}日`;
+};
+
+const addDays = (days: number) => {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date;
+};
+
+export const DateOfDelivery = ({ ordererDateState }: DateOfDeliveryProps) => {
+  const deliveryType = ordererDateState.current[0];
+
+  let label = "";
+  let deliveryText = "";
+  let note = "";
+
+  if (deliveryType === "日時指定なし") {
+    const threeDaysLaterFormat = formatDate(addDays(3));
+    const fiveDaysLaterFormat = formatDate(addDays(5));
+
+    label = "日時指定なし";
+    deliveryText = `${threeDaysLaterFormat}～${fiveDaysLaterFormat}`;
+    note = "※即日配送・日時指定（６日以降）が可能です";
+  } else if (deliveryType === "日時指定あり") {
+    const [year, month, day] = ordererDateState.current[2].split("-");
+
+    label = "日時指定あり";
+    deliveryText = `${year}年${month}月${day}日`;
+    note = "（天候により到着が前後することがあります）";
+  } else {
+    label = "即日配送";
+    deliveryText = formatDate(addDays(1));
+    note = "（天候により到着が前後することがあります）";
+  }
+
+  useEffect(() => {
+    ordererDateState.current[4] = formatDate(new Date(), "hyphen");
+    ordererDateState.current[5] = deliveryText;
+  }, [ordererDateState, deliveryText]);
+
+  return (
+    <div className="grid min-h-24 grid-cols-7 py-4">
+      <p className="col-span-3 sm:col-span-2 flex sm:items-center justify-center">
+        配達日時
+      </p>
+
+      <ul className="col-span-4 items-center py-4">
+        <li>{label}</li>
+        <li>
+          {deliveryText}{" "}
+          <span className="text-sm">
+            {deliveryType === "日時指定なし" ? "発送予定" : "到着予定"}
+          </span>
+        </li>
+        <li className="text-sm">{note}</li>
+      </ul>
+    </div>
+  );
 };

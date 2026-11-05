@@ -1,128 +1,85 @@
 import useSWR from "swr";
 import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
-import React from "react";
 import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-export const RecognizeList = (props: {
+type RecognizeListProps = {
   category: string;
   itemId: number;
   title: string;
-}) => {
+};
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? null;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getItemsUrl = (base: string) => {
   const normalizedBase = base.endsWith("/") ? base : `${base}/`;
   return new URL("items", normalizedBase).toString();
 };
 
-const { data, error } = useSWR(
-  API_BASE_URL ? getItemsUrl(API_BASE_URL) : null,
-  fetcher
-);
+const endpoint = API_BASE_URL ? getItemsUrl(API_BASE_URL) : null;
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const getCategoryText = (category: string | string[] | undefined) => {
+  if (Array.isArray(category)) {
+    return category.join(",");
+  }
+
+  return category ?? "";
+};
+
+export const RecognizeList = ({
+  category,
+  itemId,
+  title,
+}: RecognizeListProps) => {
+  const { data, error } = useSWR<ItemCardsWrapRecognizeSqlTypes[]>(
+    endpoint,
+    fetcher
+  );
 
   if (error) return <div></div>;
 
-  if (!data)
-    return (
-      <>
-        {/* <div className="animate-ping h-4 w-4 bg-blue-600 rounded-full"></div> */}
-        <div></div>
-      </>
-    );
+  if (!data) return <div></div>;
 
-  const categoryitemList: any = [];
-  const recommendItemList = [];
+  const sortedItems = [...data].sort(
+    (a, b) => (a.recommend ?? 0) - (b.recommend ?? 0)
+  );
 
-  if (props.category && props.category.length !== 0) {
-    data.map(
-      (items: { category: string; id: number }) => {
-        if (
-          (props.category.includes(items.category) ||
-            items.category.includes(props.category)) &&
-          props.itemId !== items.id
-        ) {
-          categoryitemList.push(items);
-        }
-      }
-    );
+  const categoryItems = category
+    ? sortedItems.filter((item) => {
+        const itemCategory = getCategoryText(item.category);
 
-    categoryitemList.sort(function (a: any, b: any) {
-      if (a.recommend > b.recommend) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-    console.log("a", categoryitemList);
+        return (
+          item.id !== itemId &&
+          (category.includes(itemCategory) || itemCategory.includes(category))
+        );
+      })
+    : [];
 
-    if (categoryitemList.length < 5) {
-      for (let i: number = 0; i < categoryitemList.length; i++) {
-        recommendItemList.push(categoryitemList[i]);
-      }
-    } else {
-      for (let i: number = 0; i < 5; i++) {
-        recommendItemList.push(categoryitemList[i]);
-      }
-    }
-    // console.log("b",recommendItemList.length)
-  } else {
-    const sorted = [...data].sort((a: any, b: any) => {
-      return a.recommend > b.recommend ? 1 : -1;
-    });
+  const fallbackItems = sortedItems.filter(
+    (item) =>
+      item.id !== itemId &&
+      !categoryItems.some((categoryItem) => categoryItem.id === item.id)
+  );
 
-    sorted.slice(0, 5).forEach((item) => {
-      recommendItemList.push(item);
-    });
-  }
-
-  if (recommendItemList.length < 5) {
-    data.sort(function (a: any, b: any) {
-      if (a.recommend > b.recommend) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-
-    let number: number = 0;
-    while (recommendItemList.length < 5 && number < data.length) {
-      const item = data[number];
-      const alreadyExists = recommendItemList.some((v) => v.id === item.id);
-
-      if (props.itemId !== item.id && !alreadyExists) {
-        recommendItemList.push(item);
-      }
-
-      number++;
-    }
-  }
-
-  console.log("c", recommendItemList);
+  const recommendItemList = [...categoryItems, ...fallbackItems].slice(0, 5);
 
   return (
-    <>
-      <div className="my-5 overflow-scroll w-[100%]">
-        <h5 className="sm:mb-5 mb-2">{props.title}</h5>
-        <div className="flex">
-          {recommendItemList.map(
-            (items: ItemCardsWrapRecognizeSqlTypes) => {
-              return (
-                <ItemCardsWrapRecognize
-                  name={items.name}
-                  price={items.price}
-                  imagePath={items.imagePath}
-                  id={items.id}
-                  key={items.id}
-                />
-              );
-            }
-          )}
-        </div>
+    <div className="my-5 w-full overflow-scroll">
+      <h5 className="mb-2 sm:mb-5">{title}</h5>
+
+      <div className="flex">
+        {recommendItemList.map((item) => (
+          <ItemCardsWrapRecognize
+            key={item.id}
+            name={item.name}
+            price={item.price}
+            imagePath={item.imagePath}
+            id={item.id}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,3 +1,4 @@
+import { RequiredBadge } from "components/Atoms/requiredBadge";
 import React, { ChangeEvent } from "react";
 import { ErrorMessageProps , TelTypes } from "types/type";
 
@@ -46,18 +47,18 @@ const Navigation = (props: { value: string; text: string }) => {
 };
 
 const Error4 = (props: ErrorMessageProps) => {
-  if (props.errorFlag === "true") {
+  if (props.errorFlag === true) {
     if (props.value === "empty" || props.value === "init") {
       return (
         <>
-          <label className="Error text-red-500  ml-3 text-sm">
+          <label className="Error text-red-500 ml-3 sm:text-sm text-xs sm:inline-block block sm:mt-0 mt-2">
             {props.text}
           </label>
         </>
       );
-    } else if (props.value === "format-inccorect") {
+    } else if (props.value === "format-incorrect") {
       return (
-        <label className="Error text-red-500  ml-3 text-sm">
+        <label className="Error text-red-500 ml-3 sm:text-sm text-xs sm:inline-block block sm:mt-0 mt-2">
           xxx-xxxx-xxxxの形式で入力してください
         </label>
       );
@@ -85,41 +86,33 @@ export const TelInput = (props: TelTypes) => {
       if (!ev.target.value) {
         props.SetTelErrorState("empty");
       } else if (!ev.target.value.includes("-")) {
-        props.SetTelErrorState("format-inccorect");
+        props.SetTelErrorState("format-incorrect");
       } else {
         props.SetTelErrorState("ok");
       }
     }
   };
-  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
-    if (!props.ordererTel) {
-      props.SetTelValue(ev.target.value);
+const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
+  const value = ev.target.value;
 
-      if (props.SetOrdererTel) {
-        props.SetOrdererTel(ev.target.value);
-      }
+  props.SetTelValue(value);
+  props.SetOrdererTel?.(value);
 
-      if (!ev.target.value) {
-        props.SetTelErrorState("empty");
-      } else if (!ev.target.value.includes("-")) {
-        props.SetTelErrorState("format-inccorect");
-      } else {
-        props.SetTelErrorState("ok");
-      }
-    }
-  };
+  if (!value) {
+    props.SetTelErrorState("empty");
+  } else if (!value.includes("-")) {
+    props.SetTelErrorState("format-incorrect");
+  } else {
+    props.SetTelErrorState("ok");
+  }
+};
 
   return (
     <>
       <div className="my-5 ml-5">
         <div className="mb-2">
-          <label htmlFor="tel">電話番号 </label>
-          <span
-            className="bg-red-600 rounded-md p-1 text-sm text-white "
-            style={{ fontSize: "12px" }}
-          >
-            必須
-          </span>
+          <label htmlFor="tel">電話番号</label>
+          <RequiredBadge />
           <Error4
             value={props.telErrorState}
             text="電話番号を入力してください"
@@ -130,10 +123,9 @@ export const TelInput = (props: TelTypes) => {
         <div>
           <input
             type="text"
-            className="tel border mr-4 py-1 px-3 rounded-md w-full focus:outline-none focus:ring-2 z-1 h-10"
+            className="tel border mr-4 py-1 px-3 rounded-md focus:outline-none focus:ring-2 z-1 h-10 w-full sm:w-[430px]"
             id="tel"
             required
-            style={{ width: "430px" }}
             onBlur={onBlurHandler}
             onChange={onChangeHandler}
             placeholder="例）123-1234-1234"

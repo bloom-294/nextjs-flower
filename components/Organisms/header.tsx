@@ -206,7 +206,7 @@ export const Header = () => {
     <>
       <div className=" flex flex-wrap justify-between items-center  py-5  bg-gray-50 opacity-0.1 ">
         <div className="ml-10">
-          <Logo path="/logoFlower.png" />
+          <Logo path="/logo/logo-flower.webp" />
         </div>
         <ul className="float-right hidden md:block mx-5">
           <HeaderListGoogleIconList

@@ -4,137 +4,106 @@ import style from "../../src/styles/shoppingCart.module.css";
 import { useEffect, useState } from "react";
 import { Loader } from "components/Atoms/loader";
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json());
+type CartItem = {
+  name: string;
+  imagePath: string;
+  price: number;
+  quantity: number;
+  id: number;
+  gestId: string;
+  orderPrice: number;
+};
 
-export const ShoppingList = ({ pageName = "Shopping" }: { pageName?: string }) => {
-  const [gestIdValue, SetGestIdValue] = useState("");
-  const [, SetLoginStatus] = useState("");
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const getCookieValue = (key: string) => {
+  if (typeof document === "undefined") return "";
+
+  const cookies = document.cookie.split("; ");
+  const targetCookie = cookies.find((cookie) => cookie.startsWith(`${key}=`));
+
+  return targetCookie ? targetCookie.split("=")[1] : "";
+};
+
+export const ShoppingList = ({
+  pageName = "Shopping",
+}: {
+  pageName?: string;
+}) => {
+  const [gestIdValue, setGestIdValue] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const splitCookie = document.cookie ? document.cookie.split(";") : [];
-    const list: string[][] = [];
-
-    for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
-    }
-
-    list.map((cookieData) => {
-      // ゲストID取得
-      if (cookieData.includes("gestId")) {
-        SetGestIdValue(cookieData[1]);
-      }
-      if (cookieData.includes("login")) {
-        SetLoginStatus(cookieData[1]);
-      }
-    });
+    setGestIdValue(getCookieValue("gestId"));
   }, []);
 
-  const { data, error, mutate } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/carts?gestId=${gestIdValue}`,
-    fetcher
-  );
+  const endpoint =
+    API_BASE_URL && gestIdValue
+      ? `${API_BASE_URL}/carts?gestId=${gestIdValue}`
+      : null;
 
-  // カートの商品の金額を配列に入れる
-  const priceList: any = [];
-  if (data) {
-    data.map((itemData: any) => {
-      priceList.push(itemData.orderPrice);
-    });
-  }
+  const { data, error, mutate } = useSWR<CartItem[]>(endpoint, fetcher);
 
-  //合計金額算出
-  let initTotalPrice = priceList.reduce(function (
-    sum: number,
-    element: number
-  ) {
-    return Number(sum) + Number(element);
-  },
-  0);
+  const initTotalPrice =
+    data?.reduce((sum, item) => {
+      return sum + Number(item.orderPrice);
+    }, 0) ?? 0;
 
-  const [totalPrice, setTotalPrice] = useState(Number(initTotalPrice));
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // データベースの値から算出した合計金額（initTotalPrice）と新たに定義した合計金額（totalPrice）が一致していない場合
   useEffect(() => {
-    if (initTotalPrice !== 0) {
-      if (totalPrice == 0 || totalPrice !== initTotalPrice) {
-        setTotalPrice(Number(initTotalPrice));
-        mutate();
-      }
+    if (totalPrice !== initTotalPrice) {
+      setTotalPrice(initTotalPrice);
     }
-  }, [mutate, initTotalPrice, totalPrice]);
+  }, [initTotalPrice, totalPrice]);
 
-  if (!data)
+  if (error) {
     return (
-      <>
-        <Loader />
-      </>
-    );
-
-  if (error)
-    return (
-      <div className="container flex flex-wrap justify-center items-center mx-auto py-48 px-5 ">
+      <div className="container mx-auto flex flex-wrap items-center justify-center px-5 py-48">
         An error has occurred.
       </div>
     );
+  }
+
+  if (!data) {
+    return <Loader />;
+  }
 
   return (
-    <>
-      <div className="container flex flex-col justify-center items-center mx-auto py-5 px-5 ">
-        {data &&
-          data.map(
-            (
-              shoppingItems: {
-                name: string;
-                imagePath: string;
-                price: number;
-                quantity: number;
-                id: number;
-                gestId: string;
-                orderPrice: number;
-              },
-              index: number
-            ) => {
-              return (
-                <div
-                  className={` 
-                  mb-1 sm:grid rounded-md grid-cols-6
-                  sm:gap-1 sm:grid-cols-6 
-                  md:w-[800px] flow-root
-                  
-                        `}
-                  key={index}
-                >
-                  <ItemCardsSide
-                    name={shoppingItems.name}
-                    imagePath={shoppingItems.imagePath}
-                    price={shoppingItems.price}
-                    quantity={shoppingItems.quantity}
-                    id={shoppingItems.id}
-                    gestId={shoppingItems.gestId}
-                    orderPrice={shoppingItems.orderPrice}
-                    pageName={pageName}
-                    totalPrice={totalPrice}
-                    setTotalPrice={setTotalPrice}
-                    mutate={mutate ?? (() => {})}
-                  />
-                </div>
-              );
-            }
-          )}
-
-        <hr className={`${style.line}`} />
-        <div className=" mt-10 mb-5 px-5 ">
-          <p className="text-sm">
-            合計金額&nbsp;&nbsp;&nbsp;
-            <span className="text-[35px]  text-[#75ad9d] ">
-              {totalPrice.toLocaleString()}
-            </span>{" "}
-            &nbsp;円(税込)
-          </p>
+    <div className="container mx-auto flex flex-col items-center justify-center px-5 py-5">
+      {data.map((shoppingItem) => (
+        <div
+          className="mb-1 flow-root rounded-md sm:grid sm:grid-cols-6 sm:gap-1 md:w-[800px]"
+          key={shoppingItem.id}
+        >
+          <ItemCardsSide
+            name={shoppingItem.name}
+            imagePath={shoppingItem.imagePath}
+            price={shoppingItem.price}
+            quantity={shoppingItem.quantity}
+            id={shoppingItem.id}
+            gestId={shoppingItem.gestId}
+            orderPrice={shoppingItem.orderPrice}
+            pageName={pageName}
+            totalPrice={totalPrice}
+            setTotalPrice={setTotalPrice}
+            mutate={mutate}
+          />
         </div>
+      ))}
+
+      <hr className={style.line} />
+
+      <div className="mb-5 mt-10 px-5">
+        <p className="text-sm">
+          合計金額&nbsp;&nbsp;&nbsp;
+          <span className="text-[35px] text-[#75ad9d]">
+            {totalPrice.toLocaleString()}
+          </span>
+          &nbsp;円(税込)
+        </p>
       </div>
-    </>
+    </div>
   );
 };
 

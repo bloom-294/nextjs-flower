@@ -38,7 +38,7 @@ export const Home = () => {
   const [confirmPasswordErrorState, SetConfirmPasswordErrorState] =
     useState("init");
 
-  const [errorFlag, SetErrorFlag] = useState("false");
+  const [errorFlag, SetErrorFlag] = useState(false);
 
   const clear = () => {
     SetLastNameErrorState("init");
@@ -59,7 +59,7 @@ export const Home = () => {
     SetPasswordValue("");
     SetConfirmPasswordValue("");
 
-    SetErrorFlag("false");
+    SetErrorFlag(false);
   };
 
   const register = async () => {
@@ -131,7 +131,7 @@ export const Home = () => {
           console.error("通信に失敗しました", error);
         });
     } else {
-      SetErrorFlag("true");
+      SetErrorFlag(true);
     }
   };
 

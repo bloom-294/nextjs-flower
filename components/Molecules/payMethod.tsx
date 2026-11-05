@@ -1,18 +1,18 @@
-import React from "react";
+type PayMethodProps = {
+  ordererPayMethod: string;
+};
 
-export const PayMethod = (props: { ordererPayMethod: string }) => {
+export const PayMethod = ({
+  ordererPayMethod,
+}: PayMethodProps) => {
   return (
-    <>
-      <div>
-        <div className="grid grid-cols-7 gap-2 h-24">
-          <p className="items-center flex justify-center col-span-2">
-            お支払い方法
-          </p>
-          <p className="items-center flex  col-span-5 ">
-            {props.ordererPayMethod}
-          </p>
-        </div>
-      </div>
-    </>
+    <div className="grid grid-cols-7 h-24 gap-2">
+      <p className="col-span-3 sm:col-span-2 flex items-center justify-center">
+        お支払い方法
+      </p>
+      <p className="col-span-4 flex items-center">
+        {ordererPayMethod}
+      </p>
+    </div>
   );
 };
