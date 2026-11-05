@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { GreenButton } from "./greenButton";
 
 const meta: Meta<typeof GreenButton> = {
-  title: "Components/Atom/GreenButton",
+  title: "Components/Atoms/GreenButton",
   component: GreenButton,
   tags: ["autodocs"],
   argTypes: {

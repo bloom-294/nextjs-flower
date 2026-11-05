@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { ShoppingList } from "components/Organisms/shoppingList";
 import { Loader } from "components/Atoms/loader";
 import styles from "../../styles/itemCards.module.css";
-import { UserInformation } from "components/Organisms/UserInformation";
+import { UserInformation } from "components/Organisms/userInformation";
 import { PayMethod } from "components/Molecules/payMethod";
 import { DateOfDelivery } from "components/Molecules/dateOfDelivery";
 import { ConfirmFrom } from "components/Organisms/confirmFrom";

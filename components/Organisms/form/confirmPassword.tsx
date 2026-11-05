@@ -78,6 +78,7 @@ export const ConfirmPasswordInput = (
           onChange={onChangeHandler}
           placeholder="例）Password123"
           autoComplete="new-password"
+          defaultValue={props.confirmPasswordValue ?? ""}
         />
       </div>
     </div>

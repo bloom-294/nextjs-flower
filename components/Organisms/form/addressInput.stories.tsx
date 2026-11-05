@@ -10,30 +10,6 @@ const meta = {
 
 export default meta;
 
-export const Empty = {
-  args: {
-    addressValue: "",
-    ordererAddress: "",
-    addressErrorState: "init",
-    errorFlag: false,
-    SetAddressValue: () => {},
-    SetAddressErrorState: () => {},
-    SetOrdererAddress: () => {},
-  },
-};
-
-export const Inputting = {
-  args: {
-    addressValue: "東京都中央区",
-    ordererAddress: "",
-    addressErrorState: "ok",
-    errorFlag: false,
-    SetAddressValue: () => {},
-    SetAddressErrorState: () => {},
-    SetOrdererAddress: () => {},
-  },
-};
-
 export const Saved = {
   args: {
     addressValue: "",
@@ -46,7 +22,7 @@ export const Saved = {
   },
 };
 
-export const Error = {
+export const Empty = {
   args: {
     addressValue: "",
     ordererAddress: "",

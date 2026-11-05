@@ -10,9 +10,9 @@ import "swiper/css/scrollbar";
 SwiperCore.use([Pagination, Autoplay]);
 
 const images = [
-  "/happyChristmas.jpg",
-  "/ChristmasBanner.png",
-  "/happybirthdayBanner.jpg",
+  "/banner/ChristmasBanner.svg",
+  "/banner/happyChristmas.svg",
+  "/banner/happybirthdayBanner.svg",
 ];
 
 export const SlideCursor = () => {

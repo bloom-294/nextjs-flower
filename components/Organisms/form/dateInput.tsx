@@ -44,6 +44,8 @@ export const DateInput = (props: {
   props.ordererDateState.current[1]);
   const SIX_DAYS_MS = 1000 * 60 * 60 * 24 * 6;
 
+
+  console.log(1,deliveryType,dateErrorState);
   return (
     <div className="my-5 ml-5">
       <div className="mb-2">
@@ -61,9 +63,9 @@ export const DateInput = (props: {
             className="pay mx-3"
             type="radio"
             name="date"
-            defaultChecked={true}
+            checked={deliveryType === "日時指定なし"}
             value="日時指定なし"
-            onClick={() => {
+            onChange={() => {
               setDeliveryType("日時指定なし");
               props.ordererDateState.current[0] = "日時指定なし";
               props.ordererDateState.current[1] = "ok";
@@ -78,8 +80,9 @@ export const DateInput = (props: {
             type="radio"
             name="date"
             id="fixedDate"
+            checked={deliveryType === "日時指定あり"}
             value="日時指定あり"
-            onClick={() => {
+            onChange={() => {
               setDeliveryType("日時指定あり");
               setDateErrorState("empty");
               props.ordererDateState.current[0] = "日時指定あり";
@@ -94,8 +97,9 @@ export const DateInput = (props: {
             type="radio"
             name="date"
             id="sameDayDelivery"
+            checked={deliveryType === "即日配送"}
             value="即日配送"
-            onClick={() => {
+            onChange={() => {
               setDeliveryType("即日配送");
               props.ordererDateState.current[0] = "即日配送";
               props.ordererDateState.current[1] = "ok";

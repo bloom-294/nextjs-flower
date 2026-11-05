@@ -11,7 +11,7 @@ const meta = {
 
 export default meta;
 
-export const Inputting = {
+export const Saved = {
   args: {
     passwordValue: "Password123",
     confirmPasswordValue: "Password123",

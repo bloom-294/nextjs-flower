@@ -111,6 +111,7 @@ export const PasswordInput = (props: PasswordTypes) => {
           onChange={onChangeHandler}
           placeholder="例）Password123"
           autoComplete="new-password"
+          defaultValue={props.passwordValue ?? ""}
         />
       </div>
 

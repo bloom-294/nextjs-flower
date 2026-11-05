@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 const images = [
-  "/happyChristmas.jpg",
-  "/happybirthdayBanner.jpg",
-  "/ChristmasBanner.png",
+  "/banner/ChristmasBanner.svg",
+  "/banner/happyChristmas.svg",
+  "/banner/happybirthdayBanner.svg",
 ];
 
 export const BannerList = () => {
