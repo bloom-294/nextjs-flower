@@ -20,9 +20,12 @@ SwiperCore.use([
 ]);
 
 const images = [
-  "/topImageDryFlower.png",
-  "/topImageGreenPlants.png",
-  "/topImageTulip.png",
+  // "/topImageDryFlower.png",
+  // "/topImageGreenPlants.png",
+  "/banner/ChristmasBanner.svg",
+  "/banner/CoupleBanner.svg",
+  "/banner/happybirthdayBanner.svg",
+  "/banner/happyChristmas.svg"
 ];
 
 export const Slide = () => {

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const images = [
   "/banner/ChristmasBanner.svg",
-  "/banner/happyChristmas.svg",
+  "/banner/CoupleBanner.svg",
   "/banner/happybirthdayBanner.svg",
 ];
 
