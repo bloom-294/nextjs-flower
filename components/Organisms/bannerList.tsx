@@ -1,8 +1,9 @@
 import Image from "next/image";
 
 const images = [
-  "/banner/ChristmasBanner.svg",
+  "/banner/Subscription.svg",
   "/banner/CoupleBanner.svg",
+  "/banner/ChristmasBanner.svg",
   "/banner/happybirthdayBanner.svg",
 ];
 

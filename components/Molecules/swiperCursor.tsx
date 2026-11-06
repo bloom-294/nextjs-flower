@@ -10,8 +10,9 @@ import "swiper/css/scrollbar";
 SwiperCore.use([Pagination, Autoplay]);
 
 const images = [
+  "/banner/Subscription.svg",
+  "/banner/CoupleBanner.svg",
   "/banner/ChristmasBanner.svg",
-  "/banner/happyChristmas.svg",
   "/banner/happybirthdayBanner.svg",
 ];
 
