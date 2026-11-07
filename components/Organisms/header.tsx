@@ -9,7 +9,7 @@ const Logo = (props: { path: string }) => {
   return (
     <Link href="/">
       <a>
-        <Image src={props.path} width={100} height={70} className="" alt="架空のお花屋さんのECサイトのロゴです。" />
+        <Image src={props.path} width={90} height={70} className="" alt="架空のお花屋さんのECサイトのロゴです。" />
       </a>
     </Link>
   );
@@ -42,8 +42,8 @@ const HeaderListGoogleIconList = (props: {
         <Link href={props.path}>
           <li className={`group ${headerIconStyles} w-max cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}>
               <a className={`group-hover:text-[#75ad9d] flex flex-col text-center`}>
-                <span className="cursor-pointer text-xl line-height: 1">{props.title}</span>
-                <span className="text-md line-height: 1" aria-hidden="true">{props.name}</span>
+                <span className="cursor-pointer text-xl leading-none">{props.title}</span>
+                <span className="text-md leading-tight" aria-hidden="true">{props.name}</span>
               </a>
           </li>
         </Link>
@@ -54,8 +54,8 @@ const HeaderListGoogleIconList = (props: {
       <>
       <Link href={props.path}>
         <li className={`${headerIconStyles} cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}>
-          <span className="cursor-pointer text-xl line-height: 1"> {props.title}</span>
-          <span className="text-md line-height: 1" aria-hidden="true">
+          <span className="cursor-pointer text-xl leading-none"> {props.title}</span>
+          <span className="text-md leading-tight" aria-hidden="true">
             {props.name}
           </span>
           {props.list}
@@ -180,7 +180,7 @@ export const Header = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-between items-center py-5 bg-white border">
+      <header className="flex flex-wrap justify-between items-center py-2 bg-white border">
         <div className="ml-10 flex justify-center">
           <Logo path="/logo/logo-flower.webp" />
         </div>
@@ -272,7 +272,7 @@ export const Header = () => {
             </span>
           </button>
         </div>
-      </div>
+      </header>
       <div className="container flex flex-wrap justify-end items-center mx-auto py-5">
         <HumburgerList />
       </div>
