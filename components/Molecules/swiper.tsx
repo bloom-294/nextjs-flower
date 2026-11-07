@@ -34,7 +34,7 @@ export const Slide = () => {
   const swiperRef = useRef<SwiperCore>({} as SwiperCore);
 
   return (
-    <div className="mx-auto w-[100vw] sm:container sm:w-auto overflow-hidden sm:h-[500px bg-red-200 relative">
+    <div className="mx-auto w-[100vw] sm:container sm:w-auto overflow-hidden sm:h-[500px] relative">
       <Swiper
         onSwiper={(swiper) => { swiperRef.current = swiper; }}
         slidesPerView={"auto"}
