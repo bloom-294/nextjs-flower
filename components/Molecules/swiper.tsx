@@ -56,7 +56,7 @@ export const Slide = () => {
         className="sm:h-[500px]"
       >
         {images.map((src) => (
-          <SwiperSlide key={src} className="!w-[85%] sm:!w-[700px] sm:!h-[500px] bg-orange-200 flex items-center justify-center overflow-hidden">
+          <SwiperSlide key={src} className="!w-[85%] sm:!w-[700px] sm:!h-[500px] flex items-center justify-center overflow-hidden shadow-md">
             <div className="w-full">
               <Image
                 src={src}
