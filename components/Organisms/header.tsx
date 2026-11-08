@@ -184,82 +184,84 @@ export const Header = () => {
         <div className="ml-10 flex justify-center">
           <Logo path="/logo/logo-flower.webp" />
         </div>
-  
-        <ul className="float-right hidden md:block mx-5">
-          {/* <li className={`${headerIconStyles} w-max cursor-pointer`}>
-            <form
+
+        <nav>
+          <ul className="float-right hidden md:block mx-5">
+            {/* <li className={`${headerIconStyles} w-max cursor-pointer`}>
+              <form
               onSubmit={(ev) => {
                 ev.preventDefault();
                 // setSearchState(true);
-              }}
-              className="my-auto mx-10"
-            >
-              <input
+                }}
+                className="my-auto mx-10"
+                >
+                <input
                 id="search"
                 type="text"
                 placeholder={`商品を探す`}
                 className="
-                  h-14
-                  w-[90%]
-                  max-w-lg
-                  rounded-lg
-                  border-2
-                  border-[#5d3d4a]
-                  px-4
-                  py-1
-                  text-lg
-                  text-[#5d3d4a]
-                  focus:outline-none
-                  focus:ring-2
-                  sm:w-[500px]
-                  sm:px-8
-                  m-auto
+                h-14
+                w-[90%]
+                max-w-lg
+                rounded-lg
+                border-2
+                border-[#5d3d4a]
+                px-4
+                py-1
+                text-lg
+                text-[#5d3d4a]
+                focus:outline-none
+                focus:ring-2
+                sm:w-[500px]
+                sm:px-8
+                m-auto
                 "
                 onChange={(ev) => {
                   // setSearchWord(ev.target.value);
                   // setSearchState(false);
-                }}
-                onKeyDown={(ev) => {
-                  if (ev.nativeEvent.isComposing || ev.keyCode === 229) return;
-
-                  if (ev.key === "Backspace" && ev.currentTarget.value === "") {
-                    // setSearchState(false);
-                  }
-                }}
+                  }}
+                  onKeyDown={(ev) => {
+                    if (ev.nativeEvent.isComposing || ev.keyCode === 229) return;
+                    
+                    if (ev.key === "Backspace" && ev.currentTarget.value === "") {
+                      // setSearchState(false);
+                      }
+                      }}
+                      />
+                      <span 
+                      className="
+                      material-icons relative right-[10%] z-10  translate-x-0 text-[#5d3d4a]-40
+                      sm:-translate-x-0 cursor-pointer text-center align-sub
+                      ">
+                      search
+                      </span>
+                      </form>
+                      </li> */}
+            <HeaderListGoogleIconList
+              name="items"
+              path={`/items`}
+              list={<UserNavigationGroupOther />}
+              title="商品一覧"
               />
-              <span 
-                className="
-                  material-icons relative right-[10%] z-10  translate-x-0 text-[#5d3d4a]-40
-                  sm:-translate-x-0 cursor-pointer text-center align-sub
-                ">
-                  search
-              </span>
-            </form>
-          </li> */}
-          <HeaderListGoogleIconList
-            name="items"
-            path={`/items`}
-            list={<UserNavigationGroupOther />}
-            title="商品一覧"
-          />
-          <HeaderListGoogleIconList
-            name="carts"
-            path={`/carts`}
-            list={<UserNavigationGroupCart />}
-            title="カート"
-          />
-          <HeaderListGoogleIconList
-            name="login"
-            path={`/users/login`}
-            list={
-              <UserNavigationGroupUser
+            <HeaderListGoogleIconList
+              name="carts"
+              path={`/carts`}
+              list={<UserNavigationGroupCart />}
+              title="カート"
+              />
+            <HeaderListGoogleIconList
+              name="login"
+              path={`/users/login`}
+              list={
+                <UserNavigationGroupUser
                 loginState={loginState}
                 SetLoginState={SetLoginState}
+                />
+              }
+              title="ログイン"
               />
-            }
-            title="ログイン"
-          />
-        </ul>
+          </ul>
+        </nav>
 
         <div className="flex flex-col md:hidden">
           <button

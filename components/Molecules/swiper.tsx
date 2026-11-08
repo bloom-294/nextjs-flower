@@ -74,7 +74,7 @@ export const Slide = () => {
 
       <button 
         onClick={() => swiperRef.current.slidePrev()}
-        className="absolute left-10 g:left-32 top-[50%] z-10 bg-white/80 aspect-square w-20 h-auto rounded-full hover:bg-white transition border border-[#5d3d4a] hidden md:block"
+        className="absolute left-10 lg:left-32 top-[50%] z-10 bg-white/80 aspect-square w-20 h-auto rounded-full hover:bg-white transition border border-[#5d3d4a] hidden md:block"
       >
         ◀
       </button>
