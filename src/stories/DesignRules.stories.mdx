@@ -1,0 +1,42 @@
+import { Meta, ColorPalette, ColorItem, Typeset } from '@storybook/blocks';
+
+<Meta title="Design/デザインシステム（簡易版）" />
+
+# デザインシステム（簡易版）
+
+共通のカラーとタイポグラフィです。<br/>
+今後、以下に準拠し改修を進めます！
+
+## カラーパレット（仮）
+
+<ColorPalette>
+  <ColorItem
+    title="Primary"
+    subtitle="メイン・リンク"
+    colors={{ Main: '#8F5B63', Hover: '#6B3E45', Light: '#FAF5F5' }}
+  />
+  <ColorItem
+    title="Text & Border"
+    subtitle="テキスト・境界線"
+    colors={{ Text: '#5D3D4B', SubText: '#756467', Border: '#948386' }}
+  />
+  <ColorItem
+    title="Status"
+    subtitle="通知・アラート"
+    colors={{ Success: '#3B7A68', Error: '#B83232' }}
+  />
+</ColorPalette>
+
+## タイポグラフィ
+- フォントサイズは **4px単位**で指定しましょう！
+- ECサイトのタイトル等は <strong class="font-gothic">Zen Kaku Gothic New</strong>、本文は <strong class="font-mincho">Shippori Mincho B1</strong> を使用します。
+
+<Typeset
+  fontSizes={['12px', '14px', '16px', '20px', '24px', '32px']}
+  fontWeight={700}
+  sampleText="あいうえお ABCabc 123"
+/>
+
+## スペーシング（余白）の基準
+- **5px単位** で指定しましょう！<br/>
+（`5px`, `10px`, `15px`, `20px`, `25px`）。
