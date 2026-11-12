@@ -4,7 +4,7 @@ import { Meta } from '@storybook/blocks';
 
 # Gitの運用ルール
 
-Issueのラベルとブランチの命名規則、コミットメッセージの規約をまとめました。
+Issueのラベルとブランチの命名規則、コミットメッセージの規約等をまとめました！
 
 <style>
   {`
@@ -16,7 +16,6 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
       line-height: 18px;
       border-radius: 9999px;
       border: 1px solid transparent;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     .label-backend   { background-color: #1D9DCB; color: #000; }
     .label-bug       { background-color: #D73A4A; color: #fff; }
@@ -34,8 +33,8 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
 
 ## GitHub Issueのラベル＆ブランチのプレフィックス
 
-作業を開始する前に、該当するIssueのラベルを確認し<br/>
-ブランチには対応するプレフィックスを付けてください。
+作業を開始する前に、該当するIssueのラベルを確認し、<br/>
+ブランチには対応するプレフィックスを付けてみましょう！
 
 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
   <thead>
@@ -81,8 +80,8 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
 ---
 
 ## ブランチ命名規則
-先頭にプレフィックスをつけてください。<br/>
-変更内容が一目でわかるように記述します。
+先頭にプレフィックスをつけましょう！<br/>
+変更内容が一目でわかるようになります。
 
 ```text
 # 例：Issue #42（ラベル: ui, feature）でボタンを作成するとき
@@ -97,8 +96,7 @@ docs/add-guide
 
 ## コミットメッセージの例
 
-可能な範囲で、Issue番号を末尾につけてください。<br/>
-GitHub上で自動リンクされます。
+Issue番号を末尾につけると、GitHub上で自動リンクされます！
 
 ```text
 feature: ログインフォームのUIを実装 (#42)
@@ -109,6 +107,9 @@ test: Buttonコンポーネントのテストを追加 (#65)
 
 
 ## プルリクエスト（PR）作成時のチェックリスト
+　PRは自動で生成される雛形に沿って作成しましょう！<br/>
+　以下は追加の共通の確認事項です。
+
 * [ ] Storybook上で表示崩れやエラーがないか確認した
 * [ ] レスポンシブ（PC / SP）の表示を確認した
 * [ ] 不要な `console.log` やコメントアウトを削除した
