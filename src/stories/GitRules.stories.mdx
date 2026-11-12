@@ -1,0 +1,114 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Guides/Gitの運用ルール" />
+
+# Gitの運用ルール
+
+Issueのラベルとブランチの命名規則、コミットメッセージの規約をまとめました。
+
+<style>
+  {`
+    .gh-label {
+      display: inline-block;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 18px;
+      border-radius: 9999px;
+      border: 1px solid transparent;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .label-backend   { background-color: #1D9DCB; color: #000; }
+    .label-bug       { background-color: #D73A4A; color: #fff; }
+    .label-design    { background-color: #AD0264; color: #fff; }
+    .label-doc       { background-color: #0275CA; color: #fff; }
+    .label-feature   { background-color: #D2AB8E; color: #000; }
+    .label-fix       { background-color: #A9AFF9; color: #000; }
+    .label-layout    { background-color: #C2E0C6; color: #000; }
+    .label-storybook { background-color: #E99695; color: #000; }
+    .label-test      { background-color: #FEF2C0; color: #000; }
+    .label-ui        { background-color: #935E99; color: #fff; }
+  `}
+</style>
+
+
+## GitHub Issueのラベル＆ブランチのプレフィックス
+
+作業を開始する前に、該当するIssueのラベルを確認し<br/>
+ブランチには対応するプレフィックスを付けてください。
+
+<table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
+  <thead>
+    <tr style={{ borderBottom: '2px solid #e5e7eb', backgroundColor: '#f9fafb' }}>
+      <th style={{ padding: '12px' }}>プレフィックス</th>
+      <th style={{ padding: '12px' }}>Issueのラベル</th>
+      <th style={{ padding: '12px' }}>使い分けの基準</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '12px' }}><code>feature/</code></td>
+      <td style={{ padding: '12px' }}>
+        <span className="gh-label label-feature">feature</span>{' '}
+        <span className="gh-label label-ui">ui</span>{' '}
+        <span className="gh-label label-layout">layout</span>{' '}
+        <span className="gh-label label-backend">backend</span>{' '}
+        <span className="gh-label label-test">test</span>
+      </td>
+      <td style={{ padding: '12px' }}>新しい機能や画面、テストを新しく作るとき</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '12px' }}><code>fix/</code></td>
+      <td style={{ padding: '12px' }}>
+        <span className="gh-label label-bug">bug</span>{' '}
+        <span className="gh-label label-fix">fix</span>
+      </td>
+      <td style={{ padding: '12px' }}>バグや表示崩れを直すとき</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '12px' }}><code>docs/</code></td>
+      <td style={{ padding: '12px' }}>
+        <span className="gh-label label-doc">doc</span>{' '}
+        <span className="gh-label label-storybook">Storybook</span>{' '}
+        <span className="gh-label label-design">design</span>
+      </td>
+      <td style={{ padding: '12px' }}>ドキュメントやStorybook、デザイン仕様を更新するとき</td>
+    </tr>
+  </tbody>
+</table>
+
+
+---
+
+## ブランチ命名規則
+先頭にプレフィックスをつけてください。<br/>
+変更内容が一目でわかるように記述します。
+
+```text
+# 例：Issue #42（ラベル: ui, feature）でボタンを作成するとき
+feature/primary-button
+
+# 例：Issue #55（ラベル: bug, layout）でヘッダー崩れを直すとき
+fix/top-layout
+
+# 例：Issue #60（ラベル: Storybook, doc）でガイドを追加するとき
+docs/add-guide
+```
+
+## コミットメッセージの例
+
+可能な範囲で、Issue番号を末尾につけてください。<br/>
+GitHub上で自動リンクされます。
+
+```text
+feature: ログインフォームのUIを実装 (#42)
+fix: スマホ表示時のメニュー開閉バグを修正 (#55)
+docs: StorybookにGit運用ルールページを追加 (#60)
+test: Buttonコンポーネントのテストを追加 (#65)
+```
+
+
+## プルリクエスト（PR）作成時のチェックリスト
+* [ ] Storybook上で表示崩れやエラーがないか確認した
+* [ ] レスポンシブ（PC / SP）の表示を確認した
+* [ ] 不要な `console.log` やコメントアウトを削除した
