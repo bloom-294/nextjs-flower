@@ -27,6 +27,8 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
     .label-storybook { background-color: #E99695; color: #000; }
     .label-test      { background-color: #FEF2C0; color: #000; }
     .label-ui        { background-color: #935E99; color: #fff; }
+    .label-refactor  { background-color: #0A973F; 
+    color: #fff}
   `}
 </style>
 
@@ -72,6 +74,13 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
         <span className="gh-label label-design">design</span>
       </td>
       <td style={{ padding: '12px' }}>ドキュメントやStorybook、デザイン仕様を更新するとき</td>
+    </tr>
+        <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '12px' }}><code>refactor</code></td>
+      <td style={{ padding: '12px' }}>
+        <span className="gh-label label-refactor">refactor</span>{' '}
+      </td>
+      <td style={{ padding: '12px' }}>機能の動作を変えずに、コードを改善（リファクタリング）するとき</td>
     </tr>
   </tbody>
 </table>
