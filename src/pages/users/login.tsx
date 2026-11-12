@@ -4,6 +4,7 @@ import { PasswordInput } from "components/Organisms/form/passwordInput";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import Link from "next/link";
 
 export const Home = () => {
   const [mailValue, SetMailValue] = useState("");
@@ -100,7 +101,6 @@ export const Home = () => {
           console.error("通信に失敗しました", error);
         });
     } else {
-      // alert("既にログインしています")
       Swal.fire({
         icon: "error",
         text: "既にログインしています",
@@ -115,9 +115,9 @@ export const Home = () => {
   }
   return (
     <>
-      <div className="container flex flex-wrap justify-center items-center mx-auto pt-10 px-5 bg-white-100 my-12 mb-64 ">
-        <div className="bg-gray-50 p-4 rounded-xl ">
-          <form action="" className="">
+      <div className="container flex flex-wrap justify-center items-center mx-auto px-5 bg-white-100 mt-12 mb-64">
+        <div className="bg-gray-50 sm:p-4 rounded-xl">
+          <form action="#">
             <MailInput
               mailErrorState={mailErrorState}
               mailValue={mailValue}
@@ -138,10 +138,10 @@ export const Home = () => {
               displayFlag={false}
             />
 
-            <div className="icontainer flex flex-wrap justify-center items-center ">
+            <div className="icontainer flex flex-wrap justify-center items-center">
               <button
                 type="button"
-                className="text-white px-12 py-2 rounded-md text-sm mr-3"
+                className="text-white px-12 py-2 rounded-md text-sm mb-4 hover:opacity-80"
                 style={{ backgroundColor: "#75ad9d" }}
                 onClick={async () => {
                   SetErrorFlag(true);
@@ -205,9 +205,6 @@ export const Home = () => {
                       .catch((error) => {
                         console.error("通信に失敗しました", error);
                       });
-                    // .catch(error => {
-                    //   alert("メールアドレスかパスワードが違います。c");
-                    // });
                   }
                 }}
               >
@@ -215,6 +212,11 @@ export const Home = () => {
               </button>
             </div>
           </form>
+          <Link href={"/users"}>
+            <a className="block text-center text-sm hover:opacity-80 sm:mb-2 mb-4">
+              会員登録がお済みではない方はこちら
+            </a>
+          </Link>
         </div>
       </div>
     </>

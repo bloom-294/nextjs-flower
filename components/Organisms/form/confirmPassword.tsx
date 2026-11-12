@@ -74,7 +74,7 @@ export const ConfirmPasswordInput = (
           id="confirm"
           type="password"
           required
-          className="confirm mr-4 h-10 w-[430px] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
+          className="confirm mr-4 h-10 sm:w-[430px] w-[90vw] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
           onChange={onChangeHandler}
           placeholder="例）Password123"
           autoComplete="new-password"
