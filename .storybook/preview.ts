@@ -9,6 +9,9 @@ const customHead = document.createElement('style');
 customHead.innerHTML = `
   @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
 
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
   /* 全体のデフォルト（本文）にZen角ゴシックを適用 */
   body {
     font-family: 'Zen Kaku Gothic New', serif !important;
