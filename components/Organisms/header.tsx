@@ -9,25 +9,11 @@ const Logo = (props: { path: string }) => {
   return (
     <Link href="/">
       <a>
-        <Image src={props.path} width={100} height={70} className="" alt="サイトのロゴ" />
+        <Image src={props.path} width={90} height={70} className="" alt="架空のお花屋さんのECサイトのロゴです。" />
       </a>
     </Link>
   );
 };
-
-// const HeaderListGoogleIcon = (props: { name: string; path: string }) => {
-//   return (
-//     <>
-//       <li className="float-left mx-8 py-2.5">
-//         <Link href={props.path}>
-//           <a>
-//             <span className="material-symbols-outlined">{props.name}</span>
-//           </a>
-//         </Link>
-//       </li>
-//     </>
-//   );
-// };
 
 const HeaderListText = (props: { name: string; path: string }) => {
   return (
@@ -50,21 +36,15 @@ const HeaderListGoogleIconList = (props: {
   list?: any;
   title: string;
 }) => {
-  if (props.title === "商品一覧") {
+  if (props.title !== "アカウント") {
     return (
       <>
-        <Link href="/items">
-          <li className={`group ${headerIconStyles} w-max cursor-pointer`}>
-            <span
-              className={`material-icons text-gray-400 group-hover:text-[#75ad9d] `}
-            >
-              {props.name}
-            </span>
-            <label htmlFor="material-icons">
-              <a className={`float-left group-hover:text-[#75ad9d]`}>
-                商品一覧
+        <Link href={props.path}>
+          <li className={`group ${headerIconStyles} w-max cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}>
+              <a className={`group-hover:text-[#75ad9d] flex flex-col text-center`}>
+                <span className="cursor-pointer text-xl leading-none">{props.title}</span>
+                <span className="text-md leading-tight" aria-hidden="true">{props.name}</span>
               </a>
-            </label>
           </li>
         </Link>
       </>
@@ -72,15 +52,15 @@ const HeaderListGoogleIconList = (props: {
   } else {
     return (
       <>
-        <li className={`${headerIconStyles}`}>
-          <span className={`material-icons text-gray-400 ${style.icon} `}>
+      <Link href={props.path}>
+        <li className={`${headerIconStyles} cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}>
+          <span className="cursor-pointer text-xl leading-none"> {props.title}</span>
+          <span className="text-md leading-tight" aria-hidden="true">
             {props.name}
           </span>
           {props.list}
-          <label htmlFor="material-icons">
-            <p className="cursor-pointer"> {props.title}</p>
-          </label>
         </li>
+      </Link>
       </>
     );
   }
@@ -106,8 +86,6 @@ const UserNavigationGroupCart = () => {
       className={`bg-white absolute translate-y-4 flex flex-col rounded-xl  shadow-md  ${style.list} z-100`}
     >
       <HeaderListText name="カート" path={`/carts`} />
-      {/* favorite */}
-      {/* <HeaderListText name="商品一覧" path={`/items`} /> */}
     </ul>
   );
 };
@@ -117,7 +95,6 @@ const UserNavigationGroupOther = () => {
     <ul
       className={`bg-white absolute translate-y-4 flex flex-col rounded-xl  shadow-md  ${style.list} z-100 `}
     >
-      {/* <HeaderListText name="トップ" path={`/`} /> */}
       <HeaderListText name="商品一覧" path={`/items`} />
     </ul>
   );
@@ -189,7 +166,6 @@ export const Header = () => {
             <HeaderListText name="トップ" path={`/`} />
             <HeaderListText name="商品一覧" path={`/items`} />
             <HeaderListText name="カート" path={`/carts`} />
-            <HeaderListText name="お気に入り" path={`/items/favorite`} />
             <HeaderListText name="新規登録" path={`/users/`} />
 
             <LoginState loginState={loginState} SetLoginState={SetLoginState} />
@@ -204,37 +180,90 @@ export const Header = () => {
 
   return (
     <>
-      <div className=" flex flex-wrap justify-between items-center  py-5  bg-gray-50 opacity-0.1 ">
-        <div className="ml-10">
+      <header className="flex flex-wrap justify-between items-center py-2 bg-white border">
+        <div className="ml-10 flex justify-center">
           <Logo path="/logo/logo-flower.webp" />
         </div>
-        <ul className="float-right hidden md:block mx-5">
-          <HeaderListGoogleIconList
-            name="person"
-            path={`/users/login`}
-            list={
-              <UserNavigationGroupUser
+
+        <nav>
+          <ul className="float-right hidden md:block mx-5">
+            {/* <li className={`${headerIconStyles} w-max cursor-pointer`}>
+              <form
+              onSubmit={(ev) => {
+                ev.preventDefault();
+                // setSearchState(true);
+                }}
+                className="my-auto mx-10"
+                >
+                <input
+                id="search"
+                type="text"
+                placeholder={`商品を探す`}
+                className="
+                h-14
+                w-[90%]
+                max-w-lg
+                rounded-lg
+                border-2
+                border-[#5d3d4a]
+                px-4
+                py-1
+                text-lg
+                text-[#5d3d4a]
+                focus:outline-none
+                focus:ring-2
+                sm:w-[500px]
+                sm:px-8
+                m-auto
+                "
+                onChange={(ev) => {
+                  // setSearchWord(ev.target.value);
+                  // setSearchState(false);
+                  }}
+                  onKeyDown={(ev) => {
+                    if (ev.nativeEvent.isComposing || ev.keyCode === 229) return;
+                    
+                    if (ev.key === "Backspace" && ev.currentTarget.value === "") {
+                      // setSearchState(false);
+                      }
+                      }}
+                      />
+                      <span 
+                      className="
+                      material-icons relative right-[10%] z-10  translate-x-0 text-[#5d3d4a]-40
+                      sm:-translate-x-0 cursor-pointer text-center align-sub
+                      ">
+                      search
+                      </span>
+                      </form>
+                      </li> */}
+            <HeaderListGoogleIconList
+              name="items"
+              path={`/items`}
+              list={<UserNavigationGroupOther />}
+              title="商品一覧"
+              />
+            <HeaderListGoogleIconList
+              name="carts"
+              path={`/carts`}
+              list={<UserNavigationGroupCart />}
+              title="カート"
+              />
+            <HeaderListGoogleIconList
+              name="login"
+              path={`/users/login`}
+              list={
+                <UserNavigationGroupUser
                 loginState={loginState}
                 SetLoginState={SetLoginState}
+                />
+              }
+              title="ログイン"
               />
-            }
-            title="アカウント"
-          />
-          <HeaderListGoogleIconList
-            name="shopping_cart"
-            path={`/users/login`}
-            list={<UserNavigationGroupCart />}
-            title="カート"
-          />
-          <HeaderListGoogleIconList
-            name="favorite"
-            path={`/users/login`}
-            list={<UserNavigationGroupOther />}
-            title="商品一覧"
-          />
-        </ul>
+          </ul>
+        </nav>
 
-        <div className="flex flex-col md:hidden ">
+        <div className="flex flex-col md:hidden">
           <button
             onClick={() => {
               SetHamburgerMenuDisplayState(true);
@@ -245,7 +274,7 @@ export const Header = () => {
             </span>
           </button>
         </div>
-      </div>
+      </header>
       <div className="container flex flex-wrap justify-end items-center mx-auto py-5">
         <HumburgerList />
       </div>
