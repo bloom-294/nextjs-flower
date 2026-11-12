@@ -37,6 +37,7 @@ export const SearchForm = ({
           focus:ring-2
           sm:w-[500px]
           sm:px-8
+          items-center
         "
         onChange={(ev) => {
           setSearchWord(ev.target.value);
@@ -52,14 +53,15 @@ export const SearchForm = ({
       />
       <span 
         className="
-          material-icons
-          absolute
+          material-icons 
+          relative
           right-[10%]
           z-10
           translate-x-0
           text-gray-400
-          sm:right-auto
-          sm:translate-x-52
+          align-text-bottom
+          lg:visible
+          invisible
       ">
         search
       </span>
