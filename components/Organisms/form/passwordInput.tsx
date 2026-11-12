@@ -107,7 +107,7 @@ export const PasswordInput = (props: PasswordTypes) => {
           id="password"
           type="password"
           required
-          className="password mr-4 h-10 w-[430px] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
+          className="password mr-4 h-10 sm:w-[430px] w-[90vw] rounded-md border px-3 py-1 focus:outline-none focus:ring-2"
           onChange={onChangeHandler}
           placeholder="例）Password123"
           autoComplete="new-password"

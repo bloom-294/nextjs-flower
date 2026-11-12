@@ -123,7 +123,7 @@ const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
         <div>
           <input
             type="text"
-            className="tel border mr-4 py-1 px-3 rounded-md focus:outline-none focus:ring-2 z-1 h-10 w-full sm:w-[430px]"
+            className="tel border mr-4 py-1 px-3 rounded-md focus:outline-none focus:ring-2 z-1 h-10 sm:w-[430px] w-[90vw]"
             id="tel"
             required
             onBlur={onBlurHandler}

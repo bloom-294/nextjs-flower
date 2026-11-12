@@ -137,8 +137,8 @@ export const Home = () => {
 
   return (
     <>
-      <div className="container flex flex-wrap justify-center items-center mx-auto py-5 px-5 bg-white-100 my-12">
-        <form className="bg-gray-50 p-4 rounded-xl">
+      <div className="container flex flex-wrap justify-center items-center mx-auto pb-12 bg-white-100 ">
+        <form className="bg-gray-50 sm:p-4 rounded-xl">
           <h2 className="my-5 ml-5 text-xl text-gray-500 ">基本情報</h2>
           <hr className="border border-1 border-gray-300 bg-gray-300" />
 
