@@ -2,9 +2,9 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Guides/Gitの運用ルール" />
 
-# Gitの運用ルール
+# Git の運用ルール
 
-Issueのラベルとブランチの命名規則、コミットメッセージの規約等をまとめました！
+Issue のラベルとブランチの命名規則、コミットメッセージの規約等をまとめました。
 
 <style>
   {`
@@ -32,15 +32,26 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
   `}
 </style>
 
+## GitHub Issue のラベル＆ブランチのプレフィックス
 
-## GitHub Issueのラベル＆ブランチのプレフィックス
+作業を開始する前に、該当する Issue のラベルを確認し、<br/>
+ブランチには対応するプレフィックスを付けてみましょう。
 
-作業を開始する前に、該当するIssueのラベルを確認し、<br/>
-ブランチには対応するプレフィックスを付けてみましょう！
-
-<table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
+<table
+  style={{
+    width: '100%',
+    borderCollapse: 'collapse',
+    textAlign: 'left',
+    fontSize: '14px',
+  }}
+>
   <thead>
-    <tr style={{ borderBottom: '2px solid #e5e7eb', backgroundColor: '#f9fafb' }}>
+    <tr
+      style={{
+        borderBottom: '2px solid #e5e7eb',
+        backgroundColor: '#f9fafb',
+      }}
+    >
       <th style={{ padding: '12px' }}>プレフィックス</th>
       <th style={{ padding: '12px' }}>Issueのラベル</th>
       <th style={{ padding: '12px' }}>使い分けの基準</th>
@@ -48,7 +59,9 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
   </thead>
   <tbody>
     <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-      <td style={{ padding: '12px' }}><code>feature/</code></td>
+      <td style={{ padding: '12px' }}>
+        <code>feature/</code>
+      </td>
       <td style={{ padding: '12px' }}>
         <span className="gh-label label-feature">feature</span>{' '}
         <span className="gh-label label-ui">ui</span>{' '}
@@ -56,10 +69,14 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
         <span className="gh-label label-backend">backend</span>{' '}
         <span className="gh-label label-test">test</span>
       </td>
-      <td style={{ padding: '12px' }}>新しい機能や画面、テストを新しく作るとき</td>
+      <td style={{ padding: '12px' }}>
+        新しい機能や画面、テストを新しく作るとき
+      </td>
     </tr>
     <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-      <td style={{ padding: '12px' }}><code>fix/</code></td>
+      <td style={{ padding: '12px' }}>
+        <code>fix/</code>
+      </td>
       <td style={{ padding: '12px' }}>
         <span className="gh-label label-bug">bug</span>{' '}
         <span className="gh-label label-fix">fix</span>
@@ -67,29 +84,37 @@ Issueのラベルとブランチの命名規則、コミットメッセージの
       <td style={{ padding: '12px' }}>バグや表示崩れを直すとき</td>
     </tr>
     <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-      <td style={{ padding: '12px' }}><code>docs/</code></td>
+      <td style={{ padding: '12px' }}>
+        <code>docs/</code>
+      </td>
       <td style={{ padding: '12px' }}>
         <span className="gh-label label-doc">doc</span>{' '}
         <span className="gh-label label-storybook">Storybook</span>{' '}
         <span className="gh-label label-design">design</span>
       </td>
-      <td style={{ padding: '12px' }}>ドキュメントやStorybook、デザイン仕様を更新するとき</td>
+      <td style={{ padding: '12px' }}>
+        ドキュメントやStorybook、デザイン仕様を更新するとき
+      </td>
     </tr>
-        <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-      <td style={{ padding: '12px' }}><code>refactor</code></td>
+    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '12px' }}>
+        <code>refactor</code>
+      </td>
       <td style={{ padding: '12px' }}>
         <span className="gh-label label-refactor">refactor</span>{' '}
       </td>
-      <td style={{ padding: '12px' }}>機能の動作を変えずに、コードを改善（リファクタリング）するとき</td>
+      <td style={{ padding: '12px' }}>
+        機能の動作を変えずに、コードを改善（リファクタリング）するとき
+      </td>
     </tr>
   </tbody>
 </table>
 
-
 ---
 
 ## ブランチ命名規則
-先頭にプレフィックスをつけましょう！<br/>
+
+先頭にプレフィックスをつけましょう。<br/>
 変更内容が一目でわかるようになります。
 
 ```text
@@ -105,7 +130,7 @@ docs/add-guide
 
 ## コミットメッセージの例
 
-Issue番号を末尾につけると、GitHub上で自動リンクされます！
+Issue 番号を末尾につけると、GitHub 上で自動リンクされます。
 
 ```text
 feature: ログインフォームのUIを実装 (#42)
@@ -114,11 +139,11 @@ docs: StorybookにGit運用ルールページを追加 (#60)
 test: Buttonコンポーネントのテストを追加 (#65)
 ```
 
-
 ## プルリクエスト（PR）作成時のチェックリスト
-　PRは自動で生成される雛形に沿って作成しましょう！<br/>
+
+PR は自動で生成される雛形に沿って作成しましょう。<br/>
 　以下は追加の共通の確認事項です。
 
-* [ ] Storybook上で表示崩れやエラーがないか確認した
-* [ ] レスポンシブ（PC / SP）の表示を確認した
-* [ ] 不要な `console.log` やコメントアウトを削除した
+- [ ] Storybook 上で表示崩れやエラーがないか確認した
+- [ ] レスポンシブ（PC / SP）の表示を確認した
+- [ ] 不要な `console.log` やコメントアウトを削除した
