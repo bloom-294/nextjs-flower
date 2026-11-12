@@ -4,7 +4,7 @@ import type { Meta } from "@storybook/react";
 import { ZipInput } from "./zipInput";
 
 const meta = {
-  title: "Components/Organisms/Form/ZipInput",
+  title: "Components/Molecules/Form/ZipInput",
   component: ZipInput,
   tags: ["autodocs"],
 } as Meta<typeof ZipInput>;

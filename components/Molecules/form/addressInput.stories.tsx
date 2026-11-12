@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { AddressInput } from "./addressInput";
 
 const meta = {
-  title: "Components/Organisms/Form/AddressInput",
+  title: "Components/Molecules/Form/AddressInput",
   component: AddressInput,
   tags: ["autodocs"],
 } as Meta<typeof AddressInput>;

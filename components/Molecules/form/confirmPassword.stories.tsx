@@ -4,7 +4,7 @@ import { ConfirmPasswordInput } from "./confirmPassword";
 
 const meta = {
   title:
-    "Components/Organisms/Form/ConfirmPasswordInput",
+    "Components/Molecules/Form/ConfirmPasswordInput",
   component: ConfirmPasswordInput,
   tags: ["autodocs"],
 } as Meta<typeof ConfirmPasswordInput>;

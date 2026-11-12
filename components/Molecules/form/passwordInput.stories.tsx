@@ -4,7 +4,7 @@ import type { Meta } from "@storybook/react";
 import { PasswordInput } from "./passwordInput";
 
 const meta = {
-  title: "Components/Organisms/Form/PasswordInput",
+  title: "Components/Molecules/Form/PasswordInput",
   component: PasswordInput,
   tags: ["autodocs"],
 } as Meta<typeof PasswordInput>;
