@@ -4,7 +4,7 @@
  品質を担保するため、StorybookやUIテストを充実させています。
 
 ## 公開URL・デモ環境
-- [ECサイト](nextjs-flower.vercel.app)
+- [ECサイト](https://nextjs-flower.vercel.app/)
 - [Storybook（Chromatic)](https://6af58d355d7cf6b21c5efcd0-zdaleixrxw.chromatic.com/?path=/docs/introduction-storybook%E3%81%AE%E9%81%8B%E7%94%A8%E6%96%B9%E9%87%9D--docs)
 
 ## 主な機能
