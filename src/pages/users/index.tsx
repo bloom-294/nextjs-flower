@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { MailInput } from "components/Organisms/form/mailInput";
-import { TelInput } from "components/Organisms/form/telInput";
-import { ZipInput } from "components/Organisms/form/zipInput";
-import { AddressInput } from "components/Organisms/form/addressInput";
-import { PasswordInput } from "components/Organisms/form/passwordInput";
-import { NameInput } from "components/Organisms/form/nameInput";
-import { ConfirmPasswordInput } from "components/Organisms/form/confirmPassword";
+import { MailInput } from "components/Molecules/form/mailInput";
+import { TelInput } from "components/Molecules/form/telInput";
+import { ZipInput } from "components/Molecules/form/zipInput";
+import { AddressInput } from "components/Molecules/form/addressInput";
+import { PasswordInput } from "components/Molecules/form/passwordInput";
+import { NameInput } from "components/Molecules/form/nameInput";
+import { ConfirmPasswordInput } from "components/Molecules/form/confirmPassword";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 

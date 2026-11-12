@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PaymethodInput } from "./paymethodInput";
 
 const meta = {
-  title: "Components/Organisms/Form/PaymethodInput",
+  title: "Components/Molecules/Form/PaymethodInput",
   component: PaymethodInput,
   tags: ["autodocs"],
 } as Meta<typeof PaymethodInput>;

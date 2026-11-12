@@ -4,7 +4,7 @@ import type { Meta } from "@storybook/react";
 import { MailInput } from "./mailInput";
 
 const meta = {
-  title: "Components/Organisms/Form/MailInput",
+  title: "Components/Molecules/Form/MailInput",
   component: MailInput,
   tags: ["autodocs"],
 } as Meta<typeof MailInput>;

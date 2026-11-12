@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { MailInput } from "components/Organisms/form/mailInput";
-import { PasswordInput } from "components/Organisms/form/passwordInput";
+import { MailInput } from "components/Molecules/form/mailInput";
+import { PasswordInput } from "components/Molecules/form/passwordInput";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";

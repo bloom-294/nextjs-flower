@@ -1,9 +1,9 @@
-import { TelInput } from "components/Organisms/form/telInput";
-import { ZipInput } from "components/Organisms/form/zipInput";
-import { AddressInput } from "components/Organisms/form/addressInput";
-import { NameInput } from "components/Organisms/form/nameInput";
-import { PaymethodInput } from "./form/paymethodInput";
-import { DateInput } from "./form/dateInput";
+import { TelInput } from "components/Molecules/form/telInput";
+import { ZipInput } from "components/Molecules/form/zipInput";
+import { AddressInput } from "components/Molecules/form/addressInput";
+import { NameInput } from "components/Molecules/form/nameInput";
+import { PaymethodInput } from "../Molecules/form/paymethodInput";
+import { DateInput } from "../Molecules/form/dateInput";
 import { ConfirmFromTypes } from "types/type";
 
 export const ConfirmFrom = (props: ConfirmFromTypes) => {

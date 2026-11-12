@@ -3,7 +3,7 @@ import type { Meta } from "@storybook/react";
 import { TelInput } from "./telInput";
 
 const meta = {
-  title: "Components/Organisms/Form/TelInput",
+  title: "Components/Molecules/Form/TelInput",
   component: TelInput,
   tags: ["autodocs"],
 } as Meta<typeof TelInput>;
