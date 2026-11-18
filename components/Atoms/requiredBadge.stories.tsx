@@ -19,36 +19,36 @@ type Story = StoryObj<typeof RequiredBadge>;
 
 export const Default: Story = {
   args: {
-    label: "必須",
+    label: '必須',
   },
-  play: async({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const badge = await canvas.findByTestId("badge-label");
+    const badge = await canvas.findByTestId('badge-label');
     await expect(badge).not.toBeEmptyDOMElement();
   },
   parameters: {
     docs: {
       description: {
-        story: '短いテキストを表示したバージョンです。'
-      }
-    }
-  }
+        story: '短いテキストを表示したバージョンです。',
+      },
+    },
+  },
 };
 
 export const LongText: Story = {
   args: {
     label: 'Warning',
   },
-  play: async({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const badge = await canvas.findByTestId("badge-label");
+    const badge = await canvas.findByTestId('badge-label');
     await expect(badge).not.toBeEmptyDOMElement();
   },
   parameters: {
     docs: {
       description: {
-        story: '長いテキストを表示したバージョンです。'
-      }
-    }
-  }
-}
+        story: '長いテキストを表示したバージョンです。',
+      },
+    },
+  },
+};
