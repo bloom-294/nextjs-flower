@@ -1,28 +1,28 @@
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import RecognizeList from "components/Organisms/recognizeList";
-import Swal from "sweetalert2";
-import { ItemListTypes } from "types/type";
-import { Loader } from "components/Atoms/loader";
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import RecognizeList from 'components/Organisms/recognizeList';
+import Swal from 'sweetalert2';
+import { ItemListTypes } from 'types/type';
+import { Loader } from 'components/Atoms/loader';
 
 // const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 export const Details = (data: { item: ItemListTypes }) => {
   const router = useRouter();
-  const [gestIdValue, setGestIdValue] = useState("");
+  const [gestIdValue, setGestIdValue] = useState('');
 
   useEffect(() => {
     const list: string[][] = [];
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     for (const cookieData of list) {
       // ゲストID取得
-      if (cookieData.includes("gestId")) {
+      if (cookieData.includes('gestId')) {
         setGestIdValue(cookieData[1]);
         break;
       }
@@ -46,9 +46,9 @@ export const Details = (data: { item: ItemListTypes }) => {
     };
 
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(addCartItems),
     })
@@ -57,19 +57,19 @@ export const Details = (data: { item: ItemListTypes }) => {
       })
       .then(() => {
         Swal.fire({
-          icon: "success",
-          text: "追加しました！",
-          confirmButtonText: "OK",
-          confirmButtonColor: "#75ad9d",
+          icon: 'success',
+          text: '追加しました！',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#75ad9d',
         });
       })
       .then(() => {
         router.push({
-          pathname: "/carts",
+          pathname: '/carts',
         });
       })
       .catch((error) => {
-        console.error("通信に失敗しました", error);
+        console.error('通信に失敗しました', error);
       });
   };
 
@@ -97,14 +97,18 @@ export const Details = (data: { item: ItemListTypes }) => {
           </div>
 
           <div className="m-12 ">
-            <p className="mb-4 text-xl text-gray-600">{data.item?.name}</p>
+            <p className="mb-4 text-xl text-gray-600">
+              {data.item?.name}
+            </p>
             <h5
               className="mb-8 text-2xl 
             font-bold
             text-[#75ad9d]"
             >
               {Number(data.item?.price).toLocaleString()}
-              <span className="text-sm text-gray-500">円（税込）</span>
+              <span className="text-sm text-gray-500">
+                円（税込）
+              </span>
             </h5>
             <p className="mb-4 text-sm">
               この商品の高さの目安は
@@ -157,16 +161,15 @@ export const Details = (data: { item: ItemListTypes }) => {
 };
 
 export const getStaticPaths = async () => {
-
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   if (!API_BASE_URL) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
+    throw new Error('NEXT_PUBLIC_API_BASE_URL is not defined');
   }
   const res = await fetch(`${API_BASE_URL}/items`);
   const json = await res.json();
 
   const list = json.map((item: any) => ({
-    params: { id: String(item.id) }
+    params: { id: String(item.id) },
   }));
 
   return {
@@ -178,10 +181,12 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }: any) => {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   if (!API_BASE_URL) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
+    throw new Error('NEXT_PUBLIC_API_BASE_URL is not defined');
   }
 
-  const res = await fetch(`${API_BASE_URL}/items?id=${Number(params.id)}`);
+  const res = await fetch(
+    `${API_BASE_URL}/items?id=${Number(params.id)}`
+  );
   const json = await res.json();
   const itemLists = json[0];
 

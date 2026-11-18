@@ -1,9 +1,6 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import type { ChangeEvent } from "react";
-import {
-  ConfirmPasswordTypes,
-  ErrorMessageProps,
-} from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import type { ChangeEvent } from 'react';
+import { ConfirmPasswordTypes, ErrorMessageProps } from 'types/type';
 
 const ConfirmPasswordError = ({
   errorFlag,
@@ -14,7 +11,7 @@ const ConfirmPasswordError = ({
     return null;
   }
 
-  if (value === "empty" || value === "init") {
+  if (value === 'empty' || value === 'init') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         {text}
@@ -22,7 +19,7 @@ const ConfirmPasswordError = ({
     );
   }
 
-  if (value === "mismatch") {
+  if (value === 'mismatch') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         パスワードが一致しません
@@ -33,27 +30,23 @@ const ConfirmPasswordError = ({
   return null;
 };
 
-export const ConfirmPasswordInput = (
-  props: ConfirmPasswordTypes
-) => {
-  const onChangeHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+export const ConfirmPasswordInput = (props: ConfirmPasswordTypes) => {
+  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     const confirmPassword = ev.target.value;
 
     props.SetConfirmPasswordValue(confirmPassword);
 
     if (!confirmPassword) {
-      props.SetConfirmPasswordErrorState("empty");
+      props.SetConfirmPasswordErrorState('empty');
       return;
     }
 
     if (confirmPassword !== props.passwordValue) {
-      props.SetConfirmPasswordErrorState("mismatch");
+      props.SetConfirmPasswordErrorState('mismatch');
       return;
     }
 
-    props.SetConfirmPasswordErrorState("ok");
+    props.SetConfirmPasswordErrorState('ok');
   };
 
   return (
@@ -78,7 +71,7 @@ export const ConfirmPasswordInput = (
           onChange={onChangeHandler}
           placeholder="例）Password123"
           autoComplete="new-password"
-          defaultValue={props.confirmPasswordValue ?? ""}
+          defaultValue={props.confirmPasswordValue ?? ''}
         />
       </div>
     </div>

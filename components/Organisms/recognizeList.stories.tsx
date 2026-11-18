@@ -1,12 +1,11 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { RecognizeList } from "./recognizeList";
+import { RecognizeList } from './recognizeList';
 
 const meta = {
-  title: "Components/Organisms/RecognizeList",
+  title: 'Components/Organisms/RecognizeList',
   component: RecognizeList,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof RecognizeList>;
 
 export default meta;

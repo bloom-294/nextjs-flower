@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const images = [
-  "/banner/Subscription.svg",
-  "/banner/CoupleBanner.svg",
-  "/banner/ChristmasBanner.svg",
-  "/banner/happybirthdayBanner.svg",
+  '/banner/Subscription.svg',
+  '/banner/CoupleBanner.svg',
+  '/banner/ChristmasBanner.svg',
+  '/banner/happybirthdayBanner.svg',
 ];
 
 export const BannerList = () => {

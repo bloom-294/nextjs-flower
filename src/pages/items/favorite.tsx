@@ -1,22 +1,25 @@
-import { ItemCardsWrap } from "components/Organisms/itemCards-wrap";
-import React, { useEffect, useRef, useState } from "react";
-import { Loader } from "components/Atoms/loader";
+import { ItemCardsWrap } from 'components/Organisms/itemCards-wrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Loader } from 'components/Atoms/loader';
 
 export const Favorite = () => {
-  const gestIdValue = useRef("");
+  const gestIdValue = useRef('');
   const [data, setData] = useState<any[] | null>(null);
 
   useEffect(() => {
     // ゲストID取得
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
     const list: string[][] = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     list.forEach((cookieData) => {
-      if (cookieData.includes(" gestId") || cookieData.includes("gestId")) {
+      if (
+        cookieData.includes(' gestId') ||
+        cookieData.includes('gestId')
+      ) {
         gestIdValue.current = cookieData[1];
       }
     });
@@ -24,7 +27,9 @@ export const Favorite = () => {
     // API取得
     const fetchFavorites = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/favorite`); 
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/favorite`
+        );
         const json = await res.json();
         setData(json);
       } catch {
@@ -39,13 +44,15 @@ export const Favorite = () => {
 
   const ErrorMessage = () =>
     data.length === 0 ? (
-      <p className=" translate-y-8 translate-x-24 ">該当する商品がありません。</p>
+      <p className=" translate-y-8 translate-x-24 ">
+        該当する商品がありません。
+      </p>
     ) : null;
 
   return (
     <div className="container flex flex-wrap justify-center items-center mx-auto py-5 px-5">
-      <div className="flex flex-nowrap" style={{ height: "100%" }}>
-        <div className="float-right" style={{ height: "100%" }}>
+      <div className="flex flex-nowrap" style={{ height: '100%' }}>
+        <div className="float-right" style={{ height: '100%' }}>
           <div className="flex flex-wrap justify-center items-center">
             <h1 className="text-[#75ad9d] text-[30px]">お気に入り</h1>
             <ErrorMessage />

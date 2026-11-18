@@ -1,6 +1,6 @@
-import useSWR from "swr";
-import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
-import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
+import useSWR from 'swr';
+import { ItemCardsWrapRecognize } from '../Organisms/itemCards-wrap';
+import { ItemCardsWrapRecognizeSqlTypes } from 'types/type';
 
 type TopRecognizeListProps = {
   title?: string;
@@ -9,15 +9,17 @@ type TopRecognizeListProps = {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getItemsUrl = (base: string) => {
-  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
-  return new URL("items", normalizedBase).toString();
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  return new URL('items', normalizedBase).toString();
 };
 
 const endpoint = API_BASE_URL ? getItemsUrl(API_BASE_URL) : null;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export const TopRecognizeList = ({ title }: TopRecognizeListProps) => {
+export const TopRecognizeList = ({
+  title,
+}: TopRecognizeListProps) => {
   const { data, error } = useSWR<ItemCardsWrapRecognizeSqlTypes[]>(
     endpoint,
     fetcher

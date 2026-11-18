@@ -1,8 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Favorite } from "../Molecules/favorite";
-import style from "../../src/styles/itemListWrap.module.css";
-import { ItemCardsWrapTypes, ItemCardsWrapRecognizeTypes } from "types/type";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Favorite } from '../Molecules/favorite';
+import style from '../../src/styles/itemListWrap.module.css';
+import {
+  ItemCardsWrapTypes,
+  ItemCardsWrapRecognizeTypes,
+} from 'types/type';
 
 // const ItemCardsWrapName = (props: any) => {
 //   if (props.name.length <= 5 || props.name.includes(" ")) {
@@ -34,10 +37,12 @@ import { ItemCardsWrapTypes, ItemCardsWrapRecognizeTypes } from "types/type";
 
 export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
   return (
-    <div className="
+    <div
+      className="
     sm:h-80 sm:w-48 
     w-[95%] m-auto rounded-lg shadow-md cursor-pointer mb-4
-    ">
+    "
+    >
       <Link href={`/items/${props.id}`}>
         <a>
           <Image
@@ -94,7 +99,9 @@ export const ItemCardsWrap = (props: ItemCardsWrapTypes) => {
   );
 };
 
-export const ItemCardsWrapRecognize = (props: ItemCardsWrapRecognizeTypes) => {
+export const ItemCardsWrapRecognize = (
+  props: ItemCardsWrapRecognizeTypes
+) => {
   let id = props.id;
   return (
     <div className=" w-[150px] h-[250px] sm:h-[250px] cursor-pointer mx-1 shadow-md rounded-md">

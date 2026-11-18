@@ -1,21 +1,20 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { PasswordInput } from "./passwordInput";
+import { PasswordInput } from './passwordInput';
 
 const meta = {
-  title: "Components/Molecules/Form/PasswordInput",
+  title: 'Components/Molecules/Form/PasswordInput',
   component: PasswordInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof PasswordInput>;
 
 export default meta;
 
 export const Valid = {
   args: {
-    passwordValue: "Password123",
-    confirmPasswordValue: "Password123",
-    passwordErrorState: "ok",
+    passwordValue: 'Password123',
+    confirmPasswordValue: 'Password123',
+    passwordErrorState: 'ok',
     errorFlag: false,
     displayFlag: true,
     SetPasswordValue: () => {},
@@ -26,9 +25,9 @@ export const Valid = {
 
 export const FormatError = {
   args: {
-    passwordValue: "pass",
-    confirmPasswordValue: "",
-    passwordErrorState: "format-incorrect",
+    passwordValue: 'pass',
+    confirmPasswordValue: '',
+    passwordErrorState: 'format-incorrect',
     errorFlag: true,
     displayFlag: true,
     SetPasswordValue: () => {},
@@ -39,9 +38,9 @@ export const FormatError = {
 
 export const Mismatch = {
   args: {
-    passwordValue: "Password123",
-    confirmPasswordValue: "PASSWORD123!",
-    passwordErrorState: "mismatch",
+    passwordValue: 'Password123',
+    confirmPasswordValue: 'PASSWORD123!',
+    passwordErrorState: 'mismatch',
     errorFlag: true,
     displayFlag: false,
     SetPasswordValue: () => {},
@@ -52,9 +51,9 @@ export const Mismatch = {
 
 export const Empty = {
   args: {
-    passwordValue: "",
-    confirmPasswordValue: "",
-    passwordErrorState: "empty",
+    passwordValue: '',
+    confirmPasswordValue: '',
+    passwordErrorState: 'empty',
     errorFlag: false,
     displayFlag: true,
     SetPasswordValue: () => {},

@@ -1,4 +1,4 @@
-import style from "../../styles/finishPhrase.module.css";
+import style from '../../styles/finishPhrase.module.css';
 
 const App = () => {
   return (

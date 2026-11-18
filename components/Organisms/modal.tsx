@@ -1,8 +1,8 @@
-import ReactModal from "react-modal";
-import type { ComponentType } from "react";
-import { useEffect, useState } from "react";
+import ReactModal from 'react-modal';
+import type { ComponentType } from 'react';
+import { useEffect, useState } from 'react';
 
-const Modal = (ReactModal as unknown) as ComponentType<any> & {
+const Modal = ReactModal as unknown as ComponentType<any> & {
   // eslint-disable-next-line no-unused-vars
   setAppElement: (element: Element | string) => void;
 };
@@ -12,23 +12,23 @@ const customStyles = {
     // position: "fixed",
     top: 0,
     left: 0,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
 
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    width: "500px",
-    height: "300px",
-    transform: "translate(-50%, -50%)",
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    width: '500px',
+    height: '300px',
+    transform: 'translate(-50%, -50%)',
   },
 };
 
 // アプリのルートを識別するクエリセレクタを指定する。
-Modal.setAppElement("#__next");
+Modal.setAppElement('#__next');
 
 export const ModalWindow = (props: { state: boolean }) => {
   const [modalOpen, SetModalOpen] = useState(false);

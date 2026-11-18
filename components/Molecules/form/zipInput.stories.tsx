@@ -1,23 +1,22 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { ZipInput } from "./zipInput";
+import { ZipInput } from './zipInput';
 
 const meta = {
-  title: "Components/Molecules/Form/ZipInput",
+  title: 'Components/Molecules/Form/ZipInput',
   component: ZipInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof ZipInput>;
 
 export default meta;
 
 export const Saved = {
   args: {
-    zipValue: "",
-    ordererZip: "123-1234",
-    zipErrorState: "ok",
+    zipValue: '',
+    ordererZip: '123-1234',
+    zipErrorState: 'ok',
     errorFlag: false,
-    register: "",
+    register: '',
     SetZipValue: () => {},
     SetZipErrorState: () => {},
     SetOrdererZip: () => {},
@@ -26,11 +25,11 @@ export const Saved = {
 
 export const FormatError = {
   args: {
-    zipValue: "1234567",
-    ordererZip: "",
-    zipErrorState: "format-incorrect",
+    zipValue: '1234567',
+    ordererZip: '',
+    zipErrorState: 'format-incorrect',
     errorFlag: true,
-    register: "",
+    register: '',
     SetZipValue: () => {},
     SetZipErrorState: () => {},
     SetOrdererZip: () => {},
@@ -39,11 +38,11 @@ export const FormatError = {
 
 export const UnexistError = {
   args: {
-    zipValue: "000-0000",
-    ordererZip: "",
-    zipErrorState: "unexist",
+    zipValue: '000-0000',
+    ordererZip: '',
+    zipErrorState: 'unexist',
     errorFlag: true,
-    register: "",
+    register: '',
     SetZipValue: () => {},
     SetZipErrorState: () => {},
     SetOrdererZip: () => {},
@@ -52,11 +51,11 @@ export const UnexistError = {
 
 export const Empty = {
   args: {
-    zipValue: "",
-    ordererZip: "",
-    zipErrorState: "empty",
+    zipValue: '',
+    ordererZip: '',
+    zipErrorState: 'empty',
     errorFlag: true,
-    register: "",
+    register: '',
     SetZipValue: () => {},
     SetZipErrorState: () => {},
     SetOrdererZip: () => {},

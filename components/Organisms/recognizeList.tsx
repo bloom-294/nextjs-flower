@@ -1,6 +1,6 @@
-import useSWR from "swr";
-import { ItemCardsWrapRecognize } from "../Organisms/itemCards-wrap";
-import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
+import useSWR from 'swr';
+import { ItemCardsWrapRecognize } from '../Organisms/itemCards-wrap';
+import { ItemCardsWrapRecognizeSqlTypes } from 'types/type';
 
 type RecognizeListProps = {
   category: string;
@@ -11,8 +11,8 @@ type RecognizeListProps = {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getItemsUrl = (base: string) => {
-  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
-  return new URL("items", normalizedBase).toString();
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  return new URL('items', normalizedBase).toString();
 };
 
 const endpoint = API_BASE_URL ? getItemsUrl(API_BASE_URL) : null;
@@ -21,10 +21,10 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const getCategoryText = (category: string | string[] | undefined) => {
   if (Array.isArray(category)) {
-    return category.join(",");
+    return category.join(',');
   }
 
-  return category ?? "";
+  return category ?? '';
 };
 
 export const RecognizeList = ({
@@ -51,7 +51,8 @@ export const RecognizeList = ({
 
         return (
           item.id !== itemId &&
-          (category.includes(itemCategory) || itemCategory.includes(category))
+          (category.includes(itemCategory) ||
+            itemCategory.includes(category))
         );
       })
     : [];
@@ -59,10 +60,15 @@ export const RecognizeList = ({
   const fallbackItems = sortedItems.filter(
     (item) =>
       item.id !== itemId &&
-      !categoryItems.some((categoryItem) => categoryItem.id === item.id)
+      !categoryItems.some(
+        (categoryItem) => categoryItem.id === item.id
+      )
   );
 
-  const recommendItemList = [...categoryItems, ...fallbackItems].slice(0, 5);
+  const recommendItemList = [
+    ...categoryItems,
+    ...fallbackItems,
+  ].slice(0, 5);
 
   return (
     <div className="my-5 w-full overflow-scroll">

@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { RecognizeList } from "components/Organisms/recognizeList";
-import { ShoppingList } from "components/Organisms/shoppingList";
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { RecognizeList } from 'components/Organisms/recognizeList';
+import { ShoppingList } from 'components/Organisms/shoppingList';
 
 export const Home = () => {
-  const [, SetGestIdValue] = useState("");
-  const [loginStatus, SetLoginStatus] = useState("");
+  const [, SetGestIdValue] = useState('');
+  const [loginStatus, SetLoginStatus] = useState('');
 
   useEffect(() => {
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
     const list = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     list.map((cookieData) => {
       // ゲストID取得
-      if (cookieData.includes("gestId")) {
+      if (cookieData.includes('gestId')) {
         SetGestIdValue(cookieData[1]);
       }
-      if (cookieData.includes("login")) {
+      if (cookieData.includes('login')) {
         SetLoginStatus(cookieData[1]);
       }
     });
@@ -45,15 +45,15 @@ export const Home = () => {
             onClick={() => {
               if (!loginStatus) {
                 // console.log(loginStatus);
-                router.push("/users/login");
-                document.cookie = "carts=confirm; path=/;";
+                router.push('/users/login');
+                document.cookie = 'carts=confirm; path=/;';
               } else {
                 // console.log(loginStatus);
-                router.push("/carts/confirm");
+                router.push('/carts/confirm');
               }
             }}
           >
-            {" "}
+            {' '}
             レジへ進む
           </button>
 

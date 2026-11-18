@@ -1,87 +1,94 @@
-import React from "react";
-import { useState } from "react";
-import { MailInput } from "components/Molecules/form/mailInput";
-import { TelInput } from "components/Molecules/form/telInput";
-import { ZipInput } from "components/Molecules/form/zipInput";
-import { AddressInput } from "components/Molecules/form/addressInput";
-import { PasswordInput } from "components/Molecules/form/passwordInput";
-import { NameInput } from "components/Molecules/form/nameInput";
-import { ConfirmPasswordInput } from "components/Molecules/form/confirmPassword";
-import { useRouter } from "next/router";
-import Swal from "sweetalert2";
+import React from 'react';
+import { useState } from 'react';
+import { MailInput } from 'components/Molecules/form/mailInput';
+import { TelInput } from 'components/Molecules/form/telInput';
+import { ZipInput } from 'components/Molecules/form/zipInput';
+import { AddressInput } from 'components/Molecules/form/addressInput';
+import { PasswordInput } from 'components/Molecules/form/passwordInput';
+import { NameInput } from 'components/Molecules/form/nameInput';
+import { ConfirmPasswordInput } from 'components/Molecules/form/confirmPassword';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 
 export const Home = () => {
   const router = useRouter();
 
-  const [lastNameValue, SetLastNameValue] = useState("");
-  const [lastNameErrorState, SetLastNameErrorState] = useState("init");
+  const [lastNameValue, SetLastNameValue] = useState('');
+  const [lastNameErrorState, SetLastNameErrorState] =
+    useState('init');
 
-  const [firstNameValue, SetFirstNameValue] = useState("");
-  const [firstNameErrorState, SetFirstNameErrorState] = useState("init");
+  const [firstNameValue, SetFirstNameValue] = useState('');
+  const [firstNameErrorState, SetFirstNameErrorState] =
+    useState('init');
 
-  const [mailValue, SetMailValue] = useState("");
-  const [mailErrorState, SetMailErrorState] = useState("init");
+  const [mailValue, SetMailValue] = useState('');
+  const [mailErrorState, SetMailErrorState] = useState('init');
 
-  const [telValue, SetTelValue] = useState("");
-  const [telErrorState, SetTelErrorState] = useState("init");
+  const [telValue, SetTelValue] = useState('');
+  const [telErrorState, SetTelErrorState] = useState('init');
 
-  const [zipValue, SetZipValue] = useState("");
-  const [zipErrorState, SetZipErrorState] = useState("init");
+  const [zipValue, SetZipValue] = useState('');
+  const [zipErrorState, SetZipErrorState] = useState('init');
 
-  const [addressValue, SetAddressValue] = useState("");
-  const [addressErrorState, SetAddressErrorState] = useState("init");
+  const [addressValue, SetAddressValue] = useState('');
+  const [addressErrorState, SetAddressErrorState] = useState('init');
 
-  const [passwordValue, SetPasswordValue] = useState("");
-  const [passwordErrorState, SetPasswordErrorState] = useState("init");
+  const [passwordValue, SetPasswordValue] = useState('');
+  const [passwordErrorState, SetPasswordErrorState] =
+    useState('init');
 
-  const [confirmPasswordValue, SetConfirmPasswordValue] = useState("");
+  const [confirmPasswordValue, SetConfirmPasswordValue] =
+    useState('');
   const [confirmPasswordErrorState, SetConfirmPasswordErrorState] =
-    useState("init");
+    useState('init');
 
   const [errorFlag, SetErrorFlag] = useState(false);
 
   const clear = () => {
-    SetLastNameErrorState("init");
-    SetFirstNameErrorState("init");
-    SetMailErrorState("init");
-    SetTelErrorState("init");
-    SetZipErrorState("init");
-    SetAddressErrorState("init");
-    SetPasswordErrorState("init");
-    SetConfirmPasswordErrorState("init");
+    SetLastNameErrorState('init');
+    SetFirstNameErrorState('init');
+    SetMailErrorState('init');
+    SetTelErrorState('init');
+    SetZipErrorState('init');
+    SetAddressErrorState('init');
+    SetPasswordErrorState('init');
+    SetConfirmPasswordErrorState('init');
 
-    SetLastNameValue("");
-    SetFirstNameValue("");
-    SetMailValue("");
-    SetTelValue("");
-    SetZipValue("");
-    SetAddressValue("");
-    SetPasswordValue("");
-    SetConfirmPasswordValue("");
+    SetLastNameValue('');
+    SetFirstNameValue('');
+    SetMailValue('');
+    SetTelValue('');
+    SetZipValue('');
+    SetAddressValue('');
+    SetPasswordValue('');
+    SetConfirmPasswordValue('');
 
     SetErrorFlag(false);
   };
 
   const register = async () => {
     if (
-      firstNameErrorState === "ok" &&
-      lastNameErrorState === "ok" &&
-      mailErrorState === "ok" &&
-      telErrorState === "ok" &&
-      zipErrorState === "ok" &&
-      addressErrorState === "ok" &&
-      passwordErrorState === "ok" &&
-      confirmPasswordErrorState === "ok"
+      firstNameErrorState === 'ok' &&
+      lastNameErrorState === 'ok' &&
+      mailErrorState === 'ok' &&
+      telErrorState === 'ok' &&
+      zipErrorState === 'ok' &&
+      addressErrorState === 'ok' &&
+      passwordErrorState === 'ok' &&
+      confirmPasswordErrorState === 'ok'
     ) {
       let password = `${passwordValue}flower`;
 
       const sha256 = async (text: string) => {
         const msgUint8 = new TextEncoder().encode(text); // (utf-8 の) Uint8Array にエンコードする
-        const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8); // メッセージをハッシュする
+        const hashBuffer = await crypto.subtle.digest(
+          'SHA-256',
+          msgUint8
+        ); // メッセージをハッシュする
         const hashArray = Array.from(new Uint8Array(hashBuffer)); // バッファーをバイト列に変換する
         const hashHex = hashArray
-          .map((b) => b.toString(16).padStart(2, "0"))
-          .join(""); // バイト列を16進文字列に変換する
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join(''); // バイト列を16進文字列に変換する
         return hashHex;
       };
 
@@ -106,9 +113,9 @@ export const Home = () => {
       };
 
       await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       })
@@ -118,17 +125,17 @@ export const Home = () => {
         .then(() => {
           // alert("登録が完了いたしました。");
           Swal.fire({
-            icon: "success",
-            text: "登録が完了いたしました",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#75ad9d",
+            icon: 'success',
+            text: '登録が完了いたしました',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#75ad9d',
           });
         })
         .then(() => {
-          router.push("/users/login");
+          router.push('/users/login');
         })
         .catch((error) => {
-          console.error("通信に失敗しました", error);
+          console.error('通信に失敗しました', error);
         });
     } else {
       SetErrorFlag(true);
@@ -139,7 +146,9 @@ export const Home = () => {
     <>
       <div className="container flex flex-wrap justify-center items-center mx-auto pb-12 bg-white-100 ">
         <form className="bg-gray-50 sm:p-4 rounded-xl">
-          <h2 className="my-5 ml-5 text-xl text-gray-500 ">基本情報</h2>
+          <h2 className="my-5 ml-5 text-xl text-gray-500 ">
+            基本情報
+          </h2>
           <hr className="border border-1 border-gray-300 bg-gray-300" />
 
           <NameInput
@@ -202,7 +211,9 @@ export const Home = () => {
             errorFlag={errorFlag}
             displayFlag={true}
             confirmPasswordValue={confirmPasswordValue}
-            SetConfirmPasswordErrorState={SetConfirmPasswordErrorState}
+            SetConfirmPasswordErrorState={
+              SetConfirmPasswordErrorState
+            }
           />
           <hr />
 
@@ -210,7 +221,9 @@ export const Home = () => {
             confirmPasswordValue={confirmPasswordValue}
             SetConfirmPasswordValue={SetConfirmPasswordValue}
             confirmPasswordErrorState={confirmPasswordErrorState}
-            SetConfirmPasswordErrorState={SetConfirmPasswordErrorState}
+            SetConfirmPasswordErrorState={
+              SetConfirmPasswordErrorState
+            }
             errorFlag={errorFlag}
             passwordValue={passwordValue}
           />
@@ -220,8 +233,8 @@ export const Home = () => {
               type="button"
               className="text-white px-14 py-2 rounded-md text-sm mr-7 mt-5"
               style={{
-                backgroundColor: "#75ad9d",
-                border: "solid 1px #75ad9d",
+                backgroundColor: '#75ad9d',
+                border: 'solid 1px #75ad9d',
               }}
               onClick={register}
             >
@@ -231,7 +244,10 @@ export const Home = () => {
             <button
               type="reset"
               className="text-gray-900 px-10 py-2 rounded-md text-sm mt-5"
-              style={{ color: "#75ad9d", border: "solid 1px #75ad9d" }}
+              style={{
+                color: '#75ad9d',
+                border: 'solid 1px #75ad9d',
+              }}
               onClick={clear}
             >
               クリア

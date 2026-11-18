@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type SearchFormProps = {
   categoryWord: string | string[];
@@ -44,14 +44,18 @@ export const SearchForm = ({
           setSearchState(false);
         }}
         onKeyDown={(ev) => {
-          if (ev.nativeEvent.isComposing || ev.keyCode === 229) return;
+          if (ev.nativeEvent.isComposing || ev.keyCode === 229)
+            return;
 
-          if (ev.key === "Backspace" && ev.currentTarget.value === "") {
+          if (
+            ev.key === 'Backspace' &&
+            ev.currentTarget.value === ''
+          ) {
             setSearchState(false);
           }
         }}
       />
-      <span 
+      <span
         className="
           material-icons 
           relative
@@ -62,7 +66,8 @@ export const SearchForm = ({
           align-text-bottom
           lg:visible
           invisible
-      ">
+      "
+      >
         search
       </span>
     </form>

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 
 export type User = {
   address: string;
@@ -135,35 +135,28 @@ export type ZipTypes = {
   SetZipErrorState: React.FC | Function;
   errorFlag: boolean;
   ordererZip?: string;
-  SetOrdererZip?: React.Dispatch<
-      React.SetStateAction<string>>;
+  SetOrdererZip?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type PaymethodTypes = {
-  SetOrdererPayMethod: React.Dispatch<
-      React.SetStateAction<string>>;
+  SetOrdererPayMethod: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type DateTypes = {
   ordererDateState?: { current: string[] } | any;
-  SetDateErrorState?: React.Dispatch<
-      React.SetStateAction<string>>;
-  SetOrdererDate?: React.Dispatch<
-      React.SetStateAction<string>>;
+  SetDateErrorState?: React.Dispatch<React.SetStateAction<string>>;
+  SetOrdererDate?: React.Dispatch<React.SetStateAction<string>>;
   ordererDate?: string;
 };
 
-export type ConfirmFromTypes =
-  NameTypes &
+export type ConfirmFromTypes = NameTypes &
   TelTypes &
   AddressTypes &
   ZipTypes &
   PaymethodTypes &
   DateTypes &
   MailTypes & {
-    SetOrdererName: React.Dispatch<
-      React.SetStateAction<string>
-    >;
+    SetOrdererName: React.Dispatch<React.SetStateAction<string>>;
 
     SetordererStateChange: React.Dispatch<
       React.SetStateAction<boolean>

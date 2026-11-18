@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Response = {
   name: string;
@@ -18,7 +18,7 @@ export type ItemListApiResponse = {
   debugMessage?: string;
 };
 
-import { sql } from "@vercel/postgres";
+import { sql } from '@vercel/postgres';
 
 let itemList: any;
 
@@ -32,12 +32,12 @@ const handler = async (
   const itemListSql = await sql`SELECT * FROM items;`;
   itemList = await itemListSql.rows;
 
-  if (item === "ALL") {
+  if (item === 'ALL') {
     res.status(200).json({ itemList });
   } else if (item) {
     res.status(200).json({ item });
   } else {
-    res.status(400).json({ debugMessage: "not found" });
+    res.status(400).json({ debugMessage: 'not found' });
   }
 };
 
@@ -45,7 +45,7 @@ const fetchItemList = (id: number) => {
   if (id) {
     return itemList.find((item: any) => item.id === id);
   } else {
-    return "ALL";
+    return 'ALL';
   }
 };
 

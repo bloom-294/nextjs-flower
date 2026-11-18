@@ -1,17 +1,16 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { ConfirmFrom } from "./confirmFrom";
+import { ConfirmFrom } from './confirmFrom';
 
 /**
  * ### 購入確認画面のフォームです。
- * 
+ *
  */
 
 const meta = {
-  title: "Components/Organisms/ConfirmFrom",
+  title: 'Components/Organisms/ConfirmFrom',
   component: ConfirmFrom,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof ConfirmFrom>;
 
 export default meta;
@@ -21,55 +20,55 @@ const mockSetState = () => {};
 export const Default = {
   args: {
     // Name
-    lastNameValue: "田中",
+    lastNameValue: '田中',
     SetLastNameValue: mockSetState,
-    firstNameValue: "太郎",
+    firstNameValue: '太郎',
     SetFirstNameValue: mockSetState,
-    firstNameErrorState: "init",
+    firstNameErrorState: 'init',
     SetFirstNameErrorState: mockSetState,
-    lastNameErrorState: "init",
+    lastNameErrorState: 'init',
     SetLastNameErrorState: mockSetState,
     errorFlag: false,
     SetOrdererFirstName: mockSetState,
     SetOrdererLastName: mockSetState,
-    ordererLastName: "",
-    ordererFirstName: "",
+    ordererLastName: '',
+    ordererFirstName: '',
 
     // Tel
-    telValue: "",
+    telValue: '',
     SetTelValue: mockSetState,
-    telErrorState: "init",
+    telErrorState: 'init',
     SetTelErrorState: mockSetState,
-    ordererTel: "",
+    ordererTel: '',
     SetOrdererTel: mockSetState,
 
     // Zip
-    zipValue: "",
+    zipValue: '',
     SetZipValue: mockSetState,
-    zipErrorState: "init",
+    zipErrorState: 'init',
     SetZipErrorState: mockSetState,
-    ordererZip: "",
+    ordererZip: '',
     SetOrdererZip: mockSetState,
 
     // Address
-    addressValue: "",
+    addressValue: '',
     SetAddressValue: mockSetState,
-    addressErrorState: "init",
+    addressErrorState: 'init',
     SetAddressErrorState: mockSetState,
-    ordererAddress: "",
+    ordererAddress: '',
     SetOrdererAddress: mockSetState,
 
     // Paymethod
-    ordererPayMethod: "",
+    ordererPayMethod: '',
     SetOrdererPayMethod: mockSetState,
 
     // Date
     ordererDateState: {
-      current: ["", "init"],
+      current: ['', 'init'],
     },
     SetDateErrorState: mockSetState,
     SetOrdererDate: mockSetState,
-    ordererDate: "",
+    ordererDate: '',
 
     // ConfirmFrom
     SetOrdererName: mockSetState,

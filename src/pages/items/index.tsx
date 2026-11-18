@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-import { useRouter } from "next/router";
-import { ItemCardsWrap } from "../../../components/Organisms/itemCards-wrap";
-import { SearchForm } from "components/Molecules/searchForm";
-import { Loader } from "components/Atoms/loader";
-import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
-import Countup from "react-countup";
-import { ItemCardsWrapRecognizeSqlTypes } from "types/type";
-import Swal from "sweetalert2";
-import { API_BASE_URL } from "src/config/publicEnv";
+import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import { ItemCardsWrap } from '../../../components/Organisms/itemCards-wrap';
+import { SearchForm } from 'components/Molecules/searchForm';
+import { Loader } from 'components/Atoms/loader';
+import { SearchNavigationbar } from 'components/Organisms/searchNavigationbar';
+import Countup from 'react-countup';
+import { ItemCardsWrapRecognizeSqlTypes } from 'types/type';
+import Swal from 'sweetalert2';
+import { API_BASE_URL } from 'src/config/publicEnv';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const Toast = Swal.mixin({
   toast: true,
-  position: "top",
+  position: 'top',
   showConfirmButton: false,
   timer: 2000,
 });
@@ -26,93 +26,116 @@ const toKatakana = (str: string) => {
 
 const normalizeSearchText = (str: string) => {
   return toKatakana(str)
-    .normalize("NFKC")
-    .replace(/\s+/g, "")
+    .normalize('NFKC')
+    .replace(/\s+/g, '')
     .toLowerCase();
 };
 
 export const Home = () => {
-  const [searchWord, setSearchWord] = useState("");
+  const [searchWord, setSearchWord] = useState('');
   const [searchState, setSearchState] = useState(false);
-  const [sort, setSort] = useState("");
-  
-  
+  const [sort, setSort] = useState('');
+
   const router = useRouter();
-  let categoryWord: string | string[] = "";
-  
+  let categoryWord: string | string[] = '';
+
   if (router.query.category) {
     categoryWord = router.query.category;
   } else {
-    categoryWord = "全ての商品";
+    categoryWord = '全ての商品';
   }
-  
-  const normalizedApiBaseUrl = API_BASE_URL.endsWith("/")
-  ? API_BASE_URL
-  : `${API_BASE_URL}/`;
 
-  const itemsEndpoint = new URL("items", normalizedApiBaseUrl).toString();
+  const normalizedApiBaseUrl = API_BASE_URL.endsWith('/')
+    ? API_BASE_URL
+    : `${API_BASE_URL}/`;
+
+  const itemsEndpoint = new URL(
+    'items',
+    normalizedApiBaseUrl
+  ).toString();
 
   const { data, error } = useSWR(itemsEndpoint, fetcher);
 
   const sourceItemList = data ?? [];
 
   const safeCategoryWord =
-  typeof categoryWord === "string"
-    ? categoryWord
-    : categoryWord?.[0] ?? "全ての商品";
+    typeof categoryWord === 'string'
+      ? categoryWord
+      : categoryWord?.[0] ?? '全ての商品';
 
   // 1. カテゴリで絞り込む
   const categoryFilteredList =
-    safeCategoryWord !== "全ての商品"
-      ? sourceItemList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
-          (item.category ?? []).includes(safeCategoryWord)
+    safeCategoryWord !== '全ての商品'
+      ? sourceItemList.filter(
+          (item: ItemCardsWrapRecognizeSqlTypes) =>
+            (item.category ?? []).includes(safeCategoryWord)
         )
       : sourceItemList;
-      
+
   // 2. 検索ワードで絞り込む
 
   const normalizedSearchWord = normalizeSearchText(searchWord);
 
   const searchedList = searchState
-    ? categoryFilteredList.filter((item: ItemCardsWrapRecognizeSqlTypes) =>
-        normalizeSearchText(item.name ?? "").includes(normalizedSearchWord)
+    ? categoryFilteredList.filter(
+        (item: ItemCardsWrapRecognizeSqlTypes) =>
+          normalizeSearchText(item.name ?? '').includes(
+            normalizedSearchWord
+          )
       )
     : categoryFilteredList;
 
   // 3. 並び替え
   const itemList = [...searchedList];
-  
 
-  if (sort === "安い") {
-    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
-      return (a.price ?? 0) - (b.price ?? 0);
-    });
+  if (sort === '安い') {
+    itemList.sort(
+      (
+        a: ItemCardsWrapRecognizeSqlTypes,
+        b: ItemCardsWrapRecognizeSqlTypes
+      ) => {
+        return (a.price ?? 0) - (b.price ?? 0);
+      }
+    );
   }
 
-  if (sort === "高い") {
-    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
-      return (b.price ?? 0) - (a.price ?? 0);
-    });
+  if (sort === '高い') {
+    itemList.sort(
+      (
+        a: ItemCardsWrapRecognizeSqlTypes,
+        b: ItemCardsWrapRecognizeSqlTypes
+      ) => {
+        return (b.price ?? 0) - (a.price ?? 0);
+      }
+    );
   }
 
-  if (sort === "おすすめ") {
-    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
-      return (b.recommend ?? 0) - (a.recommend ?? 0);
-    });
+  if (sort === 'おすすめ') {
+    itemList.sort(
+      (
+        a: ItemCardsWrapRecognizeSqlTypes,
+        b: ItemCardsWrapRecognizeSqlTypes
+      ) => {
+        return (b.recommend ?? 0) - (a.recommend ?? 0);
+      }
+    );
   }
 
-  if (sort === "人気") {
-    itemList.sort((a: ItemCardsWrapRecognizeSqlTypes, b: ItemCardsWrapRecognizeSqlTypes) => {
-      return (b.popular ?? 0) - (a.popular ?? 0);
-    });
+  if (sort === '人気') {
+    itemList.sort(
+      (
+        a: ItemCardsWrapRecognizeSqlTypes,
+        b: ItemCardsWrapRecognizeSqlTypes
+      ) => {
+        return (b.popular ?? 0) - (a.popular ?? 0);
+      }
+    );
   }
 
   const shouldRedirectToAllItems =
-  !!data &&
-  itemList.length === 0 &&
-  (
-    searchState || safeCategoryWord !== "全ての商品"
-  );
+    !!data &&
+    itemList.length === 0 &&
+    (searchState || safeCategoryWord !== '全ての商品');
 
   // 4. 検索結果が0件ならポップを出して商品一覧へ遷移
   useEffect(() => {
@@ -120,19 +143,18 @@ export const Home = () => {
 
     const showToast = async () => {
       Toast.fire({
-        icon: "error",
-        title: "該当する商品がありません",
+        icon: 'error',
+        title: '該当する商品がありません',
       });
 
       setSearchState(false);
-      setSearchWord("");
-      router.replace("/items");
+      setSearchWord('');
+      router.replace('/items');
     };
     showToast();
   }, [shouldRedirectToAllItems, router]);
 
   // const itemListLength: boolean = itemList.length === 0;
-
 
   useEffect(() => {
     if (!searchState) return;
@@ -140,7 +162,7 @@ export const Home = () => {
     if (itemList.length === 0) return;
 
     Toast.fire({
-      icon: "success",
+      icon: 'success',
       title: `${itemList.length}件見つかりました`,
     });
   }, [searchState, itemList.length, data]);
@@ -156,16 +178,17 @@ export const Home = () => {
   return (
     <>
       <div className="container sm:flex flex-wrap justify-center items-center mx-auto sm:py-5 px-5">
-        <div className="flex flex-nowrap justify-center" style={{ height: "100%" }}>
+        <div
+          className="flex flex-nowrap justify-center"
+          style={{ height: '100%' }}
+        >
           <div className="hidden md:flex flex-col">
             <p className="text-md mb-4">
               <span>Home</span> &gt; {categoryWord}
             </p>
 
             <div className="bg-gray-100 rounded-md w-48 py-1">
-              <h3
-                className="bg-gray-100 flex rounded-md justify-center items-end mx-auto h-12 pb-1"
-              >
+              <h3 className="bg-gray-100 flex rounded-md justify-center items-end mx-auto h-12 pb-1">
                 該当商品
                 <span className="mx-4 translate-y-2">
                   <Countup
@@ -181,7 +204,7 @@ export const Home = () => {
             <SearchNavigationbar />
           </div>
 
-          <div className="float-right" style={{ height: "100%" }}>
+          <div className="float-right" style={{ height: '100%' }}>
             <div className="container flex flex-wrap justify-center items-center mx-auto pt-5 px-5">
               <SearchForm
                 setSearchWord={setSearchWord}
@@ -197,7 +220,7 @@ export const Home = () => {
                     type="button"
                     className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
-                      setSort("おすすめ");
+                      setSort('おすすめ');
                     }}
                   >
                     おすすめ順
@@ -209,7 +232,7 @@ export const Home = () => {
                     type="button"
                     className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
-                      setSort("人気");
+                      setSort('人気');
                     }}
                   >
                     人気順
@@ -221,7 +244,7 @@ export const Home = () => {
                     type="button"
                     className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
-                      setSort("安い");
+                      setSort('安い');
                     }}
                   >
                     価格が安い順
@@ -233,7 +256,7 @@ export const Home = () => {
                     type="button"
                     className="border-b whitespace-nowrap text-gray-400 focus:text-[#75ad9d] focus:border-[#75ad9d] text-md"
                     onClick={() => {
-                      setSort("高い");
+                      setSort('高い');
                     }}
                   >
                     価格が高い順
@@ -242,11 +265,12 @@ export const Home = () => {
               </ul>
             </div>
 
-            <div
-              className="my-12 grid grid-cols-2 w-[100%] sm:grid-cols-2 sm:gap-10 sm:mx-0 sm:w-auto lg:grid-cols-3 2xl:grid-cols-5"
-            >
+            <div className="my-12 grid grid-cols-2 w-[100%] sm:grid-cols-2 sm:gap-10 sm:mx-0 sm:w-auto lg:grid-cols-3 2xl:grid-cols-5">
               {itemList.map(
-                (itemData: ItemCardsWrapRecognizeSqlTypes, index: number) => {
+                (
+                  itemData: ItemCardsWrapRecognizeSqlTypes,
+                  index: number
+                ) => {
                   return (
                     <ItemCardsWrap
                       name={itemData.name}

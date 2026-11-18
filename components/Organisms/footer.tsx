@@ -1,30 +1,30 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 const snsList = [
   {
-    href: "https://twitter.com/",
-    src: "/logo/Twitter.png",
-    alt: "twitter",
+    href: 'https://twitter.com/',
+    src: '/logo/Twitter.png',
+    alt: 'twitter',
   },
   {
-    href: "https://www.instagram.com/",
-    src: "/logo/Instagram.png",
-    alt: "instagram",
+    href: 'https://www.instagram.com/',
+    src: '/logo/Instagram.png',
+    alt: 'instagram',
   },
   {
-    href: "https://ja-jp.facebook.com/",
-    src: "/logo/facebook.png",
-    alt: "facebook",
+    href: 'https://ja-jp.facebook.com/',
+    src: '/logo/facebook.png',
+    alt: 'facebook',
   },
 ];
 
 const footerMenuList = [
-  "会社概要",
-  "採用情報",
-  "利用規約",
-  "プライバシーポリシー",
-  "特定商取引法に基づく表示",
+  '会社概要',
+  '採用情報',
+  '利用規約',
+  'プライバシーポリシー',
+  '特定商取引法に基づく表示',
 ];
 
 export const Footer = () => {
