@@ -1,15 +1,21 @@
-import Image from "next/image";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import style from "../../src/styles/header.module.css";
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import style from '../../src/styles/header.module.css';
+import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const Logo = (props: { path: string }) => {
   return (
     <Link href="/">
       <a>
-        <Image src={props.path} width={90} height={70} className="" alt="架空のお花屋さんのECサイトのロゴです。" />
+        <Image
+          src={props.path}
+          width={90}
+          height={70}
+          className=""
+          alt="架空のお花屋さんのECサイトのロゴです。"
+        />
       </a>
     </Link>
   );
@@ -18,7 +24,9 @@ const Logo = (props: { path: string }) => {
 const HeaderListText = (props: { name: string; path: string }) => {
   return (
     <>
-      <li className={`float-left mx-8 py-2.5 text-center  ${style.link}`}>
+      <li
+        className={`float-left mx-8 py-2.5 text-center  ${style.link}`}
+      >
         <Link href={props.path}>
           <a>{props.name}</a>
         </Link>
@@ -28,7 +36,7 @@ const HeaderListText = (props: { name: string; path: string }) => {
 };
 
 const headerIconStyles =
-  "float-left mx-4 py-2.5 flex flex-col justify-center items-center text-gray-500 text-sm z-100";
+  'float-left mx-4 py-2.5 flex flex-col justify-center items-center text-gray-500 text-sm z-100';
 
 const HeaderListGoogleIconList = (props: {
   name: string;
@@ -36,15 +44,26 @@ const HeaderListGoogleIconList = (props: {
   list?: any;
   title: string;
 }) => {
-  if (props.title !== "アカウント") {
+  if (props.title !== 'アカウント') {
     return (
       <>
         <Link href={props.path}>
-          <li className={`group ${headerIconStyles} w-max cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}>
-              <a className={`group-hover:text-[#75ad9d] flex flex-col text-center`}>
-                <span className="cursor-pointer text-xl leading-none">{props.title}</span>
-                <span className="text-md leading-tight" aria-hidden="true">{props.name}</span>
-              </a>
+          <li
+            className={`group ${headerIconStyles} w-max cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}
+          >
+            <a
+              className={`group-hover:text-[#75ad9d] flex flex-col text-center`}
+            >
+              <span className="cursor-pointer text-xl leading-none">
+                {props.title}
+              </span>
+              <span
+                className="text-md leading-tight"
+                aria-hidden="true"
+              >
+                {props.name}
+              </span>
+            </a>
           </li>
         </Link>
       </>
@@ -52,15 +71,23 @@ const HeaderListGoogleIconList = (props: {
   } else {
     return (
       <>
-      <Link href={props.path}>
-        <li className={`${headerIconStyles} cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}>
-          <span className="cursor-pointer text-xl leading-none"> {props.title}</span>
-          <span className="text-md leading-tight" aria-hidden="true">
-            {props.name}
-          </span>
-          {props.list}
-        </li>
-      </Link>
+        <Link href={props.path}>
+          <li
+            className={`${headerIconStyles} cursor-pointer relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#5d3d4a] hover:after:w-full`}
+          >
+            <span className="cursor-pointer text-xl leading-none">
+              {' '}
+              {props.title}
+            </span>
+            <span
+              className="text-md leading-tight"
+              aria-hidden="true"
+            >
+              {props.name}
+            </span>
+            {props.list}
+          </li>
+        </Link>
       </>
     );
   }
@@ -108,21 +135,21 @@ export const Header = () => {
   const [loginState, SetLoginState] = useState(false);
 
   useEffect(() => {
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
     const list = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     // cookieにgestIDがセットされていな場合、付与する
     if (list.length !== 0) {
       list.map((data) => {
-        if (data[0].includes("gestId")) {
+        if (data[0].includes('gestId')) {
           cookieList.push(data[0]);
         }
         if (data.length >= 2) {
-          if (data[1].includes("login")) {
+          if (data[1].includes('login')) {
             SetLoginState(true);
           }
         }
@@ -168,7 +195,10 @@ export const Header = () => {
             <HeaderListText name="カート" path={`/carts`} />
             <HeaderListText name="新規登録" path={`/users/`} />
 
-            <LoginState loginState={loginState} SetLoginState={SetLoginState} />
+            <LoginState
+              loginState={loginState}
+              SetLoginState={SetLoginState}
+            />
             {/* <HeaderListText name="ログイン" path={`/users/login`} /> */}
           </ul>
         </div>
@@ -242,24 +272,24 @@ export const Header = () => {
               path={`/items`}
               list={<UserNavigationGroupOther />}
               title="商品一覧"
-              />
+            />
             <HeaderListGoogleIconList
               name="carts"
               path={`/carts`}
               list={<UserNavigationGroupCart />}
               title="カート"
-              />
+            />
             <HeaderListGoogleIconList
               name="login"
               path={`/users/login`}
               list={
                 <UserNavigationGroupUser
-                loginState={loginState}
-                SetLoginState={SetLoginState}
+                  loginState={loginState}
+                  SetLoginState={SetLoginState}
                 />
               }
               title="ログイン"
-              />
+            />
           </ul>
         </nav>
 
@@ -269,7 +299,9 @@ export const Header = () => {
               SetHamburgerMenuDisplayState(true);
             }}
           >
-            <span className={`material-icons mx-8 text-gray-400 ${style.menu}`}>
+            <span
+              className={`material-icons mx-8 text-gray-400 ${style.menu}`}
+            >
               menu
             </span>
           </button>
@@ -293,15 +325,15 @@ const LoginState = (props: any) => {
         <button
           type="button"
           onClick={() => {
-            document.cookie = "status=login; path=/; max-age=0;";
+            document.cookie = 'status=login; path=/; max-age=0;';
             Swal.fire({
-              icon: "success",
-              text: "ログアウトしました！",
-              confirmButtonText: "OK",
-              confirmButtonColor: "#75ad9d",
+              icon: 'success',
+              text: 'ログアウトしました！',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#75ad9d',
             });
             props.SetLoginState(false);
-            router.push("/items");
+            router.push('/items');
           }}
         >
           ログアウト

@@ -1,20 +1,20 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from '@storybook/react';
 
-import { AddressInput } from "./addressInput";
+import { AddressInput } from './addressInput';
 
 const meta = {
-  title: "Components/Molecules/Form/AddressInput",
+  title: 'Components/Molecules/Form/AddressInput',
   component: AddressInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof AddressInput>;
 
 export default meta;
 
 export const Saved = {
   args: {
-    addressValue: "",
-    ordererAddress: "東京都中央区",
-    addressErrorState: "ok",
+    addressValue: '',
+    ordererAddress: '東京都中央区',
+    addressErrorState: 'ok',
     errorFlag: false,
     SetAddressValue: () => {},
     SetAddressErrorState: () => {},
@@ -24,9 +24,9 @@ export const Saved = {
 
 export const Empty = {
   args: {
-    addressValue: "",
-    ordererAddress: "",
-    addressErrorState: "empty",
+    addressValue: '',
+    ordererAddress: '',
+    addressErrorState: 'empty',
     errorFlag: true,
     SetAddressValue: () => {},
     SetAddressErrorState: () => {},

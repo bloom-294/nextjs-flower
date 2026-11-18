@@ -1,12 +1,11 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { ShoppingList } from "./shoppingList";
+import { ShoppingList } from './shoppingList';
 
 const meta = {
-  title: "Components/Organisms/ShoppingList",
+  title: 'Components/Organisms/ShoppingList',
   component: ShoppingList,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof ShoppingList>;
 
 export default meta;

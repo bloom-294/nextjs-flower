@@ -1,12 +1,11 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { RequiredBadge } from "./requiredBadge";
+import { RequiredBadge } from './requiredBadge';
 
 const meta = {
-  title: "Components/Atoms/RequiredBadge",
+  title: 'Components/Atoms/RequiredBadge',
   component: RequiredBadge,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof RequiredBadge>;
 
 export default meta;

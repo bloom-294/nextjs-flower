@@ -1,45 +1,46 @@
-import React, { useEffect } from "react";
-import { MailInput } from "components/Molecules/form/mailInput";
-import { PasswordInput } from "components/Molecules/form/passwordInput";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Swal from "sweetalert2";
-import Link from "next/link";
+import React, { useEffect } from 'react';
+import { MailInput } from 'components/Molecules/form/mailInput';
+import { PasswordInput } from 'components/Molecules/form/passwordInput';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
+import Link from 'next/link';
 
 export const Home = () => {
-  const [mailValue, SetMailValue] = useState("");
-  const [mailErrorState, SetMailErrorState] = useState("init");
+  const [mailValue, SetMailValue] = useState('');
+  const [mailErrorState, SetMailErrorState] = useState('init');
 
-  const [passwordValue, SetPasswordValue] = useState("");
-  const [passwordErrorState, SetPasswordErrorState] = useState("init");
+  const [passwordValue, SetPasswordValue] = useState('');
+  const [passwordErrorState, SetPasswordErrorState] =
+    useState('init');
 
   const [errorFlag, SetErrorFlag] = useState(false);
   // ログイン状態
   const [loginStatus, SetLoginStatus] = useState(false);
 
-  const [gestIdValue, SetGestIdValue] = useState("");
-  const [cartStatus, SetCartStatus] = useState("");
+  const [gestIdValue, SetGestIdValue] = useState('');
+  const [cartStatus, SetCartStatus] = useState('');
 
   const router = useRouter();
 
   useEffect(() => {
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
     const list = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     list.map((data) => {
-      if (data.includes("login")) {
+      if (data.includes('login')) {
         SetLoginStatus(true);
       }
       // ゲストID付与
-      if (data.includes(" gestId") || data.includes("gestId")) {
+      if (data.includes(' gestId') || data.includes('gestId')) {
         SetGestIdValue(data[1]);
       }
 
-      if (data.includes(" carts") || data.includes("carts")) {
+      if (data.includes(' carts') || data.includes('carts')) {
         SetCartStatus(data[1]);
       }
     });
@@ -59,18 +60,21 @@ export const Home = () => {
         address: props[0].address,
         tel: props[0].tel,
         password: props[0].password,
-        status: "login",
+        status: 'login',
         gestId: gestIdValue,
       };
 
       // ログインstatus追加
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${props[0].id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${props[0].id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((response) => {
           return response.json();
         })
@@ -78,34 +82,34 @@ export const Home = () => {
           console.log(data);
         })
         .then(() => {
-          document.cookie = "status=login; path=/;";
+          document.cookie = 'status=login; path=/;';
         })
         .then(() => {
           // alert("ログインしました。");
           Swal.fire({
-            icon: "success",
-            text: "ログインしました！",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#75ad9d",
+            icon: 'success',
+            text: 'ログインしました！',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#75ad9d',
           });
         })
         .then(() => {
-          if (cartStatus === "confirm") {
-            router.push("/carts/confirm");
-            document.cookie = "carts=shopping; path=/; max-age=0;";
+          if (cartStatus === 'confirm') {
+            router.push('/carts/confirm');
+            document.cookie = 'carts=shopping; path=/; max-age=0;';
           } else {
-            router.push("/items");
+            router.push('/items');
           }
         })
         .catch((error) => {
-          console.error("通信に失敗しました", error);
+          console.error('通信に失敗しました', error);
         });
     } else {
       Swal.fire({
-        icon: "error",
-        text: "既にログインしています",
-        confirmButtonText: "OK",
-        confirmButtonColor: "#75ad9d",
+        icon: 'error',
+        text: '既にログインしています',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#75ad9d',
       });
     }
   };
@@ -142,7 +146,7 @@ export const Home = () => {
               <button
                 type="button"
                 className="text-white px-12 py-2 rounded-md text-sm mb-4 hover:opacity-80"
-                style={{ backgroundColor: "#75ad9d" }}
+                style={{ backgroundColor: '#75ad9d' }}
                 onClick={async () => {
                   SetErrorFlag(true);
 
@@ -150,13 +154,15 @@ export const Home = () => {
                   const sha256 = async (text: string) => {
                     const msgUint8 = new TextEncoder().encode(text); // (utf-8 の) Uint8Array にエンコードする
                     const hashBuffer = await crypto.subtle.digest(
-                      "SHA-256",
+                      'SHA-256',
                       msgUint8
                     ); // メッセージをハッシュする
-                    const hashArray = Array.from(new Uint8Array(hashBuffer)); // バッファーをバイト列に変換する
+                    const hashArray = Array.from(
+                      new Uint8Array(hashBuffer)
+                    ); // バッファーをバイト列に変換する
                     const hashHex = hashArray
-                      .map((b) => b.toString(16).padStart(2, "0"))
-                      .join(""); // バイト列を16進文字列に変換する
+                      .map((b) => b.toString(16).padStart(2, '0'))
+                      .join(''); // バイト列を16進文字列に変換する
                     return hashHex;
                   };
 
@@ -168,7 +174,10 @@ export const Home = () => {
 
                   await hash();
 
-                  if (mailErrorState === "ok" && passwordErrorState === "ok") {
+                  if (
+                    mailErrorState === 'ok' &&
+                    passwordErrorState === 'ok'
+                  ) {
                     // console.log(password);
                     await fetch(
                       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users?mail=${mailValue}&&password=${password}`
@@ -178,10 +187,10 @@ export const Home = () => {
                         if (data.length === 0) {
                           // alert("メールアドレスかパスワードが違います。");
                           Swal.fire({
-                            icon: "error",
-                            text: "メールアドレスかパスワードが違います。",
-                            confirmButtonText: "OK",
-                            confirmButtonColor: "#75ad9d",
+                            icon: 'error',
+                            text: 'メールアドレスかパスワードが違います。',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#75ad9d',
                           });
                         } else {
                           if (
@@ -194,16 +203,16 @@ export const Home = () => {
                           } else {
                             // alert("メールアドレスかパスワードが違います。");
                             Swal.fire({
-                              icon: "error",
-                              text: "メールアドレスかパスワードが違います。",
-                              confirmButtonText: "OK",
-                              confirmButtonColor: "#75ad9d",
+                              icon: 'error',
+                              text: 'メールアドレスかパスワードが違います。',
+                              confirmButtonText: 'OK',
+                              confirmButtonColor: '#75ad9d',
                             });
                           }
                         }
                       })
                       .catch((error) => {
-                        console.error("通信に失敗しました", error);
+                        console.error('通信に失敗しました', error);
                       });
                   }
                 }}
@@ -212,7 +221,7 @@ export const Home = () => {
               </button>
             </div>
           </form>
-          <Link href={"/users"}>
+          <Link href={'/users'}>
             <a className="block text-center text-sm hover:opacity-80 sm:mb-2 mb-4">
               会員登録がお済みではない方はこちら
             </a>

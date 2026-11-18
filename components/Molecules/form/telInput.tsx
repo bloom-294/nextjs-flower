@@ -1,6 +1,6 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import React, { ChangeEvent } from "react";
-import { ErrorMessageProps , TelTypes } from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import React, { ChangeEvent } from 'react';
+import { ErrorMessageProps, TelTypes } from 'types/type';
 
 const Navigation = (props: { value: string; text: string }) => {
   if (props.value.length > 0) {
@@ -9,14 +9,14 @@ const Navigation = (props: { value: string; text: string }) => {
         <div className="py-2 text-gray-500 text-sm mb-8">
           <p>
             {(() => {
-              if (props.value.includes("-")) {
+              if (props.value.includes('-')) {
                 return (
                   <>
                     <span
                       className="material-symbols-outlined 
                   rounded-full mr-3 text-white translate-y-1.5
                   "
-                      style={{ backgroundColor: "#75ad9d" }}
+                      style={{ backgroundColor: '#75ad9d' }}
                     >
                       check_circle
                     </span>
@@ -48,7 +48,7 @@ const Navigation = (props: { value: string; text: string }) => {
 
 const Error4 = (props: ErrorMessageProps) => {
   if (props.errorFlag === true) {
-    if (props.value === "empty" || props.value === "init") {
+    if (props.value === 'empty' || props.value === 'init') {
       return (
         <>
           <label className="Error text-red-500 ml-3 sm:text-sm text-xs sm:inline-block block sm:mt-0 mt-2">
@@ -56,7 +56,7 @@ const Error4 = (props: ErrorMessageProps) => {
           </label>
         </>
       );
-    } else if (props.value === "format-incorrect") {
+    } else if (props.value === 'format-incorrect') {
       return (
         <label className="Error text-red-500 ml-3 sm:text-sm text-xs sm:inline-block block sm:mt-0 mt-2">
           xxx-xxxx-xxxxの形式で入力してください
@@ -71,7 +71,7 @@ const Error4 = (props: ErrorMessageProps) => {
 };
 
 export const TelInput = (props: TelTypes) => {
-  let tel = "";
+  let tel = '';
 
   if (props.ordererTel) {
     tel = props.ordererTel;
@@ -84,28 +84,28 @@ export const TelInput = (props: TelTypes) => {
       props.SetTelValue(ev.target.value);
 
       if (!ev.target.value) {
-        props.SetTelErrorState("empty");
-      } else if (!ev.target.value.includes("-")) {
-        props.SetTelErrorState("format-incorrect");
+        props.SetTelErrorState('empty');
+      } else if (!ev.target.value.includes('-')) {
+        props.SetTelErrorState('format-incorrect');
       } else {
-        props.SetTelErrorState("ok");
+        props.SetTelErrorState('ok');
       }
     }
   };
-const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
-  const value = ev.target.value;
+  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
+    const value = ev.target.value;
 
-  props.SetTelValue(value);
-  props.SetOrdererTel?.(value);
+    props.SetTelValue(value);
+    props.SetOrdererTel?.(value);
 
-  if (!value) {
-    props.SetTelErrorState("empty");
-  } else if (!value.includes("-")) {
-    props.SetTelErrorState("format-incorrect");
-  } else {
-    props.SetTelErrorState("ok");
-  }
-};
+    if (!value) {
+      props.SetTelErrorState('empty');
+    } else if (!value.includes('-')) {
+      props.SetTelErrorState('format-incorrect');
+    } else {
+      props.SetTelErrorState('ok');
+    }
+  };
 
   return (
     <>
@@ -133,7 +133,10 @@ const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
             autoComplete="tel"
           />
         </div>
-        <Navigation text="-（ハイフン）を含む形式" value={props.telValue} />
+        <Navigation
+          text="-（ハイフン）を含む形式"
+          value={props.telValue}
+        />
       </div>
     </>
   );

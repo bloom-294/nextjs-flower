@@ -1,22 +1,17 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import type { ChangeEvent } from "react";
-import { NameError, NameTypes } from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import type { ChangeEvent } from 'react';
+import { NameError, NameTypes } from 'types/type';
 
-const Error3 = ({
-  errorFlag,
-  value1,
-  value2,
-  text,
-}: NameError) => {
+const Error3 = ({ errorFlag, value1, value2, text }: NameError) => {
   if (!errorFlag) {
     return null;
   }
 
   if (
-    value1 === "empty" ||
-    value2 === "empty" ||
-    value1 === "init" ||
-    value2 === "init"
+    value1 === 'empty' ||
+    value2 === 'empty' ||
+    value1 === 'init' ||
+    value2 === 'init'
   ) {
     return (
       <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2 ">
@@ -31,34 +26,26 @@ const Error3 = ({
 export const NameInput = (props: NameTypes) => {
   const isConfirm = !!props.SetOrdererLastName;
 
-  const lastName = props.ordererLastName || "";
-  const firstName = props.ordererFirstName || "";
+  const lastName = props.ordererLastName || '';
+  const firstName = props.ordererFirstName || '';
 
-  const onChangeHandlerLast = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeHandlerLast = (ev: ChangeEvent<HTMLInputElement>) => {
     if (isConfirm) {
       return;
     }
 
     props.SetLastNameValue(ev.target.value);
-    props.SetLastNameErrorState(
-      ev.target.value ? "ok" : "empty"
-    );
+    props.SetLastNameErrorState(ev.target.value ? 'ok' : 'empty');
   };
 
-  const onBlurHandlerLast = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onBlurHandlerLast = (ev: ChangeEvent<HTMLInputElement>) => {
     if (!isConfirm) {
       return;
     }
 
     props.SetLastNameValue(ev.target.value);
     props.SetOrdererLastName?.(ev.target.value);
-    props.SetLastNameErrorState(
-      ev.target.value ? "ok" : "empty"
-    );
+    props.SetLastNameErrorState(ev.target.value ? 'ok' : 'empty');
   };
 
   const onChangeHandlerFirst = (
@@ -69,23 +56,17 @@ export const NameInput = (props: NameTypes) => {
     }
 
     props.SetFirstNameValue(ev.target.value);
-    props.SetFirstNameErrorState(
-      ev.target.value ? "ok" : "empty"
-    );
+    props.SetFirstNameErrorState(ev.target.value ? 'ok' : 'empty');
   };
 
-  const onBlurHandlerFirst = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onBlurHandlerFirst = (ev: ChangeEvent<HTMLInputElement>) => {
     if (!isConfirm) {
       return;
     }
 
     props.SetFirstNameValue(ev.target.value);
     props.SetOrdererFirstName?.(ev.target.value);
-    props.SetFirstNameErrorState(
-      ev.target.value ? "ok" : "empty"
-    );
+    props.SetFirstNameErrorState(ev.target.value ? 'ok' : 'empty');
   };
 
   return (

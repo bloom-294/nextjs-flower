@@ -1,5 +1,5 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import React from "react";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import React from 'react';
 
 type PaymethodInputProps = {
   ordererPayMethod: string;
@@ -24,9 +24,9 @@ export const PaymethodInput = ({
             type="radio"
             name="orderer-pay-method"
             value="現金払い"
-            checked={ordererPayMethod === "現金払い"}
+            checked={ordererPayMethod === '現金払い'}
             onChange={() => {
-              SetOrdererPayMethod("現金払い");
+              SetOrdererPayMethod('現金払い');
             }}
           />
           現金払い
@@ -38,9 +38,9 @@ export const PaymethodInput = ({
             type="radio"
             name="orderer-pay-method"
             value="クレジット"
-            checked={ordererPayMethod === "クレジット"}
+            checked={ordererPayMethod === 'クレジット'}
             onChange={() => {
-              SetOrdererPayMethod("クレジット");
+              SetOrdererPayMethod('クレジット');
             }}
           />
           クレジット

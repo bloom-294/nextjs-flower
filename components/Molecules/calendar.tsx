@@ -1,4 +1,4 @@
-import style from "../../src/styles/calendar.module.css";
+import style from '../../src/styles/calendar.module.css';
 
 export const Calendar = () => {
   return (

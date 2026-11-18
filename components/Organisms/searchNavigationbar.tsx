@@ -1,6 +1,6 @@
-import React from "react";
-import { SearchCategoryList } from "./searchCategoryList";
-import { BannerList } from "./bannerList";
+import React from 'react';
+import { SearchCategoryList } from './searchCategoryList';
+import { BannerList } from './bannerList';
 
 export const SearchNavigationbar = () => {
   return (

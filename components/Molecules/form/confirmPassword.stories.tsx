@@ -1,21 +1,20 @@
-import type { Meta } from "@storybook/react";
+import type { Meta } from '@storybook/react';
 
-import { ConfirmPasswordInput } from "./confirmPassword";
+import { ConfirmPasswordInput } from './confirmPassword';
 
 const meta = {
-  title:
-    "Components/Molecules/Form/ConfirmPasswordInput",
+  title: 'Components/Molecules/Form/ConfirmPasswordInput',
   component: ConfirmPasswordInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof ConfirmPasswordInput>;
 
 export default meta;
 
 export const Saved = {
   args: {
-    passwordValue: "Password123",
-    confirmPasswordValue: "Password123",
-    confirmPasswordErrorState: "ok",
+    passwordValue: 'Password123',
+    confirmPasswordValue: 'Password123',
+    confirmPasswordErrorState: 'ok',
     errorFlag: false,
     SetConfirmPasswordValue: () => {},
     SetConfirmPasswordErrorState: () => {},
@@ -24,9 +23,9 @@ export const Saved = {
 
 export const Mismatch = {
   args: {
-    passwordValue: "Password123",
-    confirmPasswordValue: "Password999",
-    confirmPasswordErrorState: "mismatch",
+    passwordValue: 'Password123',
+    confirmPasswordValue: 'Password999',
+    confirmPasswordErrorState: 'mismatch',
     errorFlag: true,
     SetConfirmPasswordValue: () => {},
     SetConfirmPasswordErrorState: () => {},
@@ -35,9 +34,9 @@ export const Mismatch = {
 
 export const Empty = {
   args: {
-    passwordValue: "",
-    confirmPasswordValue: "",
-    confirmPasswordErrorState: "empty",
+    passwordValue: '',
+    confirmPasswordValue: '',
+    confirmPasswordErrorState: 'empty',
     errorFlag: true,
     SetConfirmPasswordValue: () => {},
     SetConfirmPasswordErrorState: () => {},

@@ -1,17 +1,17 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import React from "react";
-import { useState } from "react";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import React from 'react';
+import { useState } from 'react';
 
 const Error = (props: {
   state: string | undefined;
   text: string;
   dateErrorState: string | undefined;
 }) => {
-  if (props.state !== "日時指定あり") {
+  if (props.state !== '日時指定あり') {
     return null;
   }
 
-  if (props.dateErrorState === "empty") {
+  if (props.dateErrorState === 'empty') {
     return (
       <span className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
         {props.text}
@@ -19,7 +19,7 @@ const Error = (props: {
     );
   }
 
-  if (props.dateErrorState === "impossible") {
+  if (props.dateErrorState === 'impossible') {
     return (
       <span className="Error sm:ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
         ６日後以降を選択してください。
@@ -33,19 +33,25 @@ const Error = (props: {
 export const DateInput = (props: {
   ordererDateState: {
     current: string[];
-  } ;
-  SetDateErrorState: React.Dispatch<React.SetStateAction<string>> | undefined;
-  SetOrdererDate: React.Dispatch<React.SetStateAction<string>> | undefined;
+  };
+  SetDateErrorState:
+    | React.Dispatch<React.SetStateAction<string>>
+    | undefined;
+  SetOrdererDate:
+    | React.Dispatch<React.SetStateAction<string>>
+    | undefined;
   ordererDate: string | undefined;
   errorFlag: boolean;
 }) => {
-  const [deliveryType, setDeliveryType] = useState(props?.ordererDateState?.current[0]);
+  const [deliveryType, setDeliveryType] = useState(
+    props?.ordererDateState?.current[0]
+  );
   const [dateErrorState, setDateErrorState] = useState(
-  props.ordererDateState.current[1]);
+    props.ordererDateState.current[1]
+  );
   const SIX_DAYS_MS = 1000 * 60 * 60 * 24 * 6;
 
-
-  console.log(1,deliveryType,dateErrorState);
+  console.log(1, deliveryType, dateErrorState);
   return (
     <div className="my-5 ml-5">
       <div className="mb-2">
@@ -63,13 +69,13 @@ export const DateInput = (props: {
             className="pay mx-3"
             type="radio"
             name="date"
-            checked={deliveryType === "日時指定なし"}
+            checked={deliveryType === '日時指定なし'}
             value="日時指定なし"
             onChange={() => {
-              setDeliveryType("日時指定なし");
-              props.ordererDateState.current[0] = "日時指定なし";
-              props.ordererDateState.current[1] = "ok";
-              setDateErrorState("ok");
+              setDeliveryType('日時指定なし');
+              props.ordererDateState.current[0] = '日時指定なし';
+              props.ordererDateState.current[1] = 'ok';
+              setDateErrorState('ok');
             }}
           />
           日時指定なし
@@ -80,37 +86,40 @@ export const DateInput = (props: {
             type="radio"
             name="date"
             id="fixedDate"
-            checked={deliveryType === "日時指定あり"}
+            checked={deliveryType === '日時指定あり'}
             value="日時指定あり"
             onChange={() => {
-              setDeliveryType("日時指定あり");
-              setDateErrorState("empty");
-              props.ordererDateState.current[0] = "日時指定あり";
-              props.ordererDateState.current[1] = "empty";
+              setDeliveryType('日時指定あり');
+              setDateErrorState('empty');
+              props.ordererDateState.current[0] = '日時指定あり';
+              props.ordererDateState.current[1] = 'empty';
             }}
           />
           日時指定あり
         </label>
-        <label htmlFor="sameDayDelivery" className="sm:inline-block block">
+        <label
+          htmlFor="sameDayDelivery"
+          className="sm:inline-block block"
+        >
           <input
             className="pay mx-3"
             type="radio"
             name="date"
             id="sameDayDelivery"
-            checked={deliveryType === "即日配送"}
+            checked={deliveryType === '即日配送'}
             value="即日配送"
             onChange={() => {
-              setDeliveryType("即日配送");
-              props.ordererDateState.current[0] = "即日配送";
-              props.ordererDateState.current[1] = "ok";
-              setDateErrorState("ok");
+              setDeliveryType('即日配送');
+              props.ordererDateState.current[0] = '即日配送';
+              props.ordererDateState.current[1] = 'ok';
+              setDateErrorState('ok');
             }}
           />
           即日配送
         </label>
 
         {/* 指定ありが選択されたら表示 */}
-        {deliveryType === "日時指定あり" && (
+        {deliveryType === '日時指定あり' && (
           <div className="my-5 ml-5">
             <input
               type="date"
@@ -119,11 +128,13 @@ export const DateInput = (props: {
               className="form-control rounded-md border px-3 py-1"
               pattern="\d{4},\d{1},\d{1}"
               onChange={(e) => {
-                props.ordererDateState.current[2] = String(e.target.value);
+                props.ordererDateState.current[2] = String(
+                  e.target.value
+                );
 
                 if (!e.target.value) {
-                  props.ordererDateState.current[1] = "empty";
-                  setDateErrorState("empty");
+                  props.ordererDateState.current[1] = 'empty';
+                  setDateErrorState('empty');
                   return;
                 }
 
@@ -132,7 +143,8 @@ export const DateInput = (props: {
 
                 currentDate.setHours(0, 0, 0, 0);
 
-                const split = props.ordererDateState.current[2].split("-");
+                const split =
+                  props.ordererDateState.current[2].split('-');
 
                 specifiedDate.setFullYear(Number(split[0]));
                 specifiedDate.setMonth(Number(split[1]) - 1);
@@ -146,16 +158,22 @@ export const DateInput = (props: {
                   SIX_DAYS_MS,
                 });
 
-                if (Number(specifiedDate) - Number(currentDate) <= SIX_DAYS_MS) {
-                  props.ordererDateState.current[1] = "impossible";
-                  setDateErrorState("impossible");
+                if (
+                  Number(specifiedDate) - Number(currentDate) <=
+                  SIX_DAYS_MS
+                ) {
+                  props.ordererDateState.current[1] = 'impossible';
+                  setDateErrorState('impossible');
                   return;
                 } else {
-                  props.ordererDateState.current[1] = "ok";
-                  setDateErrorState("ok");
+                  props.ordererDateState.current[1] = 'ok';
+                  setDateErrorState('ok');
                 }
 
-                console.log(222222,props.ordererDateState.current[1]);
+                console.log(
+                  222222,
+                  props.ordererDateState.current[1]
+                );
               }}
             />
           </div>

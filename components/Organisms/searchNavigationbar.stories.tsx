@@ -1,12 +1,11 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { SearchNavigationbar } from "./searchNavigationbar";
+import { SearchNavigationbar } from './searchNavigationbar';
 
 const meta = {
-  title: "Components/Organisms/SearchNavigationbar",
+  title: 'Components/Organisms/SearchNavigationbar',
   component: SearchNavigationbar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof SearchNavigationbar>;
 
 export default meta;

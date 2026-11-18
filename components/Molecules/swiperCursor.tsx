@@ -1,19 +1,19 @@
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Pagination } from "swiper";
-import style from "./swiper.module.css";
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import style from './swiper.module.css';
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 SwiperCore.use([Pagination, Autoplay]);
 
 const images = [
-  "/banner/Subscription.svg",
-  "/banner/CoupleBanner.svg",
-  "/banner/ChristmasBanner.svg",
-  "/banner/happybirthdayBanner.svg",
+  '/banner/Subscription.svg',
+  '/banner/CoupleBanner.svg',
+  '/banner/ChristmasBanner.svg',
+  '/banner/happybirthdayBanner.svg',
 ];
 
 export const SlideCursor = () => {
@@ -52,13 +52,13 @@ export const SlideCursor = () => {
     <>
       <div className="mx-auto hidden sm:container sm:block">
         <Swiper slidesPerView={4} {...swiperProps}>
-          {renderSlides("25vw")}
+          {renderSlides('25vw')}
         </Swiper>
       </div>
 
       <div className="mx-auto w-[100vw] sm:hidden sm:w-auto">
         <Swiper slidesPerView={2} {...swiperProps}>
-          {renderSlides("50vw")}
+          {renderSlides('50vw')}
         </Swiper>
       </div>
     </>

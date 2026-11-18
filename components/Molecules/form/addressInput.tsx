@@ -1,6 +1,6 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import type { ChangeEvent } from "react";
-import { AddressTypes, ErrorMessageProps } from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import type { ChangeEvent } from 'react';
+import { AddressTypes, ErrorMessageProps } from 'types/type';
 
 const ErrorMessage = ({
   errorFlag,
@@ -11,7 +11,7 @@ const ErrorMessage = ({
     return null;
   }
 
-  if (value !== "empty" && value !== "init") {
+  if (value !== 'empty' && value !== 'init') {
     return null;
   }
 
@@ -27,31 +27,23 @@ export const AddressInput = (props: AddressTypes) => {
     ? props.ordererAddress
     : props.addressValue;
 
-  const onChangeHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     if (props.ordererAddress) {
       return;
     }
 
     props.SetAddressValue(ev.target.value);
-    props.SetAddressErrorState(
-      ev.target.value ? "ok" : "empty"
-    );
+    props.SetAddressErrorState(ev.target.value ? 'ok' : 'empty');
   };
 
-  const onBlurHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     if (!props.ordererAddress) {
       return;
     }
 
     props.SetAddressValue(ev.target.value);
     props.SetOrdererAddress?.(ev.target.value);
-    props.SetAddressErrorState(
-      ev.target.value ? "ok" : "empty"
-    );
+    props.SetAddressErrorState(ev.target.value ? 'ok' : 'empty');
   };
 
   return (

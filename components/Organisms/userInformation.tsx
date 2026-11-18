@@ -1,4 +1,4 @@
-import { UserInfo } from "types/type";
+import { UserInfo } from 'types/type';
 
 export const UserInformation = (props: UserInfo) => {
   if (!props.name) return null;

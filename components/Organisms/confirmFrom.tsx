@@ -1,31 +1,29 @@
-import { TelInput } from "components/Molecules/form/telInput";
-import { ZipInput } from "components/Molecules/form/zipInput";
-import { AddressInput } from "components/Molecules/form/addressInput";
-import { NameInput } from "components/Molecules/form/nameInput";
-import { PaymethodInput } from "../Molecules/form/paymethodInput";
-import { DateInput } from "../Molecules/form/dateInput";
-import { ConfirmFromTypes } from "types/type";
+import { TelInput } from 'components/Molecules/form/telInput';
+import { ZipInput } from 'components/Molecules/form/zipInput';
+import { AddressInput } from 'components/Molecules/form/addressInput';
+import { NameInput } from 'components/Molecules/form/nameInput';
+import { PaymethodInput } from '../Molecules/form/paymethodInput';
+import { DateInput } from '../Molecules/form/dateInput';
+import { ConfirmFromTypes } from 'types/type';
 
 export const ConfirmFrom = (props: ConfirmFromTypes) => {
-
   const getIsValidForm = () =>
-  props.firstNameErrorState === "ok" &&
-  props.lastNameErrorState === "ok" &&
-  props.telErrorState === "ok" &&
-  props.zipErrorState === "ok" &&
-  props.addressErrorState === "ok" &&
-  (props.ordererDateState.current[1] === "ok" ||
-    props.ordererDateState.current[1] === "init");
+    props.firstNameErrorState === 'ok' &&
+    props.lastNameErrorState === 'ok' &&
+    props.telErrorState === 'ok' &&
+    props.zipErrorState === 'ok' &&
+    props.addressErrorState === 'ok' &&
+    (props.ordererDateState.current[1] === 'ok' ||
+      props.ordererDateState.current[1] === 'init');
 
-
-    console.log({
-  firstName: props.firstNameErrorState,
-  lastName: props.lastNameErrorState,
-  tel: props.telErrorState,
-  zip: props.zipErrorState,
-  address: props.addressErrorState,
-  date: props.ordererDateState.current[1],
-});
+  console.log({
+    firstName: props.firstNameErrorState,
+    lastName: props.lastNameErrorState,
+    tel: props.telErrorState,
+    zip: props.zipErrorState,
+    address: props.addressErrorState,
+    date: props.ordererDateState.current[1],
+  });
 
   return (
     <div className="mx-auto sm:py-5 py-3 px-3 flex w-full max-w-md flex-wrap items-center justify-center bg-white-100 p-4">

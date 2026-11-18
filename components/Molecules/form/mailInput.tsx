@@ -1,20 +1,20 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import type { ChangeEvent } from "react";
-import { ErrorMessageProps, MailTypes } from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import type { ChangeEvent } from 'react';
+import { ErrorMessageProps, MailTypes } from 'types/type';
 
 const Navigation = (props: { value: string; text: string }) => {
   if (!props.value) {
     return null;
   }
 
-  const isValid = props.value.includes("@");
+  const isValid = props.value.includes('@');
 
   return (
     <div className="mb-8 py-2 text-sm text-gray-500">
       <p>
         <span
           className={`material-symbols-outlined mr-3 translate-y-1.5 rounded-full text-white ${
-            isValid ? "bg-[#75ad9d]" : "bg-gray-300"
+            isValid ? 'bg-[#75ad9d]' : 'bg-gray-300'
           }`}
         >
           check_circle
@@ -34,7 +34,7 @@ const ErrorMessage = ({
     return null;
   }
 
-  if (value === "empty" || value === "init") {
+  if (value === 'empty' || value === 'init') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         {text}
@@ -42,7 +42,7 @@ const ErrorMessage = ({
     );
   }
 
-  if (value === "format-incorrect") {
+  if (value === 'format-incorrect') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         xxx@xxxxの形式で入力してください
@@ -50,7 +50,7 @@ const ErrorMessage = ({
     );
   }
 
-  if (value === "registered") {
+  if (value === 'registered') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         このメールアドレスは使用されています
@@ -66,33 +66,29 @@ export const MailInput = (props: MailTypes) => {
     ? props.ordererMail
     : props.mailValue;
 
-  const onChangeHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     const inputValue = ev.target.value;
 
     props.SetMailValue(inputValue);
     props.SetOrdererMail?.(inputValue);
 
     if (!inputValue) {
-      props.SetMailErrorState("empty");
+      props.SetMailErrorState('empty');
       return;
     }
 
-    if (!inputValue.includes("@")) {
-      props.SetMailErrorState("format-incorrect");
+    if (!inputValue.includes('@')) {
+      props.SetMailErrorState('format-incorrect');
       return;
     }
 
-    props.SetMailErrorState("ok");
+    props.SetMailErrorState('ok');
   };
 
-  const onBlurHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     if (
-      props.mailErrorState !== "ok" ||
-      props.register !== "register"
+      props.mailErrorState !== 'ok' ||
+      props.register !== 'register'
     ) {
       return;
     }
@@ -103,11 +99,11 @@ export const MailInput = (props: MailTypes) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.length !== 0) {
-          props.SetMailErrorState("registered");
+          props.SetMailErrorState('registered');
         }
       })
       .catch(() => {
-        console.log("error");
+        console.log('error');
       });
   };
 
@@ -138,10 +134,7 @@ export const MailInput = (props: MailTypes) => {
       </div>
 
       {props.displayFlag && (
-        <Navigation
-          value={props.mailValue}
-          text="@を含む形式"
-        />
+        <Navigation value={props.mailValue} text="@を含む形式" />
       )}
     </div>
   );

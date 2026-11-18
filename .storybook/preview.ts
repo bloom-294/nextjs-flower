@@ -1,9 +1,9 @@
 // @ts-ignore
-import "tailwindcss/tailwind.css";
+import 'tailwindcss/tailwind.css';
 // @ts-ignore
-import "swiper/css/bundle";
+import 'swiper/css/bundle';
 
-import type { Preview } from "@storybook/react";
+import type { Preview } from '@storybook/react';
 
 const customHead = document.createElement('style');
 customHead.innerHTML = `
@@ -44,8 +44,8 @@ const preview: Preview = {
           ['Gitの運用ルール'],
           'Design',
           ['デザインシステム（簡易版）'],
-          'Components',        
-          '*',                  
+          'Components',
+          '*',
         ],
       },
     },

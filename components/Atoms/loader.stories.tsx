@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Loader } from "./loader";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Loader } from './loader';
 
 const meta: Meta<typeof Loader> = {
-  title: "Components/Atoms/Loader",
+  title: 'Components/Atoms/Loader',
   component: Loader,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
 };
 

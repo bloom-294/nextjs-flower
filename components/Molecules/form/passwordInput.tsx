@@ -1,21 +1,20 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import type { ChangeEvent } from "react";
-import { ErrorMessageProps, PasswordTypes } from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import type { ChangeEvent } from 'react';
+import { ErrorMessageProps, PasswordTypes } from 'types/type';
 
 const Navigation = (props: { value: string; text: string }) => {
   if (!props.value) {
     return null;
   }
 
-  const isValid =
-    props.value.length >= 8 && props.value.length <= 16;
+  const isValid = props.value.length >= 8 && props.value.length <= 16;
 
   return (
     <div className="py-2 text-sm text-gray-500">
       <p>
         <span
           className={`material-symbols-outlined mr-3 translate-y-1.5 rounded-full text-white ${
-            isValid ? "bg-[#75ad9d]" : "bg-gray-300"
+            isValid ? 'bg-[#75ad9d]' : 'bg-gray-300'
           }`}
         >
           check_circle
@@ -35,7 +34,7 @@ const ErrorMessage = ({
     return null;
   }
 
-  if (value === "empty" || value === "init") {
+  if (value === 'empty' || value === 'init') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         {text}
@@ -43,7 +42,7 @@ const ErrorMessage = ({
     );
   }
 
-  if (value === "format-incorrect") {
+  if (value === 'format-incorrect') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         8文字以上16文字以下で入力してください
@@ -51,7 +50,7 @@ const ErrorMessage = ({
     );
   }
 
-  if (value === "mismatch") {
+  if (value === 'mismatch') {
     return (
       <label className="Error ml-3 text-sm text-red-500">
         パスワードが一致しません
@@ -63,19 +62,17 @@ const ErrorMessage = ({
 };
 
 export const PasswordInput = (props: PasswordTypes) => {
-  const onChangeHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     const password = ev.target.value;
 
     props.SetPasswordValue(password);
 
     if (!password) {
-      props.SetPasswordErrorState("empty");
+      props.SetPasswordErrorState('empty');
     } else if (password.length < 8 || password.length > 16) {
-      props.SetPasswordErrorState("format-incorrect");
+      props.SetPasswordErrorState('format-incorrect');
     } else {
-      props.SetPasswordErrorState("ok");
+      props.SetPasswordErrorState('ok');
     }
 
     if (!props.displayFlag) {
@@ -83,11 +80,11 @@ export const PasswordInput = (props: PasswordTypes) => {
     }
 
     if (password !== props.confirmPasswordValue) {
-      props.SetConfirmPasswordErrorState("mismatch");
+      props.SetConfirmPasswordErrorState('mismatch');
       return;
     }
 
-    props.SetConfirmPasswordErrorState("ok");
+    props.SetConfirmPasswordErrorState('ok');
   };
 
   return (
@@ -111,7 +108,7 @@ export const PasswordInput = (props: PasswordTypes) => {
           onChange={onChangeHandler}
           placeholder="例）Password123"
           autoComplete="new-password"
-          defaultValue={props.passwordValue ?? ""}
+          defaultValue={props.passwordValue ?? ''}
         />
       </div>
 

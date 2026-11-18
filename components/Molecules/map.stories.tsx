@@ -1,12 +1,11 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { Map } from "./map";
+import { Map } from './map';
 
 const meta = {
-  title: "Components/Molecules/Map",
+  title: 'Components/Molecules/Map',
   component: Map,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof Map>;
 
 export default meta;

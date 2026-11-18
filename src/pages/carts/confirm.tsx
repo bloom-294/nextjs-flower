@@ -1,77 +1,84 @@
-import useSWR from "swr";
-import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-import { ShoppingList } from "components/Organisms/shoppingList";
-import { Loader } from "components/Atoms/loader";
-import styles from "../../styles/itemCards.module.css";
-import { UserInformation } from "components/Organisms/userInformation";
-import { PayMethod } from "components/Molecules/payMethod";
-import { DateOfDelivery } from "components/Molecules/dateOfDelivery";
-import { ConfirmFrom } from "components/Organisms/confirmFrom";
-import { createContext } from "react";
+import useSWR from 'swr';
+import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
+import { ShoppingList } from 'components/Organisms/shoppingList';
+import { Loader } from 'components/Atoms/loader';
+import styles from '../../styles/itemCards.module.css';
+import { UserInformation } from 'components/Organisms/userInformation';
+import { PayMethod } from 'components/Molecules/payMethod';
+import { DateOfDelivery } from 'components/Molecules/dateOfDelivery';
+import { ConfirmFrom } from 'components/Organisms/confirmFrom';
+import { createContext } from 'react';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export const UserName = createContext("");
+export const UserName = createContext('');
 
 export const Home = () => {
   // ゲストID
-  const [gestIdValue, SetGestIdValue] = useState("");
+  const [gestIdValue, SetGestIdValue] = useState('');
 
   // お届け情報変更status
   const [ordererStateChange, SetordererStateChange] = useState(false);
 
   // 注文者情報
-  const [ordererName, SetOrdererName] = useState("");
-  const [ordererFirstName, SetOrdererFirstName] = useState("");
-  const [ordererLastName, SetOrdererLastName] = useState("");
-  const [ordererMail, SetOrdererMail] = useState("");
-  const [ordererAddress, SetOrdererAddress] = useState("");
-  const [ordererTel, SetOrdererTel] = useState("");
-  const [ordererZip, SetOrdererZip] = useState("");
-  const [ordererPayMethod, SetOrdererPayMethod] = useState("現金払い");
+  const [ordererName, SetOrdererName] = useState('');
+  const [ordererFirstName, SetOrdererFirstName] = useState('');
+  const [ordererLastName, SetOrdererLastName] = useState('');
+  const [ordererMail, SetOrdererMail] = useState('');
+  const [ordererAddress, SetOrdererAddress] = useState('');
+  const [ordererTel, SetOrdererTel] = useState('');
+  const [ordererZip, SetOrdererZip] = useState('');
+  const [ordererPayMethod, SetOrdererPayMethod] =
+    useState('現金払い');
   // const ordererPayMethod= useRef("現金払い")
 
   // 時間指定なし、時間指定あり、即日配送
   // const [ordererDateState, SetOrdererDateState] = useState("時間指定なし")
-  const ordererDateState = useRef(["日時指定なし", "init", ""]);
+  const ordererDateState = useRef(['日時指定なし', 'init', '']);
 
   // Form用
-  const [lastNameValue, SetLastNameValue] = useState("");
-  const [lastNameErrorState, SetLastNameErrorState] = useState("init");
+  const [lastNameValue, SetLastNameValue] = useState('');
+  const [lastNameErrorState, SetLastNameErrorState] =
+    useState('init');
 
-  const [firstNameValue, SetFirstNameValue] = useState("");
-  const [firstNameErrorState, SetFirstNameErrorState] = useState("init");
+  const [firstNameValue, SetFirstNameValue] = useState('');
+  const [firstNameErrorState, SetFirstNameErrorState] =
+    useState('init');
 
-  const [mailValue, SetMailValue] = useState("");
-  const [mailErrorState, SetMailErrorState] = useState("init");
+  const [mailValue, SetMailValue] = useState('');
+  const [mailErrorState, SetMailErrorState] = useState('init');
 
-  const [telValue, SetTelValue] = useState("");
-  const [telErrorState, SetTelErrorState] = useState("init");
+  const [telValue, SetTelValue] = useState('');
+  const [telErrorState, SetTelErrorState] = useState('init');
 
-  const [zipValue, SetZipValue] = useState("");
-  const [zipErrorState, SetZipErrorState] = useState("init");
+  const [zipValue, SetZipValue] = useState('');
+  const [zipErrorState, SetZipErrorState] = useState('init');
 
-  const [addressValue, SetAddressValue] = useState("");
-  const [addressErrorState, SetAddressErrorState] = useState("init");
+  const [addressValue, SetAddressValue] = useState('');
+  const [addressErrorState, SetAddressErrorState] = useState('init');
 
   const [errorFlag, SetErrorFlag] = useState(false);
 
-  const [orderUserInfoChange, SetOrderUserInfoChange] = useState(false);
+  const [orderUserInfoChange, SetOrderUserInfoChange] =
+    useState(false);
 
-  const [dateErrorState, SetDateErrorState] = useState("init");
+  const [dateErrorState, SetDateErrorState] = useState('init');
 
   useEffect(() => {
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
     const list = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     list.map((cookieData) => {
       // ゲストID取得
-      if (cookieData.includes(" gestId") || cookieData.includes("gestId")) {
+      if (
+        cookieData.includes(' gestId') ||
+        cookieData.includes('gestId')
+      ) {
         SetGestIdValue(cookieData[1]);
       }
     });
@@ -79,17 +86,17 @@ export const Home = () => {
 
   // sessionStorage 復元
   useEffect(() => {
-    const saved = sessionStorage.getItem("ordererInfo");
+    const saved = sessionStorage.getItem('ordererInfo');
 
     if (saved) {
       const ordererInfo = JSON.parse(saved);
 
-      SetOrdererLastName(ordererInfo.lastName ?? "");
-      SetOrdererFirstName(ordererInfo.firstName ?? "");
-      SetOrdererMail(ordererInfo.mail ?? "");
-      SetOrdererAddress(ordererInfo.address ?? "");
-      SetOrdererTel(ordererInfo.tel ?? "");
-      SetOrdererZip(ordererInfo.zip ?? "");
+      SetOrdererLastName(ordererInfo.lastName ?? '');
+      SetOrdererFirstName(ordererInfo.firstName ?? '');
+      SetOrdererMail(ordererInfo.mail ?? '');
+      SetOrdererAddress(ordererInfo.address ?? '');
+      SetOrdererTel(ordererInfo.tel ?? '');
+      SetOrdererZip(ordererInfo.zip ?? '');
     }
   }, []);
 
@@ -108,7 +115,7 @@ export const Home = () => {
     }
 
     sessionStorage.setItem(
-      "ordererInfo",
+      'ordererInfo',
       JSON.stringify({
         lastName: ordererLastName,
         firstName: ordererFirstName,
@@ -154,7 +161,9 @@ export const Home = () => {
           <div className="rounded-md w-auto bg-gray-100 sm:py-5 py-3 px-3 md:grid md:grid-cols-7">
             <div className="col-span-6">
               <UserInformation
-                name={`${ordererLastName || data[0].lastName} ${ordererFirstName || data[0].firstName}`}
+                name={`${ordererLastName || data[0].lastName} ${
+                  ordererFirstName || data[0].firstName
+                }`}
                 address={ordererAddress || data[0].address}
                 tel={ordererTel || data[0].tel}
                 zip={ordererZip || data[0].zip}
@@ -168,37 +177,47 @@ export const Home = () => {
               <DateOfDelivery ordererDateState={ordererDateState} />
             </div>
 
-          <div className="mt-4 flex justify-center md:mt-0 md:items-center">
+            <div className="mt-4 flex justify-center md:mt-0 md:items-center">
               <button
                 className={`mx-1 rounded-lg py-1 px-2 min-h-[40px] w-auto min-w-[64px] ${styles.changeButtonItemCards}`}
                 onClick={() => {
                   SetordererStateChange(true);
 
-                  SetOrdererLastName(ordererLastName || data[0].lastName);
-                  SetOrdererFirstName(ordererFirstName || data[0].firstName);
+                  SetOrdererLastName(
+                    ordererLastName || data[0].lastName
+                  );
+                  SetOrdererFirstName(
+                    ordererFirstName || data[0].firstName
+                  );
                   SetOrdererMail(ordererMail || data[0].mail);
-                  SetOrdererAddress(ordererAddress || data[0].address);
+                  SetOrdererAddress(
+                    ordererAddress || data[0].address
+                  );
                   SetOrdererTel(ordererTel || data[0].tel);
                   SetOrdererZip(ordererZip || data[0].zip);
 
-                  SetLastNameValue(ordererLastName || data[0].lastName);
-                  SetFirstNameValue(ordererFirstName || data[0].firstName);
+                  SetLastNameValue(
+                    ordererLastName || data[0].lastName
+                  );
+                  SetFirstNameValue(
+                    ordererFirstName || data[0].firstName
+                  );
                   SetMailValue(ordererMail || data[0].mail);
                   SetAddressValue(ordererAddress || data[0].address);
                   SetTelValue(ordererTel || data[0].tel);
                   SetZipValue(ordererZip || data[0].zip);
 
-                  SetLastNameErrorState("ok");
-                  SetFirstNameErrorState("ok");
-                  SetMailErrorState("ok");
-                  SetZipErrorState("ok");
-                  SetTelErrorState("ok");
-                  SetAddressErrorState("ok");
+                  SetLastNameErrorState('ok');
+                  SetFirstNameErrorState('ok');
+                  SetMailErrorState('ok');
+                  SetZipErrorState('ok');
+                  SetTelErrorState('ok');
+                  SetAddressErrorState('ok');
 
-                  ordererDateState.current[0] = "日時指定なし";
+                  ordererDateState.current[0] = '日時指定なし';
                 }}
               >
-                {" "}
+                {' '}
                 変更
               </button>
             </div>
@@ -274,7 +293,9 @@ export const Home = () => {
         <ShoppingList pageName="confirm" />
 
         <div className="md:w-[800px] h-auto">
-          <h2 className="sm:mb-3 md:mb-5 my-5 text-2xl text-center">お届け先情報</h2>
+          <h2 className="sm:mb-3 md:mb-5 my-5 text-2xl text-center">
+            お届け先情報
+          </h2>
 
           <OrdererInformation />
         </div>
@@ -286,7 +307,9 @@ export const Home = () => {
             const gestID = gestIdValue;
             const orderItemsList: any = [];
 
-            await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts?gestId=${gestIdValue}`)
+            await fetch(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/carts?gestId=${gestIdValue}`
+            )
               .then((res) => {
                 return res.json();
               })
@@ -294,10 +317,10 @@ export const Home = () => {
                 orderItemsList.push(data);
               })
               .catch((error) => {
-                console.error("通信に失敗しました", error);
+                console.error('通信に失敗しました', error);
               });
 
-            console.log("q", orderItemsList);
+            console.log('q', orderItemsList);
             let totalPrice = 0;
             orderItemsList.map((data: any) => {
               data.map((items: any) => {
@@ -320,22 +343,29 @@ export const Home = () => {
               orderItems: orderItemsList,
             };
 
-            await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/order`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ orderData, gestID, ordererInformation }),
-            })
+            await fetch(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/order`,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  orderData,
+                  gestID,
+                  ordererInformation,
+                }),
+              }
+            )
               .then((response) => {
                 return response.json();
               })
               .then(() => {
-                sessionStorage.removeItem("ordererInfo");
-                router.replace("/carts/finish");
+                sessionStorage.removeItem('ordererInfo');
+                router.replace('/carts/finish');
               })
               .catch((error) => {
-                console.error("通信に失敗しました", error);
+                console.error('通信に失敗しました', error);
               });
 
             // カートのデータを削除
@@ -353,7 +383,7 @@ export const Home = () => {
             // })
           }}
         >
-          {" "}
+          {' '}
           注文を確定する
         </button>
       </div>

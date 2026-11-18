@@ -1,49 +1,47 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { DateInput } from "./dateInput";
+import { DateInput } from './dateInput';
 
 const meta = {
-  title: "Components/Molecules/Form/DateInput",
+  title: 'Components/Molecules/Form/DateInput',
   component: DateInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof DateInput>;
 
 export default meta;
 
-
-export const Defaults  = {
+export const Defaults = {
   args: {
     ordererDateState: {
-      current: ["日時指定あり", "ok", ""],
+      current: ['日時指定あり', 'ok', ''],
     },
     SetDateErrorState: () => {},
     SetOrdererDate: () => {},
-    ordererDate: "",
+    ordererDate: '',
     errorFlag: false,
   },
 };
 
-export const FixedDateEmpty  = {
+export const FixedDateEmpty = {
   args: {
     ordererDateState: {
-      current: ["日時指定あり", "empty", ""],
+      current: ['日時指定あり', 'empty', ''],
     },
     SetDateErrorState: () => {},
     SetOrdererDate: () => {},
-    ordererDate: "",
+    ordererDate: '',
     errorFlag: true,
   },
 };
 
-export const FixedDateImpossible  = {
+export const FixedDateImpossible = {
   args: {
     ordererDateState: {
-      current: ["日時指定あり", "impossible", ""],
+      current: ['日時指定あり', 'impossible', ''],
     },
     SetDateErrorState: () => {},
     SetOrdererDate: () => {},
-    ordererDate: "",
+    ordererDate: '',
     errorFlag: true,
   },
 };
@@ -51,11 +49,11 @@ export const FixedDateImpossible  = {
 export const SameDayDelivery = {
   args: {
     ordererDateState: {
-      current: ["即日配送", "ok", ""],
+      current: ['即日配送', 'ok', ''],
     },
     SetDateErrorState: () => {},
     SetOrdererDate: () => {},
-    ordererDate: "",
+    ordererDate: '',
     errorFlag: false,
   },
 };

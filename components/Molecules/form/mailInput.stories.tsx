@@ -1,23 +1,22 @@
+import type { Meta } from '@storybook/react';
 
-import type { Meta } from "@storybook/react";
-
-import { MailInput } from "./mailInput";
+import { MailInput } from './mailInput';
 
 const meta = {
-  title: "Components/Molecules/Form/MailInput",
+  title: 'Components/Molecules/Form/MailInput',
   component: MailInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof MailInput>;
 
 export default meta;
 
 export const Defaults = {
   args: {
-    mailValue: "",
+    mailValue: '',
     displayFlag: false,
     errorFlag: false,
-    mailErrorState: "ok",
-    register: "",
+    mailErrorState: 'ok',
+    register: '',
     SetMailValue: () => {},
     SetOrdererMail: () => {},
     SetMailErrorState: () => {},
@@ -26,11 +25,11 @@ export const Defaults = {
 
 export const Saved = {
   args: {
-    mailValue: "test@example.com",
+    mailValue: 'test@example.com',
     displayFlag: true,
     errorFlag: false,
-    mailErrorState: "ok",
-    register: "",
+    mailErrorState: 'ok',
+    register: '',
     SetMailValue: () => {},
     SetOrdererMail: () => {},
     SetMailErrorState: () => {},
@@ -39,24 +38,24 @@ export const Saved = {
 
 export const Empty = {
   args: {
-    mailValue: "",
+    mailValue: '',
     displayFlag: false,
     errorFlag: true,
-    mailErrorState: "empty",
-    register: "",
+    mailErrorState: 'empty',
+    register: '',
     SetMailValue: () => {},
     SetOrdererMail: () => {},
     SetMailErrorState: () => {},
   },
 };
 
-export const FormatError= {
+export const FormatError = {
   args: {
-    mailValue: "testexample",
+    mailValue: 'testexample',
     displayFlag: true,
     errorFlag: true,
-    mailErrorState: "format-incorrect",
-    register: "",
+    mailErrorState: 'format-incorrect',
+    register: '',
     SetMailValue: () => {},
     SetOrdererMail: () => {},
     SetMailErrorState: () => {},
@@ -65,11 +64,11 @@ export const FormatError= {
 
 export const registered = {
   args: {
-    mailValue: "registered@example.com",
+    mailValue: 'registered@example.com',
     displayFlag: true,
     errorFlag: true,
-    mailErrorState: "registered",
-    register: "register",
+    mailErrorState: 'registered',
+    register: 'register',
     SetMailValue: () => {},
     SetOrdererMail: () => {},
     SetMailErrorState: () => {},

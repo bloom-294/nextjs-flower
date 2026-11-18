@@ -1,38 +1,47 @@
-import style from "../../src/styles/favorite.module.css";
-import { useState, useEffect, useRef } from "react";
+import style from '../../src/styles/favorite.module.css';
+import { useState, useEffect, useRef } from 'react';
 // import { useRouter } from "next/router";
 
-import { FavoriteItem } from "types/type";
+import { FavoriteItem } from 'types/type';
 
 export const Favorite = (props: {
   favorite?: string;
-  data?: { favoriteItem?: FavoriteItem; gestId?: string; id?: number };
+  data?: {
+    favoriteItem?: FavoriteItem;
+    gestId?: string;
+    id?: number;
+  };
 }) => {
   // const [favorite, SetFavorite] = useState(false);
-  const [, SetGestIdValue] = useState("");
+  const [, SetGestIdValue] = useState('');
   // const router = useRouter();
   const ref = useRef(false);
 
   useEffect(() => {
-    const splitCookie = document.cookie.split(";");
+    const splitCookie = document.cookie.split(';');
     const list = [];
 
     for (let i = 0; i < splitCookie.length; i++) {
-      list.push(splitCookie[i].split("="));
+      list.push(splitCookie[i].split('='));
     }
 
     list.map((cookieData) => {
       // ゲストID取得
-      if (cookieData.includes(" gestId") || cookieData.includes("gestId")) {
+      if (
+        cookieData.includes(' gestId') ||
+        cookieData.includes('gestId')
+      ) {
         SetGestIdValue(cookieData[1]);
       }
     });
   });
 
   // console.log(favorite);
-  if (props.favorite === "favorite") {
+  if (props.favorite === 'favorite') {
     return (
-      <label className={`${style.like} text-[17px] text-gray-500 `}>×</label>
+      <label className={`${style.like} text-[17px] text-gray-500 `}>
+        ×
+      </label>
     );
   } else {
     return (
@@ -80,8 +89,12 @@ export const Favorite = (props: {
             // // console.log(props.data);
           }}
         />
-        <span className={` material-icons ${style.glitter} `}>flare</span>
-        <span className={` material-icons ${style.favorite} `}>favorite</span>
+        <span className={` material-icons ${style.glitter} `}>
+          flare
+        </span>
+        <span className={` material-icons ${style.favorite} `}>
+          favorite
+        </span>
       </label>
     );
   }

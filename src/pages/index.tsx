@@ -1,12 +1,12 @@
-import { Loader } from "components/Atoms/loader";
-import { Information } from "components/Molecules/Information";
-import { Map } from "components/Molecules/map";
-import { Slide } from "components/Molecules/swiper";
-import { SlideCursor } from "components/Molecules/swiperCursor";
-import { ItemsSection } from "components/Organisms/ItemsSection";
-import { NewItemsList } from "components/Organisms/newItemList";
-import { SearchNavigationbar } from "components/Organisms/searchNavigationbar";
-import { TopRecognizeList } from "components/Organisms/topRecognizeList";
+import { Loader } from 'components/Atoms/loader';
+import { Information } from 'components/Molecules/Information';
+import { Map } from 'components/Molecules/map';
+import { Slide } from 'components/Molecules/swiper';
+import { SlideCursor } from 'components/Molecules/swiperCursor';
+import { ItemsSection } from 'components/Organisms/ItemsSection';
+import { NewItemsList } from 'components/Organisms/newItemList';
+import { SearchNavigationbar } from 'components/Organisms/searchNavigationbar';
+import { TopRecognizeList } from 'components/Organisms/topRecognizeList';
 
 type Item = {
   category: string;
@@ -24,7 +24,6 @@ type HomeProps = {
 };
 
 const Home = ({ data }: HomeProps) => {
-
   if (!data) {
     return <Loader />;
   }
@@ -64,13 +63,15 @@ const Home = ({ data }: HomeProps) => {
 export const getStaticProps = async () => {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   if (!API_BASE_URL) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined");
+    throw new Error('NEXT_PUBLIC_API_BASE_URL is not defined');
   }
 
-  const normalizedBaseUrl = API_BASE_URL.endsWith("/")
+  const normalizedBaseUrl = API_BASE_URL.endsWith('/')
     ? API_BASE_URL
     : `${API_BASE_URL}/`;
-  const res = await fetch(new URL("items", normalizedBaseUrl).toString());
+  const res = await fetch(
+    new URL('items', normalizedBaseUrl).toString()
+  );
   const json: Item[] = await res.json();
 
   return {

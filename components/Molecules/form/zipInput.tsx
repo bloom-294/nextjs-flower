@@ -1,20 +1,20 @@
-import { RequiredBadge } from "components/Atoms/requiredBadge";
-import type { ChangeEvent } from "react";
-import { ErrorMessageProps, ZipTypes } from "types/type";
+import { RequiredBadge } from 'components/Atoms/requiredBadge';
+import type { ChangeEvent } from 'react';
+import { ErrorMessageProps, ZipTypes } from 'types/type';
 
 const Navigation = (props: { value: string; text: string }) => {
   if (!props.value) {
     return null;
   }
 
-  const isValid = props.value.includes("-");
+  const isValid = props.value.includes('-');
 
   return (
     <div className="mb-8 py-2 text-sm text-gray-500">
       <p>
         <span
           className={`material-symbols-outlined mr-3 translate-y-1.5 rounded-full text-white ${
-            isValid ? "bg-[#75ad9d]" : "bg-gray-300"
+            isValid ? 'bg-[#75ad9d]' : 'bg-gray-300'
           }`}
         >
           check_circle
@@ -25,16 +25,12 @@ const Navigation = (props: { value: string; text: string }) => {
   );
 };
 
-const Error5 = ({
-  errorFlag,
-  value,
-  text,
-}: ErrorMessageProps) => {
+const Error5 = ({ errorFlag, value, text }: ErrorMessageProps) => {
   if (!errorFlag) {
     return null;
   }
 
-  if (value === "empty" || value === "init") {
+  if (value === 'empty' || value === 'init') {
     return (
       <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block">
         {text}
@@ -42,7 +38,7 @@ const Error5 = ({
     );
   }
 
-  if (value === "format-incorrect") {
+  if (value === 'format-incorrect') {
     return (
       <label className="Error ml-3 sm:text-sm text-xs text-red-500 sm:inline-block block sm:mt-0 mt-2">
         xxx-xxxxの形式で入力してください
@@ -50,7 +46,7 @@ const Error5 = ({
     );
   }
 
-  if (value === "unexist") {
+  if (value === 'unexist') {
     return (
       <label className="Error ml-3 text-sm text-red-500 ssm:inline-block block sm:mt-0 mt-2 ">
         存在する郵便番号を入力してください
@@ -62,37 +58,31 @@ const Error5 = ({
 };
 
 export const ZipInput = (props: ZipTypes) => {
-  const zip = props.ordererZip
-    ? props.ordererZip
-    : props.zipValue;
+  const zip = props.ordererZip ? props.ordererZip : props.zipValue;
 
   const validateZip = (value: string) => {
     if (!value) {
-      props.SetZipErrorState("empty");
+      props.SetZipErrorState('empty');
       return false;
     }
 
     if (!value.match(/^\d{3}-\d{4}$/)) {
-      props.SetZipErrorState("format-incorrect");
+      props.SetZipErrorState('format-incorrect');
       return false;
     }
 
-    props.SetZipErrorState("ok");
+    props.SetZipErrorState('ok');
     return true;
   };
 
-  const onChangeHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     if (!props.ordererZip) {
       props.SetZipValue(ev.target.value);
       validateZip(ev.target.value);
     }
   };
 
-  const onBlurHandler = (
-    ev: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onBlurHandler = (ev: ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
 
     props.SetZipValue(value);
@@ -100,27 +90,22 @@ export const ZipInput = (props: ZipTypes) => {
 
     const isValidZip = validateZip(value);
 
-    if (
-      props.register !== "register" ||
-      !isValidZip
-    ) {
+    if (props.register !== 'register' || !isValidZip) {
       return;
     }
 
-    fetch(
-      `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${value}`
-    )
+    fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${value}`)
       .then((res) => res.json())
       .then((json) => {
         if (json.results === null) {
-          props.SetZipErrorState("unexist");
+          props.SetZipErrorState('unexist');
           return;
         }
 
-        props.SetZipErrorState("ok");
+        props.SetZipErrorState('ok');
       })
       .catch((error) => {
-        props.SetZipErrorState("unexist");
+        props.SetZipErrorState('unexist');
         console.log(error);
       });
   };

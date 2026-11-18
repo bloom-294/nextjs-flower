@@ -1,19 +1,17 @@
-
-import type { Meta } from "@storybook/react";
-import { useState } from "react";
-import { PaymethodInput } from "./paymethodInput";
+import type { Meta } from '@storybook/react';
+import { useState } from 'react';
+import { PaymethodInput } from './paymethodInput';
 
 const meta = {
-  title: "Components/Molecules/Form/PaymethodInput",
+  title: 'Components/Molecules/Form/PaymethodInput',
   component: PaymethodInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof PaymethodInput>;
 
 export default meta;
 
 const Template = () => {
-  const [payMethod, setPayMethod] =
-    useState("現金払い");
+  const [payMethod, setPayMethod] = useState('現金払い');
 
   return (
     <PaymethodInput
@@ -29,14 +27,14 @@ export const Default = {
 
 export const Cash = {
   args: {
-    ordererPayMethod: "現金払い",
+    ordererPayMethod: '現金払い',
     SetOrdererPayMethod: () => {},
   },
 };
 
 export const Credit = {
   args: {
-    ordererPayMethod: "クレジット",
+    ordererPayMethod: 'クレジット',
     SetOrdererPayMethod: () => {},
   },
 };

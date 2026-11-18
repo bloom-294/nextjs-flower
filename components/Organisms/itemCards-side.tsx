@@ -1,13 +1,21 @@
-import Image from "next/image";
-import style from "../../src/styles/itemCards.module.css";
-import { useEffect, useState } from "react";
-import { ItemCardsSideTypes, ItemCardsSideCountTypes } from "types/type";
+import Image from 'next/image';
+import style from '../../src/styles/itemCards.module.css';
+import { useEffect, useState } from 'react';
+import {
+  ItemCardsSideTypes,
+  ItemCardsSideCountTypes,
+} from 'types/type';
 
 const ItemCardsSideImage = (props: { imagePath: string }) => {
   return (
     <>
       <div className="flex flex-wrap mb-2 m-auto col-span-2">
-        <Image src={props.imagePath} alt="" width={200} height={200} />
+        <Image
+          src={props.imagePath}
+          alt=""
+          width={200}
+          height={200}
+        />
       </div>
     </>
   );
@@ -28,7 +36,7 @@ const ItemCardsSidePrice = (props: { price: number }) => {
     <>
       <div className=" text-center justify-center flex flex-wrap  items-center">
         <p className="text-md">
-          {Number(props.price).toLocaleString()}{" "}
+          {Number(props.price).toLocaleString()}{' '}
           <span className="text-sm">円（税込）</span>
         </p>
       </div>
@@ -36,7 +44,9 @@ const ItemCardsSidePrice = (props: { price: number }) => {
   );
 };
 
-const ItemCardsSideQuentity = (props: { quentity: number | string }) => {
+const ItemCardsSideQuentity = (props: {
+  quentity: number | string;
+}) => {
   return (
     <>
       <div className="grid justify-items-end flex flex-wrap  pr-9">
@@ -49,7 +59,10 @@ const ItemCardsSideQuentity = (props: { quentity: number | string }) => {
 };
 
 const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
-  const updateCartItem = async (quantity: number, orderPrice: number) => {
+  const updateCartItem = async (
+    quantity: number,
+    orderPrice: number
+  ) => {
     const addCartItems = {
       name: props.name,
       price: props.price,
@@ -60,20 +73,24 @@ const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
       id: props.id,
     };
 
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(addCartItems),
-    });
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(addCartItems),
+      }
+    );
 
     props.mutate();
   };
 
   const handlePlus = async () => {
     const nextQuantity = Number(props.quantityAdd) + 1;
-    const nextOrderPrice = Number(props.itemsPriceChange) + Number(props.price);
+    const nextOrderPrice =
+      Number(props.itemsPriceChange) + Number(props.price);
 
     props.setQuantityAdd(nextQuantity);
     props.setItemsPriceChange(nextOrderPrice);
@@ -85,7 +102,8 @@ const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
     if (props.quantityAdd <= 1) return;
 
     const nextQuantity = Number(props.quantityAdd) - 1;
-    const nextOrderPrice = Number(props.itemsPriceChange) - Number(props.price);
+    const nextOrderPrice =
+      Number(props.itemsPriceChange) - Number(props.price);
 
     props.setQuantityAdd(nextQuantity);
     props.setItemsPriceChange(nextOrderPrice);
@@ -118,7 +136,9 @@ const ItemCardsSideCount = (props: ItemCardsSideCountTypes) => {
 
 export const ItemCardsSide = (props: ItemCardsSideTypes) => {
   const [quantityAdd, setQuantityAdd] = useState(props.quantity);
-  const [itemsPriceChange, setItemsPriceChange] = useState(props.orderPrice);
+  const [itemsPriceChange, setItemsPriceChange] = useState(
+    props.orderPrice
+  );
 
   useEffect(() => {
     setQuantityAdd(props.quantity);
@@ -126,18 +146,21 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
   }, [props.quantity, props.orderPrice]);
 
   const deleteItems = () => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/carts/${props.id}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then(() => {
         props.mutate();
       })
       .catch((error) => {
-        console.error("通信に失敗しました", error);
+        console.error('通信に失敗しました', error);
       });
   };
 
-  if (props.pageName === "confirm") {
+  if (props.pageName === 'confirm') {
     return (
       <>
         <ItemCardsSideImage imagePath={props.imagePath} />
@@ -170,27 +193,27 @@ export const ItemCardsSide = (props: ItemCardsSideTypes) => {
           <ItemCardsSidePrice price={props.orderPrice} />
         </div>
         <div className="m-auto">
-            <ItemCardsSideCount
-              quantityAdd={quantityAdd}
-              setQuantityAdd={setQuantityAdd}
-              itemsPriceChange={itemsPriceChange}
-              setItemsPriceChange={setItemsPriceChange}
-              totalPrice={props.totalPrice}
-              setTotalPrice={props.setTotalPrice}
-              name={props.name}
-              imagePath={props.imagePath}
-              price={props.price}
-              quantity={props.quantity}
-              id={props.id}
-              gestId={props.gestId}
-              mutate={props.mutate}
-            />
+          <ItemCardsSideCount
+            quantityAdd={quantityAdd}
+            setQuantityAdd={setQuantityAdd}
+            itemsPriceChange={itemsPriceChange}
+            setItemsPriceChange={setItemsPriceChange}
+            totalPrice={props.totalPrice}
+            setTotalPrice={props.setTotalPrice}
+            name={props.name}
+            imagePath={props.imagePath}
+            price={props.price}
+            quantity={props.quantity}
+            id={props.id}
+            gestId={props.gestId}
+            mutate={props.mutate}
+          />
         </div>
         <button
           className={`mx-6 text-gray-500 ${style.deleteButtonItemCards}`}
           onClick={deleteItems}
         >
-          {" "}
+          {' '}
           削除
         </button>
       </>

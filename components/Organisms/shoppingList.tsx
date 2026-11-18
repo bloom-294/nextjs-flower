@@ -1,8 +1,8 @@
-import useSWR from "swr";
-import { ItemCardsSide } from "components/Organisms/itemCards-side";
-import style from "../../src/styles/shoppingCart.module.css";
-import { useEffect, useState } from "react";
-import { Loader } from "components/Atoms/loader";
+import useSWR from 'swr';
+import { ItemCardsSide } from 'components/Organisms/itemCards-side';
+import style from '../../src/styles/shoppingCart.module.css';
+import { useEffect, useState } from 'react';
+import { Loader } from 'components/Atoms/loader';
 
 type CartItem = {
   name: string;
@@ -19,24 +19,26 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const getCookieValue = (key: string) => {
-  if (typeof document === "undefined") return "";
+  if (typeof document === 'undefined') return '';
 
-  const cookies = document.cookie.split("; ");
-  const targetCookie = cookies.find((cookie) => cookie.startsWith(`${key}=`));
+  const cookies = document.cookie.split('; ');
+  const targetCookie = cookies.find((cookie) =>
+    cookie.startsWith(`${key}=`)
+  );
 
-  return targetCookie ? targetCookie.split("=")[1] : "";
+  return targetCookie ? targetCookie.split('=')[1] : '';
 };
 
 export const ShoppingList = ({
-  pageName = "Shopping",
+  pageName = 'Shopping',
 }: {
   pageName?: string;
 }) => {
-  const [gestIdValue, setGestIdValue] = useState("");
+  const [gestIdValue, setGestIdValue] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    setGestIdValue(getCookieValue("gestId"));
+    setGestIdValue(getCookieValue('gestId'));
   }, []);
 
   const endpoint =
@@ -44,7 +46,10 @@ export const ShoppingList = ({
       ? `${API_BASE_URL}/carts?gestId=${gestIdValue}`
       : null;
 
-  const { data, error, mutate } = useSWR<CartItem[]>(endpoint, fetcher);
+  const { data, error, mutate } = useSWR<CartItem[]>(
+    endpoint,
+    fetcher
+  );
 
   const initTotalPrice =
     data?.reduce((sum, item) => {

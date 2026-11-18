@@ -1,31 +1,25 @@
 import React, { useRef } from 'react';
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {
   Autoplay,
   EffectFade,
   Navigation,
   Pagination,
-} from "swiper";
-import style from "./swiper.module.css";
+} from 'swiper';
+import style from './swiper.module.css';
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
-
-SwiperCore.use([
-  Navigation,
-  Pagination,
-  Autoplay,
-  EffectFade,
-]);
+SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade]);
 
 const images = [
-  "/banner/ChristmasBanner.svg",
-  "/banner/CoupleBanner.svg",
-  "/banner/Subscription.svg",
+  '/banner/ChristmasBanner.svg',
+  '/banner/CoupleBanner.svg',
+  '/banner/Subscription.svg',
   // "/banner/happybirthdayBanner.svg",
   // "/banner/happyChristmas.svg",
 ];
@@ -36,8 +30,10 @@ export const Slide = () => {
   return (
     <div className="mx-auto w-[100vw] sm:container sm:w-auto overflow-hidden sm:h-[500px] relative">
       <Swiper
-        onSwiper={(swiper) => { swiperRef.current = swiper; }}
-        slidesPerView={"auto"}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
+        slidesPerView={'auto'}
         spaceBetween={10}
         centeredSlides={true}
         autoplay={{
@@ -56,7 +52,10 @@ export const Slide = () => {
         className="sm:h-[500px]"
       >
         {images.map((src) => (
-          <SwiperSlide key={src} className="!w-[85%] sm:!w-[700px] sm:!h-[500px] flex items-center justify-center overflow-hidden shadow-md">
+          <SwiperSlide
+            key={src}
+            className="!w-[85%] sm:!w-[700px] sm:!h-[500px] flex items-center justify-center overflow-hidden shadow-md"
+          >
             <div className="w-full">
               <Image
                 src={src}
@@ -72,13 +71,13 @@ export const Slide = () => {
         ))}
       </Swiper>
 
-      <button 
+      <button
         onClick={() => swiperRef.current.slidePrev()}
         className="absolute left-10 lg:left-32 top-[50%] z-10 bg-white/80 aspect-square w-20 h-auto rounded-full hover:bg-white transition border border-[#5d3d4a] hidden md:block"
       >
         ◀
       </button>
-      <button 
+      <button
         onClick={() => swiperRef.current.slideNext()}
         className="absolute right-10 lg:right-32 top-[50%] z-10 bg-white/80 aspect-square w-20 h-auto rounded-full hover:bg-white transition border border-[#5d3d4a] hidden md:block"
       >
